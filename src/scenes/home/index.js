@@ -1,0 +1,1 @@
+// Holds all the homepage js for the app
