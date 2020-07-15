@@ -7,10 +7,8 @@ const ProfileStack = createStackNavigator();
 function ProfileStackScreen(){
     return(
         <ProfileStack.Navigator>
-            <ProfileStack.Screen 
-              name="ProfileScreen"
-              component={ProfileScreen} 
-            />
+            <ProfileStack.Screen name="ProfileScreen" component={ProfileScreen}/>
+            
         </ProfileStack.Navigator>
     )
 }
