@@ -80,12 +80,7 @@ function NumberEntryPage({ navigation }) {
       <View style={styles.title}>
         <OnboardingTitle description="What is your phone number ?" />
         <View style={styles.numberInput}>
-          <NumberEntry
-            // isConfigValid={isConfigValid}
-            _placeHolder="+1 999 999 9999"
-            _number={phoneNumber}
-            _setNumber={setPhoneNumber}
-          />
+          <NumberEntry _number={phoneNumber} _setNumber={setPhoneNumber} />
         </View>
       </View>
 

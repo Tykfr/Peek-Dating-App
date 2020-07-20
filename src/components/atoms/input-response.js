@@ -3,21 +3,31 @@ import PropTypes from "prop-types";
 
 import { TextInput, StyleSheet } from "react-native";
 
-function InputResponse({ textFiller, _onChangeText, _onChangeCallBack }) {
+function InputResponse({
+  _placeHolder,
+  _onChangeText,
+  _onChangeCallBack,
+  _keyboardType,
+  _editable,
+}) {
   return (
     <TextInput
       style={styles.textInput}
       returnKeyType="done"
-      placeholder={textFiller}
+      editable={_editable}
+      keyboardType={_keyboardType}
+      placeholder={_placeHolder}
       onChangeText={(_onChangeText) => _onChangeCallBack(_onChangeText)}
     />
   );
 }
 
 InputResponse.propTypes = {
-  textFiller: PropTypes.string,
-  _onChangeText: PropTypes.string,
-  _onChangeCallBack: PropTypes.func,
+  _editable: PropTypes.bool.isRequired,
+  _onChangeText: PropTypes.string.isRequired,
+  _onChangeCallBack: PropTypes.func.isRequired,
+  _keyboardType: PropTypes.string.isRequired,
+  _placeHolder: PropTypes.string,
 };
 export default InputResponse;
 

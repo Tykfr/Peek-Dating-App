@@ -8,6 +8,8 @@ import {
   LoginPage,
   NumberEntryPage,
   VerificationCodePage,
+  NameEntryPage,
+  EmailEntryPage,
 } from "_scenes/";
 
 const Stack = createStackNavigator();
@@ -25,6 +27,8 @@ const App = () => {
           name="VerificationPage"
           component={VerificationCodePage}
         />
+        <Stack.Screen name="NameEntryPage" component={NameEntryPage} />
+        <Stack.Screen name="EmailEntryPage" component={EmailEntryPage} />
       </Stack.Navigator>
     </NavigationContainer>
   );
