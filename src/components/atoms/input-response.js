@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { TextInput, StyleSheet } from "react-native";
 
 function InputResponse({
+  _autoCapitalize,
   _placeHolder,
   _onChangeText,
   _onChangeCallBack,
@@ -18,6 +19,7 @@ function InputResponse({
       keyboardType={_keyboardType}
       placeholder={_placeHolder}
       onChangeText={(_onChangeText) => _onChangeCallBack(_onChangeText)}
+      autoCapitalize={_autoCapitalize}
     />
   );
 }
@@ -28,6 +30,7 @@ InputResponse.propTypes = {
   _onChangeCallBack: PropTypes.func.isRequired,
   _keyboardType: PropTypes.string.isRequired,
   _placeHolder: PropTypes.string,
+  _autoCapitalize: PropTypes.string,
 };
 export default InputResponse;
 

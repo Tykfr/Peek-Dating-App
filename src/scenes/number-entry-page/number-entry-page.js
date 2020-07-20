@@ -8,9 +8,8 @@ import {
   KeyboardAvoidingView,
 } from "react-native";
 
-import OnboardingTitle from "_atoms/onboarding-page-title";
-import NumberEntry from "_atoms/number-entry";
-import ContinueButton from "_atoms/continueButton";
+import { OnboardingTitle, NumberEntry, ContinueButton } from "_atoms";
+
 import { FirebaseRecaptchaVerifierModal } from "expo-firebase-recaptcha";
 import * as firebase from "firebase";
 

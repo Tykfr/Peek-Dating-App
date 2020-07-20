@@ -1,9 +1,15 @@
 import React from "react";
 import { SafeAreaView, View, Image, StyleSheet, Alert } from "react-native";
-import OnboardingTitle from "_atoms/onboarding-page-title";
-import InfoText from "_atoms/info-text";
-import ContinueButton from "_atoms/continueButton";
-import InputResponse from "_atoms/input-response";
+import {
+  OnboardingTitle,
+  InfoText,
+  ContinueButton,
+  InputResponse,
+} from "_atoms";
+// import OnboardingTitle from "_atoms/onboarding-page-title";
+// import InfoText from "_atoms/info-text";
+// import ContinueButton from "_atoms/continueButton";
+// import InputResponse from "_atoms/input-response";
 
 function NameEntryPage({ route, navigation }) {
   const { userID } = JSON.parse(JSON.stringify(route.params));
@@ -33,7 +39,9 @@ function NameEntryPage({ route, navigation }) {
       .then((response) => response.json())
       .then((responseJson) => {
         Alert.alert(responseJson);
-        navigation.navigate("EmailEntryPage");
+        navigation.navigate("EmailEntryPage", {
+          userID: userID,
+        });
       });
   }
   return (
