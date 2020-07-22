@@ -6,44 +6,18 @@ import {
   ContinueButton,
   InputResponse,
 } from "_atoms";
-// import OnboardingTitle from "_atoms/onboarding-page-title";
-// import InfoText from "_atoms/info-text";
-// import ContinueButton from "_atoms/continueButton";
-// import InputResponse from "_atoms/input-response";
 
 function NameEntryPage({ route, navigation }) {
-  const { userID } = JSON.parse(JSON.stringify(route.params));
+  const { userData } = route.params;
   const [name, setName] = React.useState();
-  const url =
-    "https://www-student.cse.buffalo.edu/peek_mobile_dating/writeUserName.php";
 
-  /**
-   * @author William Phillips
-   * @param {*} name - name will the string representation of the users name and will written to the database appeneded to their userID
-   * @param {*} url - link to php script that will writer users name to database
-   * @description - this function will make a call to the database api and udate the users info with their name
-   */
-
-  async function writeUserName() {
-    await fetch(url, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: name,
-        userID: userID,
-      }),
-    })
-      .then((response) => response.json())
-      .then((responseJson) => {
-        Alert.alert(responseJson);
-        navigation.navigate("EmailEntryPage", {
-          userID: userID,
-        });
-      });
+  function recordUserName() {
+    userData.push({ name: name });
+    navigation.navigate("EmailEntryPage", {
+      userData: userData,
+    });
   }
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.logoPos}>
@@ -70,7 +44,7 @@ function NameEntryPage({ route, navigation }) {
         </View>
       </View>
       <View style={styles.continueButton}>
-        <ContinueButton _onPress={writeUserName} _disabled={!name} />
+        <ContinueButton _onPress={recordUserName} _disabled={!name} />
       </View>
     </SafeAreaView>
   );
