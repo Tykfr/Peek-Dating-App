@@ -31,8 +31,8 @@ function calculateAge(dateOfBirth) {
 }
 
 function BirthdayEntryPage({ navigation, route }) {
-  const { userID } = JSON.parse(JSON.stringify(route.params));
-  console.log("UserID: " + userID);
+  const { userData } = route.params;
+
   const [date, setDate] = React.useState(new Date());
   let dateOfBirth = new Date();
   let age;
@@ -42,11 +42,13 @@ function BirthdayEntryPage({ navigation, route }) {
   };
 
   const _genderIdentityPage = () => {
+    userData.push(
+      { birthYear: dateOfBirth.getFullYear() },
+      { birthMonth: dateOfBirth.getMonth() + 1 },
+      { birthDay: dateOfBirth.getDate() }
+    );
     navigation.navigate("GenderIdentityPage", {
-      userID: userID,
-      birthYear: dateOfBirth.getFullYear(),
-      birthMonth: dateOfBirth.getMonth() + 1,
-      birthDay: dateOfBirth.getDate(),
+      userData: userData,
     });
   };
   return (
@@ -77,7 +79,7 @@ function BirthdayEntryPage({ navigation, route }) {
       </View>
 
       <View style={styles.continueButtonContainer}>
-        <ContinueButton _onPress={_genderIdentityPage} />
+        <ContinueButton _onPress={() => _genderIdentityPage()} />
       </View>
     </SafeAreaView>
   );
