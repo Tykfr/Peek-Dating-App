@@ -42,40 +42,14 @@ function VerificationCodePage({ route, navigation }) {
       );
       await firebase.auth().signInWithCredential(credential);
 
-      await getUserID(phoneNumber);
+      navigation.navigate("NameEntryPage", {
+        userData: [{ phoneNumber: phoneNumber }],
+      });
     } catch (err) {
       Alert.alert(`Error: ${err.message}`);
     }
   }
 
-  /**
-   * @author - William Phillips
-   * @param {*} phoneNumber - user inputted phone number
-   * @description - calls database api to create an entry of a user via phone number and returns back their userID
-   *              - function then navigates to name entry page
-   */
-  async function getUserID(phoneNumber) {
-    await fetch(
-      "https://www-student.cse.buffalo.edu/peek_mobile_dating/userIDLookUp.php",
-      {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          phoneNumber: phoneNumber,
-        }),
-      }
-    )
-      .then((response) => response.json())
-      .then((responseJson) => {
-        const userID = JSON.parse(responseJson);
-        navigation.navigate("NameEntryPage", {
-          userID: userID,
-        });
-      });
-  }
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle={"dark-content"} />
