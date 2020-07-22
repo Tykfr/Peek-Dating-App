@@ -25,7 +25,7 @@ function InputResponse({
 }
 
 InputResponse.propTypes = {
-  _editable: PropTypes.bool.isRequired,
+  _editable: PropTypes.bool,
   _onChangeText: PropTypes.string.isRequired,
   _onChangeCallBack: PropTypes.func.isRequired,
   _keyboardType: PropTypes.string.isRequired,
