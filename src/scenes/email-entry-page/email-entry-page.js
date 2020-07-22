@@ -23,46 +23,22 @@ import {
 } from "_atoms";
 
 /**
- * @author William Phillips
- * @param {*} url - string directed to the php script to write users email to the database
- * @param {*} email - users inputted email
- * @param {*} userID - users unique ID
- * @description this function writes the users inputted email to their userID entry in the users table
- */
-async function writeUserEmail(url, email, userID, navigation) {
-  fetch(url, {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      email: email,
-      userID: userID,
-    }),
-  })
-    .then((response) => response.json())
-    .then((responseJson) => {
-      Alert.alert(responseJson);
-
-      navigation.navigate("BirthdayEntryPage", {
-        userID: userID,
-      });
-    });
-}
-
-/**
  *
  * @param {*} param0
  */
 
 function EmailEntryPage({ route, navigation }) {
-  const { userID } = JSON.parse(JSON.stringify(route.params));
+  const { userData } = route.params;
 
   const [checked, setCheck] = React.useState(false);
   const [email, setEmail] = React.useState("");
-  const url =
-    "https://www-student.cse.buffalo.edu/peek_mobile_dating/writeUserEmail.php";
+
+  function recordUserEmail() {
+    userData.push({ email: email });
+    navigation.navigate("BirthdayEntryPage", {
+      userData: userData,
+    });
+  }
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle={"dark-content"} />
@@ -100,10 +76,7 @@ function EmailEntryPage({ route, navigation }) {
       </View>
 
       <View style={styles.continueButton}>
-        <ContinueButton
-          _onPress={() => writeUserEmail(url, email, userID, navigation)}
-          _disabled={!email}
-        />
+        <ContinueButton _onPress={() => recordUserEmail()} _disabled={!email} />
       </View>
     </SafeAreaView>
   );
