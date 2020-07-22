@@ -11,6 +11,8 @@ import {
   EmailEntryPage,
   BirthdayEntryPage,
   GenderIdentityPage,
+  DatingInterestPage,
+  SchoolEntryPage,
 } from "_scenes/";
 
 const Stack = createStackNavigator();
@@ -35,6 +37,11 @@ const App = () => {
           name="GenderIdentityPage"
           component={GenderIdentityPage}
         />
+        <Stack.Screen
+          name="DatingInterestPage"
+          component={DatingInterestPage}
+        />
+        <Stack.Screen name="SchoolEntryPage" component={SchoolEntryPage} />
       </Stack.Navigator>
     </NavigationContainer>
   );
