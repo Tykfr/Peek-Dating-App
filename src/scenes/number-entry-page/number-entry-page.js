@@ -6,6 +6,7 @@ import {
   Image,
   StatusBar,
   KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 
 import { OnboardingTitle, NumberEntry, ContinueButton } from "_atoms";
@@ -63,34 +64,40 @@ function NumberEntryPage({ navigation }) {
     ? firebase.app().options
     : undefined;
   return (
-    //<KeyboardAvoidingView behavior="padding">
-    <SafeAreaView style={styles.container}>
-      <FirebaseRecaptchaVerifierModal
-        ref={recaptchaVerifier}
-        firebaseConfig={firebaseConfig}
-      />
-      <StatusBar barStyle={"dark-content"} />
-      <View style={styles.logoPos}>
-        <Image
-          style={styles.logo}
-          source={require("_assets/images/Peek_Logo_Inverted.png")}
+    <KeyboardAvoidingView
+      style={styles.container}
+      behavior={Platform.OS === "ios" ? "padding" : null}
+    >
+      <SafeAreaView style={styles.container}>
+        <FirebaseRecaptchaVerifierModal
+          ref={recaptchaVerifier}
+          firebaseConfig={firebaseConfig}
         />
-      </View>
-      <View style={styles.title}>
-        <OnboardingTitle description="What is your phone number ?" />
-        <View style={styles.numberInput}>
-          <NumberEntry _number={phoneNumber} _setNumber={setPhoneNumber} />
+        <StatusBar barStyle={"dark-content"} />
+        <View>
+          <View style={styles.logoPos}>
+            <Image
+              style={styles.logo}
+              source={require("_assets/images/Peek_Logo_Inverted.png")}
+            />
+          </View>
+          <View>
+            <View style={styles.titleContainer}>
+              <OnboardingTitle description="What is your phone number ?" />
+            </View>
+            <View>
+              <NumberEntry _number={phoneNumber} _setNumber={setPhoneNumber} />
+            </View>
+          </View>
         </View>
-      </View>
-
-      <View style={styles.continueButton}>
-        <ContinueButton
-          _onPress={sendVerificationCode}
-          _disabled={!phoneNumber}
-        />
-      </View>
-    </SafeAreaView>
-    //</KeyboardAvoidingView>
+        <View style={styles.continueButtonContainer}>
+          <ContinueButton
+            _onPress={sendVerificationCode}
+            _disabled={!phoneNumber}
+          />
+        </View>
+      </SafeAreaView>
+    </KeyboardAvoidingView>
   );
 }
 
@@ -98,33 +105,25 @@ export default NumberEntryPage;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: "center",
+    flexGrow: 1,
+    justifyContent: "space-between",
     alignItems: "center",
     backgroundColor: "#FFFFFF",
   },
-  title: {
-    position: "absolute",
-    top: 100,
-    left: 16,
-    marginRight: 56,
+  titleContainer: {
+    marginBottom: 15,
   },
-  numberInput: {
-    position: "absolute",
-    top: 148,
-    justifyContent: "center",
-  },
-  continueButton: {
-    position: "absolute",
-    bottom: 46,
+  continueButtonContainer: {
+    justifyContent: "flex-end",
+    flexGrow: 1,
+    marginBottom: 20,
   },
   logo: {
     height: 50,
     width: 50,
   },
   logoPos: {
-    position: "absolute",
-    top: 37,
-    right: 18,
+    alignSelf: "flex-end",
+    marginVertical: 20,
   },
 });
