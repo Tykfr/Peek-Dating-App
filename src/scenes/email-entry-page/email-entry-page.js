@@ -14,6 +14,7 @@ import {
   StatusBar,
   Alert,
 } from "react-native";
+
 import {
   OnboardingTitle,
   InputResponse,
@@ -21,7 +22,14 @@ import {
   InfoText,
 } from "_atoms";
 
-async function writeUserEmail(url, email, userID) {
+/**
+ * @author William Phillips
+ * @param {*} url - string directed to the php script to write users email to the database
+ * @param {*} email - users inputted email
+ * @param {*} userID - users unique ID
+ * @description this function writes the users inputted email to their userID entry in the users table
+ */
+async function writeUserEmail(url, email, userID, navigation) {
   fetch(url, {
     method: "POST",
     headers: {
@@ -36,13 +44,17 @@ async function writeUserEmail(url, email, userID) {
     .then((response) => response.json())
     .then((responseJson) => {
       Alert.alert(responseJson);
-      /**
-       * navigation.navigate("BirthdayEntryPage", {
-       *      userID: userID
-       * });
-       */
+
+      navigation.navigate("BirthdayEntryPage", {
+        userID: userID,
+      });
     });
 }
+
+/**
+ *
+ * @param {*} param0
+ */
 
 function EmailEntryPage({ route, navigation }) {
   const { userID } = JSON.parse(JSON.stringify(route.params));
@@ -89,7 +101,7 @@ function EmailEntryPage({ route, navigation }) {
 
       <View style={styles.continueButton}>
         <ContinueButton
-          _onPress={() => writeUserEmail(url, email, userID)}
+          _onPress={() => writeUserEmail(url, email, userID, navigation)}
           _disabled={!email}
         />
       </View>
