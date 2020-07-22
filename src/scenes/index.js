@@ -6,3 +6,5 @@ export { default as NameEntryPage } from "./name-entry-page/name-entry-page";
 export { default as EmailEntryPage } from "./email-entry-page/email-entry-page";
 export { default as BirthdayEntryPage } from "./birthday-entry-page/birthday-entry-page";
 export { default as GenderIdentityPage } from "./gender-identity-page/gender-identity-page";
+export { default as DatingInterestPage } from "./dating-interest-page/dating-interest-page";
+export { default as SchoolEntryPage } from "./school-entry-page/school-entry-page";
