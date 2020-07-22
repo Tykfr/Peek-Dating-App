@@ -6,14 +6,11 @@ import { AppLoading } from "expo";
 import { useFonts, Roboto_500Medium } from "@expo-google-fonts/roboto";
 
 function GenderIdentityPage({ route, navigation }) {
-  const { userID } = JSON.parse(JSON.stringify(route.params));
-  const { birthMonth } = JSON.parse(JSON.stringify(route.params));
-  const { birthDay } = JSON.parse(JSON.stringify(route.params));
-  const { birthYear } = JSON.parse(JSON.stringify(route.params));
-
+  const { userData } = route.params;
   const [maleChecked, setMaleCheck] = React.useState(false);
   const [femaleChecked, setfemaleCheck] = React.useState(false);
   const [genderResult, setGenderResult] = React.useState("");
+
   function selectMale() {
     setMaleCheck(true);
     setfemaleCheck(false);
@@ -27,12 +24,9 @@ function GenderIdentityPage({ route, navigation }) {
   }
 
   const _datingInterestPageHandler = () => {
-    navigation.navigate("DatingInteretsPage", {
-      userID: userID,
-      birthMonth: birthMonth,
-      birthDay: birthDay,
-      birthYear: birthYear,
-      genderResult: genderResult,
+    userData.push({ genderResult: genderResult });
+    navigation.navigate("DatingInterestPage", {
+      userData: userData,
     });
   };
   let [fontsLoaded] = useFonts({
