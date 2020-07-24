@@ -8,3 +8,5 @@ export { default as BirthdayEntryPage } from "./birthday-entry-page/birthday-ent
 export { default as GenderIdentityPage } from "./gender-identity-page/gender-identity-page";
 export { default as DatingInterestPage } from "./dating-interest-page/dating-interest-page";
 export { default as SchoolEntryPage } from "./school-entry-page/school-entry-page";
+export { default as PoliticalEntryPage } from "./political-entry-page/political-entry-page";
+export { default as ReligionEntryPage } from "./religion-entry-page/religion-entry-page";
