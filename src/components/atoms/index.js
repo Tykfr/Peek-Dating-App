@@ -8,6 +8,7 @@ import NumberEntry from "./number-entry";
 import InfoText from "./info-text";
 import AssistButton from "./assist-button";
 import InputResponse from "./input-response";
+import InvertedLogo from "./inverted-logo";
 export {
   AppTitle,
   Button,
@@ -19,4 +20,5 @@ export {
   InfoText,
   AssistButton,
   InputResponse,
+  InvertedLogo,
 };
