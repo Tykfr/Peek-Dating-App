@@ -4,7 +4,6 @@ import { InvertedLogo, OnboardingTitle, ContinueButton } from "_atoms";
 import { CheckBox } from "react-native-elements";
 function ReligionEntryPage({ navigation, route }) {
   const { userData } = route.params;
-  //   console.log(userData);
   const [jewish, setJewish] = React.useState(false);
   const [islam, setIslam] = React.useState(false);
   const [atheism, setAtheism] = React.useState(false);
