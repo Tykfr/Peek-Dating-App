@@ -10,3 +10,7 @@ export { default as DatingInterestPage } from "./dating-interest-page/dating-int
 export { default as SchoolEntryPage } from "./school-entry-page/school-entry-page";
 export { default as PoliticalEntryPage } from "./political-entry-page/political-entry-page";
 export { default as ReligionEntryPage } from "./religion-entry-page/religion-entry-page";
+export { default as EthnicityEntryPage } from "./ethnicity-entry-page/ethnicity-entry-page";
+export { default as OccupationEntryPage } from "./occupation-entry-page/occupation-entry-page";
+export { default as LocationEntryPage } from "./location-entry-page/location-entry-page";
+export { default as BioEntryPage } from "./bio-entry-page/bio-entry-page";
