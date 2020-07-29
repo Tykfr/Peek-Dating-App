@@ -8,24 +8,56 @@ import {
   MediumPhotoInput,
   SmallPhotoInput,
 } from "_atoms";
+import * as ImagePicker from "expo-image-picker";
+import * as Permissions from "expo-permissions";
 
 function PhotoSelectionPage({ navigation, route }) {
-  const [largeImage, setLargeImage] = React.useState();
-  console.log("LargeImage: " + largeImage);
-  const [mediumImageOne, setMediumImageOne] = React.useState();
-  const [mediumImageTwo, setMediumImageTwo] = React.useState();
-
-  const [smallImageOne, setSmallImageOne] = React.useState();
-  const [smallImageTwo, setSmallImageTwo] = React.useState();
-  const [smallImageThree, setSmallImageThree] = React.useState();
+  const { userData } = route.params;
+  const [largeImage, setLargeImage] = React.useState(null);
+  const [mediumImageOne, setMediumImageOne] = React.useState(null);
+  const [mediumImageTwo, setMediumImageTwo] = React.useState(null);
+  const [smallImageOne, setSmallImageOne] = React.useState(null);
+  const [smallImageTwo, setSmallImageTwo] = React.useState(null);
+  const [smallImageThree, setSmallImageThree] = React.useState(null);
   const _promptHander = () => {
-    console.log(largeImage);
-    console.log(mediumImageOne);
-    console.log(mediumImageTwo);
-    console.log(smallImageOne);
-    console.log(smallImageTwo);
-    console.log(smallImageThree);
+    userData.push(
+      { largeImage: largeImage },
+      { mediumImageOne: mediumImageOne },
+      { mediumImageTwo: mediumImageTwo },
+      { smallImageOne: smallImageOne },
+      { smallImageTwo: smallImageTwo },
+      { smallImageThree: smallImageThree }
+    );
+    navigation.navigate("PromptEntryPage", {
+      userData: userData,
+    });
   };
+  async function getPermissionAsync(setImage) {
+    if (Platform.OS === "ios") {
+      const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+      if (status !== "granted") {
+        alert("Sorry, we need camera roll permissions to make this work!");
+      } else {
+        await _pickImage(setImage);
+      }
+    }
+  }
+  async function _pickImage(setImage) {
+    try {
+      let result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        allowsEditing: true,
+        aspect: [4, 3],
+        quality: 1,
+        base64: true,
+      });
+      if (!result.cancelled) {
+        setImage(result.base64);
+      }
+    } catch (E) {
+      console.log(E);
+    }
+  }
   return (
     <SafeAreaView style={styles.container}>
       <View style={{ width: "100%", flexShrink: 1 }}>
@@ -37,20 +69,27 @@ function PhotoSelectionPage({ navigation, route }) {
         </View>
         <View style={styles.largePhotoLayoutContainer}>
           {/* Large Photo selection */}
-          <LargePhotoInput _image={largeImage} _setImage={setLargeImage} />
+          <LargePhotoInput
+            _image={largeImage}
+            _getPermissionAsync={() => getPermissionAsync(setLargeImage)}
+          />
           <View>
             {/* Medium Photo selection 1 */}
             <View style={{ marginBottom: 12 }}>
               <MediumPhotoInput
                 _image={mediumImageOne}
-                _setImage={() => setMediumImageOne()}
+                _getPermissionAsync={() =>
+                  getPermissionAsync(setMediumImageOne)
+                }
               />
             </View>
             {/* Medium Photo selection 2 */}
             <View style={{ marginBottom: 12 }}>
               <MediumPhotoInput
                 _image={mediumImageTwo}
-                _setImage={() => setMediumImageTwo()}
+                _getPermissionAsync={() =>
+                  getPermissionAsync(setMediumImageTwo)
+                }
               />
             </View>
           </View>
@@ -58,15 +97,15 @@ function PhotoSelectionPage({ navigation, route }) {
         <View style={styles.smallPhotoLayoutContainer}>
           <SmallPhotoInput
             _image={smallImageOne}
-            _setImage={() => setSmallImageOne()}
+            _getPermissionAsync={() => getPermissionAsync(setSmallImageOne)}
           />
           <SmallPhotoInput
             _image={smallImageTwo}
-            _setImage={() => setSmallImageTwo()}
+            _getPermissionAsync={() => getPermissionAsync(setSmallImageTwo)}
           />
           <SmallPhotoInput
             _image={smallImageThree}
-            _setImage={() => setSmallImageThree()}
+            _getPermissionAsync={() => getPermissionAsync(setSmallImageThree)}
           />
         </View>
       </View>
@@ -76,12 +115,12 @@ function PhotoSelectionPage({ navigation, route }) {
           _onPress={_promptHander}
           _disabled={
             !(
-              largeImage &
-              mediumImageOne &
-              mediumImageTwo &
-              smallImageOne &
-              smallImageTwo &
-              smallImageThree
+              !!largeImage &
+              !!mediumImageOne &
+              !!mediumImageTwo &
+              !!smallImageOne &
+              !!smallImageTwo &
+              !!smallImageThree
             )
           }
         />

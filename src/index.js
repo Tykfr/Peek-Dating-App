@@ -15,14 +15,19 @@ import {
   SchoolEntryPage,
   PoliticalEntryPage,
   ReligionEntryPage,
+  EthnicityEntryPage,
+  OccupationEntryPage,
+  LocationEntryPage,
+  BioEntryPage,
+  PhotoSelectionPage,
+  PromptEntryPage,
 } from "_scenes/";
-
 const Stack = createStackNavigator();
 const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="ReligionEntryPage"
+        initialRouteName="StartPage"
         screenOptions={{ headerShown: false }}
       >
         <Stack.Screen name="StartPage" component={StartPage} />
@@ -49,6 +54,21 @@ const App = () => {
           component={PoliticalEntryPage}
         />
         <Stack.Screen name="ReligionEntryPage" component={ReligionEntryPage} />
+        <Stack.Screen
+          name="EthnicityEntryPage"
+          component={EthnicityEntryPage}
+        />
+        <Stack.Screen
+          name="OccupationEntryPage"
+          component={OccupationEntryPage}
+        />
+        <Stack.Screen name="LocationEntryPage" component={LocationEntryPage} />
+        <Stack.Screen name="BioEntryPage" component={BioEntryPage} />
+        <Stack.Screen
+          name="PhotoSelectionPage"
+          component={PhotoSelectionPage}
+        />
+        <Stack.Screen name="PromptEntryPage" component={PromptEntryPage} />
       </Stack.Navigator>
     </NavigationContainer>
   );
