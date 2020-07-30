@@ -11,6 +11,52 @@ import {
 import * as ImagePicker from "expo-image-picker";
 import * as Permissions from "expo-permissions";
 
+async function submitData(userData) {
+  await fetch(
+    "https://www-student.cse.buffalo.edu/peek_mobile_dating/newUser.php",
+    {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        phoneNumber: userData[0].phoneNumber,
+        name: userData[1].name,
+        email: userData[2].email,
+        birthYear: userData[3].birthYear,
+        birthDay: userData[4].birthDay,
+        birthMonth: userData[5].birthMonth,
+        birthDay: userData[6].birthDay,
+        genderResult: userData[7].genderResult,
+        interestSelection: userData[8].interestSelection,
+        school: userData[9].school,
+        policitalParty: userData[10].policitalParty,
+        religion: userData[11].religion,
+        ethnicity: userData[12].ethnicity,
+        occupation: userData[13].occupation,
+        latitude: userData[14].location.latitude,
+        longitude: userData[14].location.longitude,
+        city_state: userData[15].city_state,
+        bio: userData[16].bio,
+        largeImage: userData[17].largeImage,
+        mediumImageOne: userData[18].mediumImageOne,
+        mediumImageTwo: userData[19].mediumImageTwo,
+        smallImageOne: userData[20].smallImageOne,
+        smallImageTwo: userData[21].smallImageTwo,
+        smallImageThree: userData[22].smallImageThree,
+      }),
+    }
+  )
+    .then((response) => response.json())
+    .then((responseJson) => {
+      console.log(responseJson);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
 function PhotoSelectionPage({ navigation, route }) {
   const { userData } = route.params;
   const [largeImage, setLargeImage] = React.useState(null);
@@ -28,12 +74,14 @@ function PhotoSelectionPage({ navigation, route }) {
       { smallImageTwo: smallImageTwo },
       { smallImageThree: smallImageThree }
     );
-    navigation.navigate("PromptEntryPage", {
-      userData: userData,
-    });
+
+    submitData(userData);
+    // navigation.navigate("CompletePage", {
+    //   userData: userData,
+    // });
   };
   async function getPermissionAsync(setImage) {
-    if (Platform.OS === "ios") {
+    if (Platform.OS === "ios" || Platform.OS === "android") {
       const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
       if (status !== "granted") {
         alert("Sorry, we need camera roll permissions to make this work!");
