@@ -1,0 +1,1 @@
+export {default as Profile_images} from './Profile_imgs';

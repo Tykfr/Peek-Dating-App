@@ -5,3 +5,4 @@ export {default as Heart_button} from './heart-icon';
 export {default as Chat_button} from './chat-icon';
 export {default as Match_button} from './matching-icon';
 export {default as Flip_button} from './flip-icon';
+export {default as Remove_button} from './remove-icon';
