@@ -1,6 +1,7 @@
 import React from 'react';
 import { View,StyleSheet } from 'react-native';
 import {Remove_button} from "_atoms";
+import {Image} from 'react-native-elements';
 
 const large_img = StyleSheet.create({
     container: {
@@ -15,12 +16,11 @@ const large_img = StyleSheet.create({
 })
 
 const Large_image = ({}) => (
-    <View>
-        <View style={large_img.img}> 
+    // Add if case here and remove or add button
+        <Image style={large_img.img}> 
         <Remove_button/>
       
-        </View>
-    </View>
+        </Image>
 )
 
 export default Large_image;

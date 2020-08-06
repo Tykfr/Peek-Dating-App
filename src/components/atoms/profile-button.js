@@ -23,7 +23,7 @@ const Profile_button = ({navigation}) =>
                                 <View style={circle.basic}>
 
                                 <TouchableOpacity 
-                                onPress={() => navigation.navigate('Profile')}
+                                onPress={() => navigation.navigate('Profile', {screen: 'ProfileScreen'})}
                                 >
                                     <View style={circle.press}></View>
                                 </TouchableOpacity>

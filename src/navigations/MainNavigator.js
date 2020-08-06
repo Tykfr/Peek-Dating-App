@@ -1,7 +1,7 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer} from "@react-navigation/native";
-import {Homescreen} from '_scenes/home';
+import {Homescreen,ProfileScreen} from '_scenes/home';
 import {ProfileStackScreen} from '_navigations';
 
  const Stack = createStackNavigator();
@@ -11,7 +11,13 @@ function MainNavigation(){
     return(
         <NavigationContainer>
             <Stack.Navigator>
-                <Stack.Screen name='Home' component={Homescreen}/>
+                <Stack.Screen 
+                    name='Home' 
+                    component={Homescreen}
+                    options={{
+                            headerShown: false,
+                        }}
+                    />
                 <Stack.Screen name="Profile" component={ProfileStackScreen}/>
             </Stack.Navigator>
         </NavigationContainer>

@@ -15,12 +15,10 @@ const small_img = StyleSheet.create({
 })
 
 const Small_image = ({}) => (
-    <View>
         <View style={small_img.img}> 
         <Remove_button/>
       
         </View>
-    </View>
 )
 
 export default Small_image;

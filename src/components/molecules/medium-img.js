@@ -15,12 +15,10 @@ const medium_img = StyleSheet.create({
 })
 
 const Medium_image = ({}) => (
-    <View>
         <View style={medium_img.img}> 
         <Remove_button/>
       
         </View>
-    </View>
 )
 
 export default Medium_image;
