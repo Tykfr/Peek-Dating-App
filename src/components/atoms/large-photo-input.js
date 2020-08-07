@@ -1,18 +1,7 @@
 import React from "react";
-import {
-  Text,
-  SafeAreaView,
-  StyleSheet,
-  View,
-  Platform,
-  Image,
-  ImageBackground,
-} from "react-native";
+import { SafeAreaView, StyleSheet, View, ImageBackground } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import * as ImagePicker from "expo-image-picker";
-import * as Permissions from "expo-permissions";
 import PropTypes from "prop-types";
-import { useEffect } from "react";
 
 function LargePhotoInput({ _image, _getPermissionAsync }) {
   const temp = "_assets/images/defaultPortait.jpg";
