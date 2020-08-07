@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     },
     textShadowColor: "rgba(0, 0, 0, 0.25)",
     textShadowRadius: 10,
-    marginBottom: 17,
-    marginRight: 20,
+    // marginBottom: 17,
+    // marginRight: 20,
   },
 });
