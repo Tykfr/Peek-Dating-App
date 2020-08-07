@@ -24,7 +24,7 @@ export default InfoText;
 const styles = StyleSheet.create({
   textStyle: {
     fontFamily: "Roboto_400Regular",
-    fontSize: 15,
+    fontSize: 18,
     color: "#656565",
   },
 });
