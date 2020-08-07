@@ -16,7 +16,7 @@ function ContinueButton({ _onPress, _disabled }) {
 }
 ContinueButton.propTypes = {
   _onPress: PropTypes.func,
-  _disabled: PropTypes.string,
+  _disabled: PropTypes.bool,
 };
 export default ContinueButton;
 
