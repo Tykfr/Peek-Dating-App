@@ -21,7 +21,9 @@ function LocationEntryPage({ navigation, route }) {
   const [errorMessage, setErrorMessage] = React.useState("");
 
   const _bioEntryPageHandler = () => {
-    userData.push({ location: location }, { city_state: city_state });
+    userData.longitude = location.longitude;
+    userData.latitude = location.latitude;
+    userData.city_state = city_state;
     navigation.navigate("BioEntryPage", {
       userData: userData,
     });
@@ -41,7 +43,6 @@ function LocationEntryPage({ navigation, route }) {
     await setLocation(coordinates);
 
     const city_state = await Location.reverseGeocodeAsync(coordinates);
-
     await setCityState(city_state[0].city + ", " + city_state[0].region);
   }
 
@@ -112,7 +113,6 @@ const styles = StyleSheet.create({
     marginBottom: 14,
   },
   getLocationButton: {
-    // backgroundColor: "#FFFFFF",
     borderWidth: 3,
     borderRadius: 33,
     borderColor: "#D99202",

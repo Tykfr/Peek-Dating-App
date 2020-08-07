@@ -5,22 +5,28 @@ import {
   SafeAreaView,
   TextInput,
   Text,
+  Platform,
   KeyboardAvoidingView,
 } from "react-native";
 import { OnboardingTitle, InvertedLogo, ContinueButton } from "_atoms";
-import { set } from "react-native-reanimated";
-import { useCardAnimation } from "@react-navigation/stack";
 
 function BioEntryPage({ navigation, route }) {
   const { userData } = route.params;
   const [bio, setBio] = React.useState("");
+
   const _selectPhotoHander = () => {
-    userData.push({ bio: bio });
-    console.log(userData);
+    userData.bio = bio;
+
+    navigation.navigate("PhotoSelectionPage", {
+      userData: userData,
+    });
   };
 
   return (
-    <KeyboardAvoidingView style={styles.container} behavior="padding">
+    <KeyboardAvoidingView
+      style={styles.container}
+      behavior={Platform.OS === "ios" ? "padding" : null}
+    >
       <SafeAreaView style={styles.container}>
         <View style={{ width: "100%", height: "100%" }}>
           {/* Logo Container */}
@@ -37,18 +43,19 @@ function BioEntryPage({ navigation, route }) {
               <TextInput
                 style={styles.textInputStyle}
                 placeholder={
-                  "Looking for some positive moments, adventures and fun." +
-                  "\n" +
-                  "\n" +
-                  "Max chacter count: 100"
+                  "Looking for some positive moments, adventures and fun."
                 }
                 onChangeText={(bio) => setBio(bio)}
                 multiline={true}
-                textAlignVertical={"left"}
+                textAlignVertical={"top"}
                 maxLength={100}
                 keyboardType="default"
                 returnKeyType="done"
+                autoFocus={true}
               />
+            </View>
+            <View style={styles.characterCountContainer}>
+              <Text> Characters Left: {bio.length}/100</Text>
             </View>
           </View>
 
@@ -112,5 +119,10 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     marginRight: 20,
     flexShrink: 1,
+  },
+  characterCountContainer: {
+    justifyContent: "flex-end",
+    // backgroundColor: "green",
+    flexGrow: 1,
   },
 });

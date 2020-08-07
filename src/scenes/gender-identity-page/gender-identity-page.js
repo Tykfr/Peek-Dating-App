@@ -11,6 +11,8 @@ function GenderIdentityPage({ route, navigation }) {
   const [femaleChecked, setfemaleCheck] = React.useState(false);
   const [genderResult, setGenderResult] = React.useState("");
 
+  // NTS: Comeback at a later date and restructre this component so that it works similary to
+  // the ethniciity page when selecting a gender.
   function selectMale() {
     setMaleCheck(true);
     setfemaleCheck(false);
@@ -24,7 +26,8 @@ function GenderIdentityPage({ route, navigation }) {
   }
 
   const _datingInterestPageHandler = () => {
-    userData.push({ genderResult: genderResult });
+    userData.genderResult = genderResult;
+
     navigation.navigate("DatingInterestPage", {
       userData: userData,
     });

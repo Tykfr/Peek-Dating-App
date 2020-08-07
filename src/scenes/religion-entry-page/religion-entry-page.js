@@ -26,14 +26,15 @@ function ReligionEntryPage({ navigation, route }) {
     setJudiasm(selection === "Judiasm" ? true : false);
   }
   const _ethnicityEntryPage = () => {
-    userData.push({ religion: religion });
+    userData.religion = religion;
+
     navigation.navigate("EthnicityEntryPage", {
       userData: userData,
     });
   };
   return (
     <SafeAreaView style={styles.container}>
-      <View style={{ width: "100%" /*backgroundColor: "orange"*/ }}>
+      <View style={{ width: "100%" }}>
         {/* Logo Container */}
         <View style={styles.logoContainer}>
           <InvertedLogo />
@@ -45,7 +46,6 @@ function ReligionEntryPage({ navigation, route }) {
         {/* Options Container */}
         <View
           style={{
-            /*backgroundColor: "purple",*/
             width: "100%",
           }}
         >

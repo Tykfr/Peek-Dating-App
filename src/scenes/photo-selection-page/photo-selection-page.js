@@ -10,75 +10,27 @@ import {
 } from "_atoms";
 import * as ImagePicker from "expo-image-picker";
 import * as Permissions from "expo-permissions";
-
-async function submitData(userData) {
-  await fetch(
-    "https://www-student.cse.buffalo.edu/peek_mobile_dating/newUser.php",
-    {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        phoneNumber: userData[0].phoneNumber,
-        name: userData[1].name,
-        email: userData[2].email,
-        birthYear: userData[3].birthYear,
-        birthDay: userData[4].birthDay,
-        birthMonth: userData[5].birthMonth,
-        birthDay: userData[6].birthDay,
-        genderResult: userData[7].genderResult,
-        interestSelection: userData[8].interestSelection,
-        school: userData[9].school,
-        policitalParty: userData[10].policitalParty,
-        religion: userData[11].religion,
-        ethnicity: userData[12].ethnicity,
-        occupation: userData[13].occupation,
-        latitude: userData[14].location.latitude,
-        longitude: userData[14].location.longitude,
-        city_state: userData[15].city_state,
-        bio: userData[16].bio,
-        largeImage: userData[17].largeImage,
-        mediumImageOne: userData[18].mediumImageOne,
-        mediumImageTwo: userData[19].mediumImageTwo,
-        smallImageOne: userData[20].smallImageOne,
-        smallImageTwo: userData[21].smallImageTwo,
-        smallImageThree: userData[22].smallImageThree,
-      }),
-    }
-  )
-    .then((response) => response.json())
-    .then((responseJson) => {
-      console.log(responseJson);
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-}
+import { StatusBar } from "expo-status-bar";
 
 function PhotoSelectionPage({ navigation, route }) {
   const { userData } = route.params;
-  const [largeImage, setLargeImage] = React.useState(null);
-  const [mediumImageOne, setMediumImageOne] = React.useState(null);
-  const [mediumImageTwo, setMediumImageTwo] = React.useState(null);
-  const [smallImageOne, setSmallImageOne] = React.useState(null);
-  const [smallImageTwo, setSmallImageTwo] = React.useState(null);
-  const [smallImageThree, setSmallImageThree] = React.useState(null);
+  const [largeImage, setLargeImage] = React.useState("");
+  const [mediumImageOne, setMediumImageOne] = React.useState("");
+  const [mediumImageTwo, setMediumImageTwo] = React.useState("");
+  const [smallImageOne, setSmallImageOne] = React.useState("");
+  const [smallImageTwo, setSmallImageTwo] = React.useState("");
+  const [smallImageThree, setSmallImageThree] = React.useState("");
   const _promptHander = () => {
-    userData.push(
-      { largeImage: largeImage },
-      { mediumImageOne: mediumImageOne },
-      { mediumImageTwo: mediumImageTwo },
-      { smallImageOne: smallImageOne },
-      { smallImageTwo: smallImageTwo },
-      { smallImageThree: smallImageThree }
-    );
+    userData.largeImage = largeImage;
+    userData.mediumImageOne = mediumImageOne;
+    userData.mediumImageTwo = mediumImageTwo;
+    userData.smallImageOne = smallImageOne;
+    userData.smallImageTwo = smallImageTwo;
+    userData.smallImageThree = smallImageThree;
 
-    submitData(userData);
-    // navigation.navigate("CompletePage", {
-    //   userData: userData,
-    // });
+    navigation.navigate("PromptEntryPage", {
+      userData: userData,
+    });
   };
   async function getPermissionAsync(setImage) {
     if (Platform.OS === "ios" || Platform.OS === "android") {
@@ -108,6 +60,7 @@ function PhotoSelectionPage({ navigation, route }) {
   }
   return (
     <SafeAreaView style={styles.container}>
+      <StatusBar style="dark" />
       <View style={{ width: "100%", flexShrink: 1 }}>
         <View style={styles.logoContainer}>
           <InvertedLogo />
@@ -183,14 +136,11 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "space-between",
-    // backgroundColor: "grey",
   },
   continueButtonContainer: {
-    // backgroundColor: "blue",
     marginBottom: 40,
   },
   titleContainer: {
-    // backgroundColor: "green",
     marginLeft: 16,
     marginBottom: 20,
   },
@@ -199,7 +149,6 @@ const styles = StyleSheet.create({
     marginRight: 18,
     marginTop: 28,
     marginBottom: 14,
-    // backgroundColor: "orange",
   },
 
   smallPhotoLayoutContainer: {

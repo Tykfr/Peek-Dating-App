@@ -36,7 +36,8 @@ function PoliticalEntryPage({ navigation, route }) {
   };
 
   const _religionEntryPageHandler = () => {
-    userData.push({ policitalParty: result });
+    userData.politicalParty = result;
+
     navigation.navigate("ReligionEntryPage", {
       userData: userData,
     });

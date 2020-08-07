@@ -32,21 +32,21 @@ function calculateAge(dateOfBirth) {
 
 function BirthdayEntryPage({ navigation, route }) {
   const { userData } = route.params;
-
   const [date, setDate] = React.useState(new Date());
+
   let dateOfBirth = new Date();
   let age;
+
   const onChange = (event, selectedDate) => {
     dateOfBirth = selectedDate || date;
     age = calculateAge(dateOfBirth);
   };
 
   const _genderIdentityPage = () => {
-    userData.push(
-      { birthYear: dateOfBirth.getFullYear() },
-      { birthMonth: dateOfBirth.getMonth() + 1 },
-      { birthDay: dateOfBirth.getDate() }
-    );
+    userData.birthYear = dateOfBirth.getFullYear();
+    userData.birthMonth = dateOfBirth.getMonth() + 1; //The plus one is necesary because the months are counting from 0.
+    userData.birthDay = dateOfBirth.getDate();
+
     navigation.navigate("GenderIdentityPage", {
       userData: userData,
     });
@@ -55,26 +55,22 @@ function BirthdayEntryPage({ navigation, route }) {
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle={"dark-content"} />
 
-      <View>
+      <View style={{ width: "100%" }}>
         <View style={styles.logoContainer}>
-          <Image
-            style={styles.logo}
-            source={require("_assets/images/Peek_Logo_Inverted.png")}
-          />
+          <Image source={require("_assets/images/Peek_Logo_Inverted.png")} />
+        </View>
+
+        <View style={styles.titleContainer}>
+          <OnboardingTitle description={"What is your date of birth ?"} />
         </View>
         <View style={styles.datePickerContainer}>
-          <View style={styles.titleContainer}>
-            <OnboardingTitle description={"What is your date of birth ?"} />
-          </View>
-          <View>
-            <DateTimePicker
-              value={date}
-              mode={"date"}
-              display="default"
-              onChange={onChange}
-              maximumDate={new Date()}
-            />
-          </View>
+          <DateTimePicker
+            value={date}
+            mode={"date"}
+            display="default"
+            onChange={onChange}
+            maximumDate={new Date()}
+          />
         </View>
       </View>
 
@@ -94,23 +90,24 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#FFFFFF",
   },
-  logo: {
-    width: 50,
-    height: 50,
-  },
+
   logoContainer: {
     alignSelf: "flex-end",
-    marginVertical: 20,
-  },
-  title: {
-    position: "absolute",
-    top: 100,
-    left: 16,
     marginRight: 18,
+    marginTop: 28,
+    marginBottom: 14,
   },
+
   continueButtonContainer: {
+    marginBottom: 40,
+  },
+  titleContainer: {
+    marginLeft: 16,
+    // backgroundColor: "blue",
     marginBottom: 10,
   },
-  titleContainer: { marginBottom: 20 },
-  datePickerContainer: { width: "100%" },
+  datePickerContainer: {
+    width: "100%",
+    //  backgroundColor: "grey"
+  },
 });

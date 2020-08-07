@@ -16,7 +16,8 @@ function EthnicityEntryPage({ navigation, route }) {
   const [ethnicity, setEthnicity] = React.useState("");
 
   function _occupationHandler() {
-    userData.push({ ethnicity: ethnicity });
+    userData.ethnicity = ethnicity;
+
     navigation.navigate("OccupationEntryPage", {
       userData: userData,
     });
@@ -24,7 +25,7 @@ function EthnicityEntryPage({ navigation, route }) {
 
   function ethnicitySelection(selection) {
     setEthnicity(selection);
-    setBlack(selection === "Black");
+    setBlack(selection === "Black/African American");
     setAsian(selection === "Asian");
     setNativeAmerica(selection === "Native American");
     setWhite(selection === "White");
@@ -50,7 +51,7 @@ function EthnicityEntryPage({ navigation, route }) {
             <CheckBox
               title={"Black/African American"}
               containerStyle={styles.checkBox}
-              onPress={() => ethnicitySelection("Black")}
+              onPress={() => ethnicitySelection("Black/African American")}
               checked={black}
               checkedColor="#D99202"
             />

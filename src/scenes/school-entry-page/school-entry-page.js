@@ -16,7 +16,8 @@ function SchoolEntryPage({ navigation, route }) {
   const [school, setSchool] = React.useState("");
 
   const _polticalEntryPageHandler = () => {
-    userData.push({ school: school });
+    userData.school = school;
+
     navigation.navigate("PoliticalEntryPage", {
       userData: userData,
     });
@@ -79,7 +80,7 @@ const styles = StyleSheet.create({
   titleContainer: {
     //backgroundColor: "orange",
     marginBottom: 33,
-    marginLeft: 30,
+    marginLeft: 16,
   },
   logoContainer: {
     //backgroundColor: "green",

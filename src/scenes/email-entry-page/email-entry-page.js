@@ -8,11 +8,10 @@ import { CheckBox } from "react-native-elements";
 import {
   StyleSheet,
   SafeAreaView,
-  Text,
   Image,
   View,
   StatusBar,
-  Alert,
+  KeyboardAvoidingView,
 } from "react-native";
 
 import {
@@ -34,23 +33,43 @@ function EmailEntryPage({ route, navigation }) {
   const [email, setEmail] = React.useState("");
 
   function recordUserEmail() {
-    userData.push({ email: email });
+    userData.email = email;
     navigation.navigate("BirthdayEntryPage", {
       userData: userData,
     });
   }
   return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar barStyle={"dark-content"} />
+    <KeyboardAvoidingView
+      style={styles.container}
+      behavior={Platform.OS === "ios" ? "padding" : null}
+    >
+      <SafeAreaView style={styles.container}>
+        <StatusBar barStyle={"dark-content"} />
 
-      <View style={styles.logoPos}>
-        <Image
-          style={styles.logo}
-          source={require("_assets/images/Peek_Logo_Inverted.png")}
-        />
-      </View>
-      <View style={styles.title}>
-        <OnboardingTitle description={"What is your email?"} />
+        <View style={{ width: "100%" }}>
+          <View style={styles.logoPos}>
+            <Image source={require("_assets/images/Peek_Logo_Inverted.png")} />
+          </View>
+
+          <View style={styles.title}>
+            <OnboardingTitle description={"What is your email?"} />
+            <View style={styles.infoText}>
+              <InfoText
+                description={"Email will be used for account recovery."}
+              />
+            </View>
+            <View style={styles.optIn}>
+              <CheckBox
+                title="Opt-in for email notifications"
+                checkedColor="#D99202"
+                checked={checked}
+                onPress={() => setCheck(!checked)} //This is key to calling function with parameters without it invoking on render
+                containerStyle={styles.checkBox}
+              />
+            </View>
+          </View>
+        </View>
+
         <View style={styles.input}>
           <InputResponse
             _placeHolder={"johndoe@peek.com"}
@@ -61,24 +80,15 @@ function EmailEntryPage({ route, navigation }) {
             _autoCapitalize={"none"}
           />
         </View>
-        <View style={styles.infoText}>
-          <InfoText description={"Will be used for account recovery."} />
-        </View>
-        <View style={styles.optIn}>
-          <CheckBox
-            title="Opt-in for email notifications"
-            checkedColor="#D99202"
-            checked={checked}
-            onPress={() => setCheck(!checked)} //This is key to calling function with parameters without it invoking on render
-            containerStyle={styles.checkBox}
+
+        <View style={styles.continueButton}>
+          <ContinueButton
+            _onPress={() => recordUserEmail()}
+            _disabled={!email}
           />
         </View>
-      </View>
-
-      <View style={styles.continueButton}>
-        <ContinueButton _onPress={() => recordUserEmail()} _disabled={!email} />
-      </View>
-    </SafeAreaView>
+      </SafeAreaView>
+    </KeyboardAvoidingView>
   );
 }
 
@@ -87,47 +97,41 @@ export default EmailEntryPage;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: "space-between",
     alignItems: "center",
     backgroundColor: "#FFFFFF",
-  },
-
-  logo: {
-    height: 50,
-    width: 50,
+    width: "100%",
   },
 
   logoPos: {
-    position: "absolute",
-    top: 37,
-    right: 18,
+    alignSelf: "flex-end",
+    marginRight: 18,
+    marginTop: 28,
+    marginBottom: 14,
+    // backgroundColor: "orange",
   },
   title: {
-    position: "absolute",
-    top: 100,
-    left: 16,
-    marginRight: 18,
+    // backgroundColor: "purple",
+    marginLeft: 16,
   },
   input: {
-    alignSelf: "flex-start",
-    flexDirection: "row",
-    justifyContent: "center",
-    marginTop: 50,
-    marginLeft: 18,
+    // backgroundColor: "red",
   },
   infoText: {
-    marginTop: 15,
-    marginLeft: 18,
+    // backgroundColor: "brown",
+    marginTop: 10,
   },
   continueButton: {
-    position: "absolute",
-    bottom: 46,
+    // backgroundColor: "yellow",
+    marginBottom: 20,
   },
   optIn: {
-    marginTop: 20,
+    width: "100%",
+    // backgroundColor: "blue",
   },
   checkBox: {
     backgroundColor: "#FFFFFF",
     borderWidth: 0,
+    marginLeft: 0,
   },
 });

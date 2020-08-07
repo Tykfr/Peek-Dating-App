@@ -6,6 +6,7 @@ import {
   Text,
   StatusBar,
   KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 import {
   ContinueButton,
@@ -19,14 +20,17 @@ function OccupationEntryPage({ navigation, route }) {
   const [occupation, setOccupation] = React.useState("");
 
   const _locationHandler = () => {
-    userData.push({ occupation: occupation });
+    userData.occupation = occupation;
     navigation.navigate("LocationEntryPage", {
       userData: userData,
     });
   };
 
   return (
-    <KeyboardAvoidingView style={styles.container} behavior="padding">
+    <KeyboardAvoidingView
+      style={styles.container}
+      behavior={Platform.OS === "ios" ? "padding" : null}
+    >
       <SafeAreaView style={styles.container}>
         <StatusBar barStyle="dark-content" />
         <View style={{ width: "100%" }}>
