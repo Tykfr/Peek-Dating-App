@@ -1,10 +1,11 @@
 import React from "react";
 import { Text, StyleSheet, TouchableOpacity } from "react-native";
 import { AppLoading } from "expo";
+import PropTypes from "prop-types";
 
 import { useFonts, Roboto_400Regular } from "@expo-google-fonts/roboto";
 
-function AssistButton({ description }) {
+function AssistButton({ _description, _onPress }) {
   let [fontsLoaded] = useFonts({
     Roboto_400Regular,
   });
@@ -12,18 +13,21 @@ function AssistButton({ description }) {
     return <AppLoading />;
   } else {
     return (
-      <TouchableOpacity>
-        <Text style={styles.textStyle}>{description}</Text>
+      <TouchableOpacity onPress={_onPress}>
+        <Text style={styles.textStyle}>{_description}</Text>
       </TouchableOpacity>
     );
   }
 }
 export default AssistButton;
-
+AssistButton.propTypes = {
+  _onPress: PropTypes.func,
+  _description: PropTypes.string,
+};
 const styles = StyleSheet.create({
   textStyle: {
     color: "#D99202",
     fontFamily: "Roboto_400Regular",
-    fontSize: 21,
+    fontSize: 20,
   },
 });
