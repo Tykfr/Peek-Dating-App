@@ -78,7 +78,7 @@ function NumberEntry({ _number, _setNumber, _editable }) {
         style={styles.inputStyle}
         onChangeText={(_number) => _setNumber(code + _number)}
         editable={_editable}
-        // autoFocus={true}
+        autoFocus={true}
       />
       {/* Modal for country code and flag */}
 
