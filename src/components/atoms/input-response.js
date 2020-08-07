@@ -10,11 +10,13 @@ function InputResponse({
   _onChangeCallBack,
   _keyboardType,
   _editable,
+  _returnKeyType,
 }) {
   return (
     <TextInput
+      autoFocus={true}
       style={styles.textInput}
-      returnKeyType="done"
+      returnKeyType={_returnKeyType === undefined ? _returnKeyType : "done"}
       editable={_editable}
       keyboardType={_keyboardType}
       placeholder={_placeHolder}
@@ -31,6 +33,7 @@ InputResponse.propTypes = {
   _keyboardType: PropTypes.string.isRequired,
   _placeHolder: PropTypes.string,
   _autoCapitalize: PropTypes.string,
+  _returnKeyType: PropTypes.string,
 };
 export default InputResponse;
 
