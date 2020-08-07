@@ -5,8 +5,15 @@ import AppTitle from "_atoms/app-title";
 import Button from "_atoms/button";
 import TermsButton from "_atoms/termsBtn";
 import PrivacyButton from "_atoms/privacyBtn";
+import { Entypo } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
 
-function LoginPage() {
+function LoginPage({ navigation }) {
+  const dialIcon = <Entypo name="dial-pad" size={22} color="#FFFFFF" />;
+  const emailIcon = <MaterialIcons name="email" size={22} color="#FFFFFF" />;
+  const phoneNumberHandler = () => {
+    navigation.navigate("NumberEntryPage");
+  };
   return (
     <LinearGradient
       style={{ flex: 1 }}
@@ -18,37 +25,58 @@ function LoginPage() {
       ]}
     >
       <SafeAreaView style={styles.container}>
-        <SafeAreaView style={styles.title_logoPos}>
-          <AppTitle />
+        <View style={styles.imageView}>
           <Image
-            style={styles.logoPos}
-            source={require("_assets/images/Peek_Logo.png")}
+            resizeMode="stretch"
+            style={styles.imageStyle}
+            source={require("_assets/images/Heart_Connections.png")}
           />
-        </SafeAreaView>
-        <View style={styles.button_icon}>
-          <Image
-            style={styles.mailIcon}
-            source={require("_assets/images/mail.png")}
-          />
-          <Button description="Continue with Email" />
         </View>
 
-        <View style={styles.button_icon}>
-          <Image
-            style={styles.dialIcon}
-            source={require("_assets/images/dialPad.png")}
-          />
-          <Button description="Continue with Phone Number" />
+        <View
+          style={{
+            width: "100%",
+            alignItems: "center",
+          }}
+        >
+          <View style={styles.title_logoPos}>
+            <View>
+              <AppTitle />
+            </View>
+
+            <View style={styles.logoPos}>
+              <Image
+                style={styles.logoPos}
+                source={require("_assets/images/Peek_Logo.png")}
+              />
+            </View>
+          </View>
+
+          <View>
+            <View>
+              <Button description="Continue with Email" icon={emailIcon} />
+            </View>
+
+            <View>
+              <Button
+                description="Continue with Phone Number"
+                icon={dialIcon}
+                onPress={phoneNumberHandler}
+              />
+            </View>
+          </View>
+        </View>
+
+        <View style={styles.terms_priv}>
+          <View>
+            <TermsButton description="Terms of Service" />
+          </View>
+
+          <View>
+            <PrivacyButton description="Privacy Concerns" />
+          </View>
         </View>
       </SafeAreaView>
-
-      <View style={styles.termsOfServ}>
-        <TermsButton description="Terms of Service" />
-      </View>
-
-      <View style={styles.privacyBtn}>
-        <PrivacyButton description="Privacy Concerns" />
-      </View>
     </LinearGradient>
   );
 }
@@ -57,54 +85,33 @@ export default LoginPage;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: "space-between",
     alignItems: "center",
   },
-  termsOfServ: {
-    alignSelf: "flex-start",
-    bottom: 0,
-    position: "absolute",
-    left: 34,
-    marginBottom: 40,
+  terms_priv: {
+    flexDirection: "row",
+    width: "100%",
+    justifyContent: "space-between",
+    paddingHorizontal: 20,
+    marginBottom: 20,
   },
-  privacyBtn: {
-    alignSelf: "flex-end",
-    bottom: 0,
-    position: "absolute",
-    right: 35,
-    marginBottom: 40,
-  },
+
   title_logoPos: {
-    alignSelf: "center",
     flexDirection: "row",
     justifyContent: "center",
-    marginRight: 0,
+    width: "100%",
   },
   logoPos: {
-    marginBottom: 17,
-    position: "absolute",
-    left: 125,
-    bottom: 10,
-    alignSelf: "center",
-    height: 70,
-    width: 70,
+    width: 75,
+    height: 75,
   },
-  button_icon: {
-    flexDirection: "row",
-    justifyContent: "center",
+  imageView: {
+    width: "100%",
+    height: 0,
+    marginTop: 20,
   },
-  mailIcon: {
-    position: "absolute",
-    left: 20,
-    top: 17,
-    height: 22,
-    width: 22,
-  },
-  dialIcon: {
-    height: 22,
-    width: 22,
-    position: "absolute",
-    left: 20,
-    top: 17,
+  imageStyle: {
+    width: "100%",
+    height: 200,
   },
 });
