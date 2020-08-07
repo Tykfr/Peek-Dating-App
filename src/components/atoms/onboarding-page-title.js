@@ -19,7 +19,7 @@ export default OnboardingTitle;
 const styles = StyleSheet.create({
   textStyle: {
     color: "#000000",
-    fontSize: 32,
+    fontSize: 27,
     fontFamily: "ReemKufi_400Regular",
   },
 });
