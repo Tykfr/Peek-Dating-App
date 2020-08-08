@@ -28,7 +28,7 @@ function VerificationCodePage({ route, navigation }) {
   let { verificationId } = route.params;
   let { phoneNumber } = route.params;
   phoneNumber = JSON.parse(JSON.stringify(phoneNumber));
-  const [verificationCode, setVerificationCode] = React.useState();
+  const [verificationCode, setVerificationCode] = React.useState("");
   verificationId = JSON.parse(JSON.stringify(verificationId));
 
   /**
@@ -103,7 +103,10 @@ function VerificationCodePage({ route, navigation }) {
         </View>
 
         <View style={styles.continueButton}>
-          <ContinueButton _disabled={!verificationId} _onPress={verifyCode} />
+          <ContinueButton
+            _disabled={verificationCode.length !== 6}
+            _onPress={verifyCode}
+          />
         </View>
       </SafeAreaView>
     </KeyboardAvoidingView>

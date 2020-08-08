@@ -112,7 +112,7 @@ function EthnicityEntryPage({ navigation, route }) {
       <View style={styles.continueButtonContainer}>
         <ContinueButton
           _onPress={() => _occupationHandler()}
-          _disabled={false}
+          _disabled={!ethnicity}
         />
       </View>
     </SafeAreaView>

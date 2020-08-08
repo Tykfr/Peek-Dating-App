@@ -73,17 +73,14 @@ const styles = StyleSheet.create({
   continueButtonContainer: {
     marginBottom: 46,
     flexGrow: 1,
-    // backgroundColor: "blue",
     justifyContent: "flex-end",
   },
-  inputResponseContainer: { /*backgroundColor: "red",*/ alignSelf: "center" },
+  inputResponseContainer: { alignSelf: "center" },
   titleContainer: {
-    //backgroundColor: "orange",
     marginBottom: 33,
     marginLeft: 16,
   },
   logoContainer: {
-    //backgroundColor: "green",
     alignSelf: "flex-end",
     marginRight: 18,
     marginTop: 28,
