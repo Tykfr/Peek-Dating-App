@@ -16,6 +16,7 @@ function SmallPhotoInput({ _image, _getPermissionAsync }) {
     <SafeAreaView>
       <View style={styles.smallPhotoStyle}>
         <ImageBackground
+          resizeMode="repeat"
           source={{
             uri: _image !== null ? `data:image/jpg;base64,${_image}` : temp,
           }}
@@ -26,7 +27,6 @@ function SmallPhotoInput({ _image, _getPermissionAsync }) {
             justifyContent: "flex-end",
           }}
           imageStyle={{
-            borderWidth: 1,
             borderRadius: 23,
             alignSelf: "center",
             justifyContent: "center",
@@ -59,13 +59,5 @@ const styles = StyleSheet.create({
     flexShrink: 1,
     alignItems: "flex-end",
     justifyContent: "flex-end",
-  },
-  image: {
-    flex: 1,
-    resizeMode: "cover",
-    justifyContent: "center",
-    width: 109,
-    height: 73,
-    borderRadius: 23,
   },
 });

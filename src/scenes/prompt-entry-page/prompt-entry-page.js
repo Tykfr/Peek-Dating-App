@@ -11,13 +11,6 @@ import {
 } from "_atoms";
 import { useEffect } from "react";
 
-async function storeUserID(userID) {
-  try {
-    await AsyncStorage.setItem("userID", userID);
-  } catch (e) {
-    console.error("Error: " + e);
-  }
-}
 function PromptEntryPage({ navigation, route }) {
   const { userData } = route.params;
 
@@ -37,39 +30,16 @@ function PromptEntryPage({ navigation, route }) {
   const [thirdPromptVisibility, setThirdPromptVisibility] = React.useState(
     false
   );
-
-  async function submitData(userData) {
-    await fetch(
-      "https://www-student.cse.buffalo.edu/peek_mobile_dating/newUser.php",
-      {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userData),
-      }
-    )
-      .then((response) => response.json())
-      .then((responseJson) => {
-        const userID = JSON.stringify(responseJson); //The userID needs to be a string so that it can be stored in async storage
-        storeUserID(userID);
-        //naviagation that navigate will be called her to go to the main stack.
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }
-
-  async function completeAccount() {
+  async function completeAccount(userData, navigation) {
     userData.firstResponse = firstResponse;
     userData.secondResponse = secondResponse;
     userData.thirdResponse = thirdResponse;
     userData.firstPrompt = firstPrompt;
     userData.secondPrompt = secondPrompt;
     userData.thirdPrompt = thirdPrompt;
-    await submitData(userData);
+    await submitData(userData, navigation);
   }
+
   const _promptSelectionHandler = (key) => {
     switch (key) {
       case 1:
@@ -183,7 +153,7 @@ function PromptEntryPage({ navigation, route }) {
 
         <View style={styles.continueButtonContainer}>
           <ContinueButton
-            _onPress={() => completeAccount()}
+            _onPress={() => completeAccount(userData, navigation)}
             _disabled={false}
           />
         </View>
@@ -228,3 +198,36 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
 });
+
+async function storeUserID(userID, navigation) {
+  try {
+    await AsyncStorage.setItem("userID", userID);
+    navigation.navigate("MainNavigation");
+  } catch (e) {
+    console.error("Error: " + e);
+  }
+}
+
+async function submitData(userData, navigation) {
+  await fetch(
+    "https://www-student.cse.buffalo.edu/peek_mobile_dating/newUser.php",
+    {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userData),
+    }
+  )
+    .then((response) => response.json())
+    .then((responseJson) => {
+      const userID = JSON.stringify(responseJson); //The userID needs to be a string so that it can be stored in async storage
+      storeUserID(userID, navigation);
+
+      //naviagation that navigate will be called her to go to the main stack.
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}

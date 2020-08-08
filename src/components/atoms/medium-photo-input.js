@@ -19,6 +19,7 @@ function MediumPhotoInput({ _image, _getPermissionAsync }) {
     <SafeAreaView>
       <View style={styles.mediumPhotoStyle}>
         <ImageBackground
+          resizeMode="repeat"
           source={{
             uri: _image !== null ? `data:image/jpg;base64,${_image}` : temp,
           }}
@@ -29,7 +30,6 @@ function MediumPhotoInput({ _image, _getPermissionAsync }) {
             justifyContent: "flex-end",
           }}
           imageStyle={{
-            borderWidth: 1,
             borderRadius: 23,
             alignSelf: "center",
             justifyContent: "center",
@@ -59,17 +59,8 @@ const styles = StyleSheet.create({
     height: 92,
     borderWidth: 1,
     borderRadius: 23,
-    // backgroundColor: "green",
     flexShrink: 1,
     alignItems: "flex-end",
     justifyContent: "flex-end",
-  },
-  image: {
-    flex: 1,
-    resizeMode: "cover",
-    justifyContent: "center",
-    width: 134,
-    height: 92,
-    borderRadius: 23,
   },
 });

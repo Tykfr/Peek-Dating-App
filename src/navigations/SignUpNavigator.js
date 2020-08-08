@@ -22,15 +22,15 @@ import { PhotoSelectionPage } from "_scenes/photo-selection-page";
 import { PromptEntryPage } from "_scenes/prompt-entry-page";
 import { PromptSelectionPage } from "_scenes/prompt-selection-page";
 import { PromptSubmissionPage } from "_scenes/prompt-submission-page";
-import { CompletePage } from "_scenes/complete-page";
+import { MainNavigation } from "_navigations";
 
 const Stack = createStackNavigator();
 
 function SignUpNavigator() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login" headerMode="none">
-        <Stack.Screen name="Login" component={LoginPage} />
+      <Stack.Navigator initialRouteName="LoginPage" headerMode="none">
+        <Stack.Screen name="LoginPage" component={LoginPage} />
         <Stack.Screen name="NumberEntryPage" component={NumberEntryPage} />
         <Stack.Screen
           name="VerificationPage"
@@ -80,7 +80,7 @@ function SignUpNavigator() {
           name="PromptSubmissionPage"
           component={PromptSubmissionPage}
         />
-        <Stack.Screen name="CompletePage" component={CompletePage} />
+        <Stack.Screen name="MainNavigation" component={MainNavigation} />
       </Stack.Navigator>
     </NavigationContainer>
   );

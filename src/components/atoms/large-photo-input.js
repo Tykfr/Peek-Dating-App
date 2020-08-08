@@ -19,7 +19,7 @@ function LargePhotoInput({ _image, _getPermissionAsync }) {
             justifyContent: "flex-end",
           }}
           imageStyle={{
-            borderWidth: 1,
+            // borderWidth: 1,
             borderRadius: 23,
             alignSelf: "center",
             justifyContent: "center",
@@ -53,13 +53,5 @@ const styles = StyleSheet.create({
     flexShrink: 1,
     alignItems: "flex-end",
     justifyContent: "flex-end",
-  },
-  image: {
-    flex: 1,
-    resizeMode: "cover",
-    justifyContent: "center",
-    width: 201,
-    height: 196,
-    borderRadius: 23,
   },
 });

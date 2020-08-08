@@ -1,19 +1,29 @@
-import React from 'react';
-import {View,Text, StyleSheet, TouchableOpacity} from 'react-native';
-import { useState, useEffect } from 'react';
-import {Camera} from 'expo-camera';
-import {Profile_button,Heart_button,Chat_button,Match_button,Flip_button} from '_atoms';
+import React from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  SafeAreaView,
+} from "react-native";
+import { useState, useEffect } from "react";
+import { Camera } from "expo-camera";
+import {
+  Profile_button,
+  Heart_button,
+  Chat_button,
+  Match_button,
+  Flip_button,
+} from "_atoms";
 
-
-
-function HomeScreen({navigation}){
+function HomeScreen({ navigation }) {
   const [hasPermission, setHasPermission] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
 
   useEffect(() => {
     (async () => {
       const { status } = await Camera.requestPermissionsAsync();
-      setHasPermission(status === 'granted');
+      setHasPermission(status === "granted");
     })();
   }, []);
 
@@ -24,40 +34,66 @@ function HomeScreen({navigation}){
     return <Text>No access to camera</Text>;
   }
   return (
-    <View style={{ flex: 1 }}>
-      
-      <Camera style={{ flex: 1 }} type={type}>
-      <Profile_button navigation={navigation} />
-      <Chat_button/>
-      <Match_button/>
-      <Heart_button/>
-      
-        <View
-          style={{
-            flex: 1,
-            backgroundColor: 'transparent',
-            flexDirection: 'row',
-          }}>
-          <TouchableOpacity
-            style={{
-              flex: 0.1,
-              alignSelf: 'flex-end',
-              alignItems: 'center',
-            }}
-            onPress={() => {
-              setType(
-                type === Camera.Constants.Type.back
-                  ? Camera.Constants.Type.front
-                  : Camera.Constants.Type.back
-              );
-            }}>
-            
-            <Flip_button/>
-          </TouchableOpacity>
+    <SafeAreaView style={{ flex: 1 }}>
+      <Camera style={styles.cameraStyle} type={type}>
+        <View style={styles.profileButton_HeartButton_Container}>
+          <Profile_button navigation={navigation} />
+          <Heart_button />
+        </View>
+
+        <View style={{ width: "100%" }}>
+          <View style={styles.flipButtonContainer}>
+            <TouchableOpacity
+              style={styles.flipButtonStyle}
+              onPress={() =>
+                setType(
+                  type === Camera.Constants.Type.back
+                    ? Camera.Constants.Type.front
+                    : Camera.Constants.Type.back
+                )
+              }
+            >
+              <Flip_button />
+            </TouchableOpacity>
+          </View>
+
+          <View style={styles.chatButton_MatchButton_Container}>
+            <Chat_button />
+            <Match_button />
+          </View>
         </View>
       </Camera>
-    </View>
+    </SafeAreaView>
   );
 }
 
 export default HomeScreen;
+
+const styles = {
+  profileButton_HeartButton_Container: {
+    flexDirection: "row",
+    width: "100%",
+    justifyContent: "space-between",
+    marginTop: 20,
+    paddingHorizontal: 20,
+  },
+  cameraStyle: {
+    flex: 1,
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  chatButton_MatchButton_Container: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingHorizontal: 20,
+    marginBottom: 20,
+  },
+  flipButtonContainer: {
+    alignSelf: "flex-start",
+    marginLeft: 25,
+    marginBottom: 30,
+  },
+  flipButtonStyle: {
+    alignSelf: "flex-start",
+  },
+};

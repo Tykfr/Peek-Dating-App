@@ -65,6 +65,5 @@
     "eslint-import-resolver-babel-module": "^5.1.2",
     "eslint-plugin-import": "^2.22.0"
   },
- 
   "private": true
 }

@@ -16,20 +16,6 @@ import * as firebase from "firebase";
 import InputResponse from "_atoms/input-response";
 import AsyncStorage from "@react-native-community/async-storage";
 
-async function userIDLookUp(phoneNumber, navigation) {
-  try {
-    const userID = await AsyncStorage.getItem("userID");
-    if (userID) {
-      navigation.navigate("CompletePage");
-    } else {
-      navigation.navigate("NameEntryPage", {
-        userData: { phoneNumber: phoneNumber },
-      });
-    }
-  } catch (e) {
-    // error reading value
-  }
-}
 /**
  * @author - William Phillips
  * @param {*} route - route is a prop that allows me to recieve data passed from a previous page
@@ -58,7 +44,7 @@ function VerificationCodePage({ route, navigation }) {
       );
       await firebase.auth().signInWithCredential(credential);
 
-      userIDLookUp(phoneNumber, navigation);
+      await retrieveUserIDFromDB(phoneNumber, navigation);
     } catch (err) {
       Alert.alert(`Error: ${err.message}`);
     }
@@ -155,3 +141,40 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
 });
+
+async function retrieveUserIDFromDB(phoneNumber, navigation) {
+  await fetch(
+    "https://www-student.cse.buffalo.edu/peek_mobile_dating/userIDLookUp.php",
+    {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        phoneNumber: phoneNumber,
+      }),
+    }
+  )
+    .then((response) => response.json())
+    .then((responseJson) => {
+      const userID = JSON.parse(JSON.stringify(responseJson)); //The userID needs to be a string so that it can be stored in async storage
+      if (userID !== "-1") {
+        try {
+          AsyncStorage.setItem("userID", JSON.stringify(userID));
+          navigation.navigate("MainNavigation");
+        } catch (e) {
+          // error reading value
+        }
+      } else {
+        navigation.navigate("NameEntryPage", {
+          userData: { phoneNumber: phoneNumber },
+        });
+      }
+
+      //naviagation that navigate will be called her to go to the main stack.
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
