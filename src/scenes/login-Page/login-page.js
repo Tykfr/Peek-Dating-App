@@ -8,6 +8,7 @@ import PrivacyButton from "_atoms/privacyBtn";
 import { Entypo } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 
+// This is a test comment.
 function LoginPage({ navigation }) {
   const dialIcon = <Entypo name="dial-pad" size={22} color="#FFFFFF" />;
   const emailIcon = <MaterialIcons name="email" size={22} color="#FFFFFF" />;
