@@ -3,7 +3,7 @@ import "react-native-gesture-handler";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import { LoginPage } from "_scenes/login-page";
+import { LoginPage } from "_scenes/login-Page";
 import { NumberEntryPage } from "_scenes/number-entry-page";
 import { VerificationCodePage } from "_scenes/verification-code-page";
 import { NameEntryPage } from "_scenes/name-entry-page";
