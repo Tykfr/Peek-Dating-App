@@ -10,7 +10,7 @@ import {
 import { AppLoading } from "expo";
 import PropTypes from "prop-types";
 import { useFonts, Roboto_400Regular } from "@expo-google-fonts/roboto";
-import { ListOfPrompts } from "_utils/list-of-prompts";
+import { ListOfPrompts } from "_assets/data";
 
 function PromptOptions({ _onPress }) {
   const prompts = ListOfPrompts;

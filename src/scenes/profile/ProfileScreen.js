@@ -177,3 +177,23 @@ function ProfileScreen({ navigation }) {
 }
 
 export default ProfileScreen;
+
+async function updatePrompts{
+
+  let userID = await AsyncStorage.getItem("userID");
+  fetch ( "https://www-students.cse.buffalo.edu/peek_mobile_dating/",{
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content Type': 'application/json'
+    },
+    body: JSON.stringify({
+      userID: userId
+    })
+    }
+  )
+  .then((response) => response.json)
+  .then((json) => {
+    // Update prompts here 
+  });
+}
