@@ -74,7 +74,7 @@ function NumberEntry({ _number, _setNumber, _editable }) {
       <TextInput
         placeholder="+44766554433"
         keyboardType={"numeric"}
-        returnKeyType="done"
+        returnKeyType="none"
         style={styles.inputStyle}
         onChangeText={(_number) => _setNumber(code + _number)}
         editable={_editable}

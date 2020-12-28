@@ -23,3 +23,5 @@ export { default as PromptInputBox } from "./prompt-input-box";
 export { default as AddAPrompt } from "./add-a-prompt";
 export { default as PromptOptions } from "./prompt-option";
 export { default as PromptTitle } from "./prompt-title";
+export { default as SubTitle } from "./sub-title";
+export { default as SettingsButtonTitle } from "./settings-button-title";

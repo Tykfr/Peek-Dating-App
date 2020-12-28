@@ -60,8 +60,11 @@ function PromptEntryPage({ navigation, route }) {
   };
 
   useEffect(() => {
+    let mounted = true;
+    if(mounted){
     if (route.params) {
       const { key } = route.params;
+      
       if (key) {
         const { response } = route.params;
         const { prompt } = route.params;
@@ -83,6 +86,8 @@ function PromptEntryPage({ navigation, route }) {
         }
       }
     }
+    }
+    return () => mounted = false;
   });
   return (
     <ScrollView
@@ -230,4 +235,4 @@ async function submitData(userData, navigation) {
     .catch((error) => {
       console.error(error);
     });
-}
+  }

@@ -14,6 +14,9 @@ import { AppLoading } from "expo";
 
 import { useFonts, Roboto_400Regular } from "@expo-google-fonts/roboto";
 
+const _SettingsHandler = (navigation) => {
+  navigation.navigate("SettingsNavigator");
+};
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -169,6 +172,12 @@ function ProfileScreen({ navigation }) {
                 color="#D99202"
               />
             </View>
+          </View>
+          <View>
+            <Button
+              title={"Settings"}
+              onPress={() => _SettingsHandler(navigation)}
+            />
           </View>
         </ScrollView>
       </SafeAreaView>

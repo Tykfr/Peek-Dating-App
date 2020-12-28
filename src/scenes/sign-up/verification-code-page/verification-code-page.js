@@ -43,7 +43,7 @@ function VerificationCodePage({ route, navigation }) {
         verificationCode
       );
       await firebase.auth().signInWithCredential(credential);
-
+      
       await retrieveUserIDFromDB(phoneNumber, navigation);
     } catch (err) {
       Alert.alert(`Error: ${err.message}`);
@@ -162,6 +162,7 @@ async function retrieveUserIDFromDB(phoneNumber, navigation) {
     .then((response) => response.json())
     .then((responseJson) => {
       const userID = JSON.parse(JSON.stringify(responseJson)); //The userID needs to be a string so that it can be stored in async storage
+
       if (userID !== "-1") {
         try {
           AsyncStorage.setItem("userID", JSON.stringify(userID));
