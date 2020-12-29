@@ -9,11 +9,13 @@ import {
   StatusBar,
   ScrollView,
   TouchableOpacity,
+  Image
 } from "react-native";
 import { SubTitle, SettingsButtonTitle, InfoText } from "_atoms";
 import { AppLoading } from "expo";
 import { useFonts, ReemKufi_400Regular } from "@expo-google-fonts/reem-kufi";
 import AsyncStorage from "@react-native-community/async-storage";
+import * as firebase from "firebase";
 
 // import { StatusBar } from "expo-status-bar";
 
@@ -22,14 +24,43 @@ function SettingsPage() {
     "When private, your profile will be hidden from new people, but you will still be able to talk with your current matches.";
   const [publicStatus, setPublicStatus] = React.useState();
 
+  const [img, setImg] = React.useState("");
   const [email, setEmail] = React.useState();
   const [phoneNumber, setPhoneNumber] = React.useState();
   const [notificationStatus, setNotificationStatus] = React.useState();
   const [userID, setUserID] = React.useState();
+  const temp = "_assets/images/defaultPortait.jpg";
 
   //due to lag of data retrieval, update application to store user settings to device on sign up and retrieve from device.
-
+  function getImage(){
+    var storage = firebase.storage();
+    storage.ref('user_images/user_"231"/img_0').getDownloadURL()
+      .then(function (url) {
+        setImg(url);
+    }).catch(function(error){
+      switch (error.code) {
+        case 'storage/object-not-found':
+          // File doesn't exist
+          console.error("file doesnt exist")
+          break;
+    
+        case 'storage/unauthorized':
+          // User doesn't have permission to access the object
+          console.error("no permission to access")
+          break;
+    
+        case 'storage/canceled':
+          // User canceled the upload
+          console.error("user cancelled process");
+          break;
+      }
+  
+    });
+  
+    
+  }
   useEffect(() => {
+    getImage();
     retrieveSettings(
       setPublicStatus,
       setEmail,
@@ -48,6 +79,9 @@ function SettingsPage() {
     return <AppLoading />;
   } else {
     return (
+      
+      <Image style= {{height: 100, width:100}}source={{uri: img !== null ? img : temp}}/>
+      /*
       <ScrollView
         contentContainerStyle={{
           justifyContent: "space-between",
@@ -56,7 +90,7 @@ function SettingsPage() {
         style={{ backgroundColor: "#FFFFFF" }}
       >
         <SafeAreaView style={styles.container}>
-          {/* Profile Status Section */}
+         // { Profile Status Section }
           <View style={{ marginTop: 20 }}>
             <View style={{ marginLeft: 20 }}>
               <SubTitle description={"Profile Status"} />
@@ -76,7 +110,7 @@ function SettingsPage() {
               <InfoText description={profileDescription} />
             </View>
 
-            {/* Phone & Email Section */}
+           // { Phone & Email Section }
             <View style={{ marginTop: 20, marginLeft: 20 }}>
               <SubTitle description={"Phone & Email"} />
             </View>
@@ -106,7 +140,7 @@ function SettingsPage() {
               </View>
             </View>
 
-            {/* Notifications Section */}
+          //  { Notifications Section }
             <View style={{ marginTop: 20, marginLeft: 20 }}>
               <SubTitle description={"Notifications"} />
             </View>
@@ -124,7 +158,7 @@ function SettingsPage() {
               />
             </View>
 
-            {/* Implement Connected Accounts after adding them to the login process */}
+           // { Implement Connected Accounts after adding them to the login process }
             {/* Connected Accounts Section
               <View style={{ marginTop: 20, marginLeft: 20 }}>
                 <SubTitle description={"Connected Accounts"} />
@@ -142,9 +176,9 @@ function SettingsPage() {
               <View style={styles.switchStyle}>
                 <SettingsButtonTitle description={"Google"} />
                 <Switch />
-              </View> */}
+             // </View> }
 
-            {/* Legal Section */}
+          //  { Legal Section }
             <View style={{ marginTop: 20, marginLeft: 20 }}>
               <SubTitle description={"Legal"} />
             </View>
@@ -158,7 +192,7 @@ function SettingsPage() {
                 <Text style={styles.buttonStyle}>Privacy Concerns</Text>
               </TouchableOpacity>
             </View>
-            {/* Help Section */}
+          //  { Help Section }
             <View style={{ marginTop: 20, marginLeft: 20 }}>
               <SubTitle description={"Help"} />
             </View>
@@ -168,7 +202,7 @@ function SettingsPage() {
               </TouchableOpacity>
             </View>
 
-            {/* Logout & Delete Account */}
+            //{ Logout & Delete Account }
             <View style={{ marginTop: 20, marginLeft: 20 }}>
               <SubTitle description={""} />
             </View>
@@ -185,7 +219,7 @@ function SettingsPage() {
           </View>
         </SafeAreaView>
       </ScrollView>
-    );
+    */);
   }
 }
 
@@ -328,3 +362,6 @@ async function updateEmail(userID, email) {
       console.error(error);
     });
 }
+
+
+

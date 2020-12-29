@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { View, SafeAreaView, Image, StyleSheet } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import AppTitle from "_atoms/app-title";
@@ -7,14 +7,26 @@ import TermsButton from "_atoms/termsBtn";
 import PrivacyButton from "_atoms/privacyBtn";
 import { Entypo } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
+import * as firebase from "firebase";
 
 // This is a test comment.
 function LoginPage({ navigation }) {
   const dialIcon = <Entypo name="dial-pad" size={22} color="#FFFFFF" />;
   const emailIcon = <MaterialIcons name="email" size={22} color="#FFFFFF" />;
+ 
   const phoneNumberHandler = () => {
     navigation.navigate("NumberEntryPage");
   };
+
+//move this code to a splash page
+  useEffect(()=>{
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        navigation.navigate("MainNavigation");
+        // User is signed in.
+      }
+    });
+  })
   return (
     <LinearGradient
       style={{ flex: 1 }}

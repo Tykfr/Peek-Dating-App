@@ -12,6 +12,8 @@ import * as ImagePicker from "expo-image-picker";
 import * as Permissions from "expo-permissions";
 import { StatusBar } from "expo-status-bar";
 
+//array that keeps hold of image uri's, must be kept global
+const img_array  = [];
 function PhotoSelectionPage({ navigation, route }) {
   const { userData } = route.params;
   const [largeImage, setLargeImage] = React.useState("");
@@ -20,14 +22,9 @@ function PhotoSelectionPage({ navigation, route }) {
   const [smallImageOne, setSmallImageOne] = React.useState("");
   const [smallImageTwo, setSmallImageTwo] = React.useState("");
   const [smallImageThree, setSmallImageThree] = React.useState("");
-  const _promptHander = () => {
-    userData.largeImage = largeImage;
-    userData.mediumImageOne = mediumImageOne;
-    userData.mediumImageTwo = mediumImageTwo;
-    userData.smallImageOne = smallImageOne;
-    userData.smallImageTwo = smallImageTwo;
-    userData.smallImageThree = smallImageThree;
 
+  const _promptHander = () => {
+    userData.img_array = img_array;
     navigation.navigate("PromptEntryPage", {
       userData: userData,
     });
@@ -48,11 +45,13 @@ function PhotoSelectionPage({ navigation, route }) {
         mediaTypes: ImagePicker.MediaTypeOptions.Images,
         allowsEditing: true,
         aspect: [4, 3],
-        quality: 1,
-        base64: true,
+        quality: 0.7,
+        base64:true
       });
       if (!result.cancelled) {
         setImage(result.base64);
+        img_array.push(result.uri);
+
       }
     } catch (E) {
       console.log(E);

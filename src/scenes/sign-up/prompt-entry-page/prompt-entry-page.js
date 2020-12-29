@@ -1,6 +1,8 @@
-import React from "react";
+import React, {useEffect} from "react";
 import AsyncStorage from "@react-native-community/async-storage";
 import { StyleSheet, View, SafeAreaView, Text, ScrollView } from "react-native";
+import * as firebase from "firebase";
+
 import {
   ContinueButton,
   InvertedLogo,
@@ -9,7 +11,6 @@ import {
   PromptInputBox,
   AddAPrompt,
 } from "_atoms";
-import { useEffect } from "react";
 
 function PromptEntryPage({ navigation, route }) {
   const { userData } = route.params;
@@ -228,6 +229,7 @@ async function submitData(userData, navigation) {
     .then((response) => response.json())
     .then((responseJson) => {
       const userID = JSON.stringify(responseJson); //The userID needs to be a string so that it can be stored in async storage
+      uploadImages(userData, userID);
       storeUserID(userID, navigation);
 
       //naviagation that navigate will be called her to go to the main stack.
@@ -235,4 +237,25 @@ async function submitData(userData, navigation) {
     .catch((error) => {
       console.error(error);
     });
+  }
+
+  async function uploadImages(userData, userID){
+    console.log("inside upload images");
+    console.log(userData.img_array);
+
+    for (let x = 0; x < userData.img_array.length; x++){
+      let ref = firebase.storage().ref().child("user_images/" + "user_" +userID  + "/" + "img_"+ x);
+      let img =userData.img_array[x];
+      const response = await fetch(img);
+      const blob = await response.blob();
+      ref.put(blob)
+              .then(function(snapshot) {
+             console.log('Uploaded img ' + x);
+            })
+            .catch((error) =>{
+             console.error("Failure on image : " + x +" " + error);
+            });
+    }
+ 
+
   }
