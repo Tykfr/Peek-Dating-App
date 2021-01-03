@@ -6,6 +6,7 @@ import {
   StyleSheet,
   ScrollView,
   Button,
+  StatusBar,
 } from "react-native";
 import { Profile_images } from "_organisms";
 import { Divider, Avatar } from "react-native-elements";
@@ -97,6 +98,7 @@ function ProfileScreen({ navigation }) {
   } else {
     return (
       <SafeAreaView>
+        <StatusBar barStyle="dark-content"/>
         <ScrollView>
           <View style={styles.container}>
             <View style={styles.peek}>

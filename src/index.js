@@ -1,8 +1,8 @@
 import React from "react";
-import { MainNavigation, SignUpNavigator } from "_navigations";
+import { SplashNavigator} from "_navigations";
 
 const App = () => {
-  return <SignUpNavigator />;
+  return <SplashNavigator />;
 };
 
 export default App;

@@ -11,6 +11,9 @@ function InputResponse({
   _keyboardType,
   _editable,
   _returnKeyType,
+  _value,
+  _maxLength,
+  _onKeyPress
 }) {
   return (
     <TextInput
@@ -22,6 +25,10 @@ function InputResponse({
       placeholder={_placeHolder}
       onChangeText={(_onChangeText) => _onChangeCallBack(_onChangeText)}
       autoCapitalize={_autoCapitalize}
+      value= {_value}
+      maxLength={_maxLength}
+      onKeyPress={_onKeyPress}
+
     />
   );
 }
@@ -34,6 +41,9 @@ InputResponse.propTypes = {
   _placeHolder: PropTypes.string,
   _autoCapitalize: PropTypes.string,
   _returnKeyType: PropTypes.string,
+  _value: PropTypes.string,
+  _maxLength:PropTypes.number,
+  _onKeyPress: PropTypes.func
 };
 export default InputResponse;
 
