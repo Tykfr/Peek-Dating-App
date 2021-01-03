@@ -6,6 +6,7 @@ import {
   StyleSheet,
   ScrollView,
   Button,
+  StatusBar,
 } from "react-native";
 import { Profile_images } from "_organisms";
 import { Divider, Avatar } from "react-native-elements";
@@ -14,6 +15,9 @@ import { AppLoading } from "expo";
 
 import { useFonts, Roboto_400Regular } from "@expo-google-fonts/roboto";
 
+const _SettingsHandler = (navigation) => {
+  navigation.navigate("SettingsNavigator");
+};
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -94,6 +98,7 @@ function ProfileScreen({ navigation }) {
   } else {
     return (
       <SafeAreaView>
+        <StatusBar barStyle="dark-content"/>
         <ScrollView>
           <View style={styles.container}>
             <View style={styles.peek}>
@@ -169,6 +174,12 @@ function ProfileScreen({ navigation }) {
                 color="#D99202"
               />
             </View>
+          </View>
+          <View>
+            <Button
+              title={"Settings"}
+              onPress={() => _SettingsHandler(navigation)}
+            />
           </View>
         </ScrollView>
       </SafeAreaView>

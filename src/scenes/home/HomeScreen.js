@@ -5,6 +5,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   SafeAreaView,
+  StatusBar
 } from "react-native";
 import { useState, useEffect } from "react";
 import { Camera } from "expo-camera";
@@ -34,7 +35,8 @@ function HomeScreen({ navigation }) {
     return <Text>No access to camera</Text>;
   }
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor:"#000000" }}>
+      <StatusBar barStyle="light-content"/>
       <Camera style={styles.cameraStyle} type={type}>
         <View style={styles.profileButton_HeartButton_Container}>
           <Profile_button navigation={navigation} />
