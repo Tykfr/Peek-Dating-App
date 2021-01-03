@@ -1,28 +1,6 @@
 import React from "react";
 import "react-native-gesture-handler";
 import { createStackNavigator } from "@react-navigation/stack";
-<<<<<<< HEAD
-
-import { LoginPage } from "_scenes/login-Page";
-import { NumberEntryPage } from "_scenes/number-entry-page";
-import { VerificationCodePage } from "_scenes/verification-code-page";
-import { NameEntryPage } from "_scenes/name-entry-page";
-import { EmailEntryPage } from "_scenes/email-entry-page";
-import { BirthdayEntryPage } from "_scenes/birthday-entry-page";
-import { GenderIdentityPage } from "_scenes/gender-identity-page";
-import { DatingInterestPage } from "_scenes/dating-interest-page";
-import { SchoolEntryPage } from "_scenes/school-entry-page";
-import { PoliticalEntryPage } from "_scenes/political-entry-page";
-import { ReligionEntryPage } from "_scenes/religion-entry-page";
-import { EthnicityEntryPage } from "_scenes/ethnicity-entry-page";
-import { OccupationEntryPage } from "_scenes/occupation-entry-page";
-import { LocationEntryPage } from "_scenes/location-entry-page";
-import { BioEntryPage } from "_scenes/bio-entry-page";
-import { PhotoSelectionPage } from "_scenes/photo-selection-page";
-import { PromptEntryPage } from "_scenes/prompt-entry-page";
-import { PromptSelectionPage } from "_scenes/prompt-selection-page";
-import { PromptSubmissionPage } from "_scenes/prompt-submission-page";
-=======
 import { LoginPage } from "_scenes/sign-up";
 import { NumberEntryPage } from "_scenes/sign-up";
 import { VerificationCodePage } from "_scenes/sign-up";
@@ -42,7 +20,6 @@ import { PhotoSelectionPage } from "_scenes/sign-up";
 import { PromptEntryPage } from "_scenes/sign-up";
 import { PromptSelectionPage } from "_scenes/sign-up";
 import { PromptSubmissionPage } from "_scenes/sign-up";
->>>>>>> origin/Sprint_3_Settings
 import { MainNavigation } from "_navigations";
 
 const Stack = createStackNavigator();
