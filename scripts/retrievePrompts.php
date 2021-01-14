@@ -10,15 +10,16 @@ $obj = json_decode($json,true);
 
 $userID = $obj['userID'];
 
-$sql_query = "SELECT * FROM Prompts WHERE userID='$userID'";
+$sql_query = "SELECT * FROM Prompts WHERE userID=$userID";
 
-$result  = $con->query($sql_query);
+$result  = mysqli_query($con,$sql_query);
 
-if($result){
-  echo $result;
+if($result->num_rows > 0){
+  $row = $result->fetch_assoc();
+  echo json_encode($row);
 }
 else{
 
-  echo "Error: Not Found";
+  echo json_encode("Error: Not Found");
 }
 ?>

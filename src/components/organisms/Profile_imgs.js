@@ -4,27 +4,42 @@ import {Large_image,Medium_image,Small_image} from '_molecules';
 
 const profile_img = StyleSheet.create({
     basic:{
-        flexDirection:"row",
-        flexWrap:"wrap",
-        justifyContent:"space-between",
-    },
-    medium: {
-        justifyContent: "space-between",
+        
     },
 
 })
 
 const Profile_images = ({}) => (
     <View style={profile_img.basic}>
-            <Large_image/>
-            <View style={profile_img.medium}>
-                <Medium_image/>
-                <Medium_image/>
-            </View>
-                <Small_image/>
-                <Small_image/>
-                <Small_image/>
 
+        <View style={{flexDirection:'row',flex:1, justifyContent:"space-between"}}>
+
+            <View style={{flex:2}}>
+                <Large_image/>
+            </View>
+
+            <View style={{flexDirection:'column',flex:1,justifyContent:"space-between"}}>
+                <View style={{flex:1}}>
+                    <Medium_image/>
+                </View>
+                <View style={{flex:1}}>
+                    <Medium_image/>
+                </View>
+            </View>
+        </View>             
+        <View style={{flex:1,flexDirection:'row',justifyContent:"space-between"}}>
+            <View style={{flex:1}}>
+            <Small_image/>
+            </View>
+            <View style={{flex:1}}>
+            <Small_image/>
+            </View>
+            <View style={{flex:1}}>
+            <Small_image/>
+            </View>
+        </View>   
+     
+        
     </View>
 )
 

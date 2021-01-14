@@ -21,7 +21,6 @@ const styles = StyleSheet.create({
       marginRight: 13,
     },
     images: {
-      flex: 1,
       marginTop: 16,
       marginLeft: 33,
       marginRight: 33,

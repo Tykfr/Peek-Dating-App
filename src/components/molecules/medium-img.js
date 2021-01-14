@@ -1,6 +1,7 @@
 import React from 'react';
 import { View,StyleSheet } from 'react-native';
 import {Remove_button} from "_atoms";
+import {Image} from 'react-native-elements';
 
 const medium_img = StyleSheet.create({
     container: {
@@ -8,17 +9,18 @@ const medium_img = StyleSheet.create({
     },
     img: {
         borderRadius: 18,
-        width: 128,
+        width: "100%",
         height:85,
+        
         backgroundColor: 'black',
     }
 })
 
 const Medium_image = ({}) => (
-        <View style={medium_img.img}> 
+        <Image style={medium_img.img}> 
         <Remove_button/>
       
-        </View>
+        </Image>
 )
 
 export default Medium_image;

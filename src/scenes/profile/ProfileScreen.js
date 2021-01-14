@@ -10,17 +10,19 @@ class Profile extends Component{
       loaded:false,
       datasource:[],
       userId:"",
+      prompts: [],
     }
   }
   getUserId = async() => {
     try {
-      await AsyncStorage.setItem("userID","164")
-      const userId = await AsyncStorage.getItem("userID")
-      console.log(userId)
+      await AsyncStorage.setItem("userID","234")
+      const userID = await AsyncStorage.getItem("userID")
       
+
       this.setState({
-        userId:userId
+        userId:userID
       })
+      
     } catch (error) {
       console.log("Error retrieving userId")
 
@@ -29,7 +31,9 @@ class Profile extends Component{
   }
 
   // Function to fetch profile data from database 
-  fetchProfileData = () => {
+  fetchProfileData = async () => {
+
+    await this.getUserId()
 
     fetch ( "https://www-student.cse.buffalo.edu/peek_mobile_dating/retrievePrompts.php",{
     method: "POST",
@@ -43,32 +47,51 @@ class Profile extends Component{
     })
     }
   )
-  .then((response) => response.json)
-  .then((responsejson) => {
+  .then((response) => response.json())
+  .then((json) => {
     // Update prompts here 
-    console.log(responsejson.data)
+    const data = JSON.parse(JSON.stringify(json));
+    console.log(data)
     this.setState({
       isloading:false,
       loaded:true,
-      datasource: responsejson.data
     })
+    if(data.Prompt_1.length > 0){
+      var prompt = this.state.prompts.concat([[data.Prompt_1,data.Response_1]])
+      this.setState({
+        prompts: prompt
+      })
+    }
+    if(data.Prompt_2.length > 0){
+      var prompt = this.state.prompts.concat([data.Prompt_2,data.Response_2])
+      this.setState({
+        prompts: prompt
+      })
+    }
+    if(data.Prompt_3.length > 0){
+      var prompt = this.state.prompts.concat([data.Prompt_3,data.Response_3])
+      this.setState({
+        prompts: prompt
+      })
+    }
+    console.log(this.state.prompts)
+
   })
   .catch((error) => console.log(error))
   }
 
   componentDidMount(){
-    this.getUserId().then(
-      this.fetchProfileData()
-    )
+    this.fetchProfileData(this.state.userId)
+    
 
   }
 
   render(){
-    const {datasource,isloading,loaded} = this.state
+    const {prompts,isloading,loaded} = this.state
     const {navigation} = this.props
     return (
       <ProfileView 
-        datasource={datasource}
+        prompts={prompts}
         isloading={isloading}
         loaded={loaded}
         navigation={navigation}

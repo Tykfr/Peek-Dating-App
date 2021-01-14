@@ -9,8 +9,7 @@ const large_img = StyleSheet.create({
     },
     img: {
         borderRadius: 23,
-        width: 192,
-        height:183,
+        height:"100%",
         backgroundColor: 'black',
     }
 })

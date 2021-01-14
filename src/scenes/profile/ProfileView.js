@@ -12,9 +12,22 @@ import {
   import { Divider, Avatar } from "react-native-elements";
   import { TouchableOpacity } from "react-native-gesture-handler";
 
+const Prompt = ({prompt,navigation}) => {
+  
+  return(
+    <View>
+      <TouchableOpacity onPress={() => navigation.navigate("Prompt")}>
+      <View style={styles.prompt_text}>
+        <Text>{prompt[0]}</Text>
+        <Text>{prompt[1]}</Text>
+      </View>
+      </TouchableOpacity> 
+    </View>
+  )
+}
 
 const ProfileView = (props) => {
-    const {datasource,isloading,loaded,navigation} = props 
+    const { prompts,isloading,loaded,navigation} = props 
     return (
         <SafeAreaView>
         { isloading && 
@@ -38,33 +51,24 @@ const ProfileView = (props) => {
 
             <View style={styles.header}>
               <Text>Jeff Dowyre, 26</Text>
-              <Text>
-                {datasource}
-              </Text>
             </View>
             <Divider />
             <View style={styles.images}>
-              <Profile_images />
+              <Profile_images/>
             </View>
             <View style={styles.prompt}>
-              <Text style={styles.prompt_title}>Prompts</Text>
-              <TouchableOpacity onPress={() => navigation.navigate("Prompt")}>
-                <View style={styles.prompt_text}>
-                  <Text>My Week usually goes like this....</Text>
-                </View>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={() => navigation.navigate("Prompt")}>
-                <View style={styles.prompt_text}>
-                  <Text>An irrational fear I have is....</Text>
-                </View>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={() => navigation.navigate("Prompt")}>
-                <View style={styles.prompt_text}>
-                  <Text>I spend more time than I should doing this....</Text>
-                </View>
-              </TouchableOpacity>
+            <Text style={styles.prompt_title}>Prompts</Text>
+            
+            {prompts.map(prompt => (
+              <Prompt 
+                prompt={prompt}
+                navigation={navigation}
+              /> 
+            ))}
+            {prompts.length < 3 && <Prompt prompt={["Add Prompt",""]} navigation={navigation}/>}
             </View>
-            <Divider />
+
+            <Divider/>
             <View style={styles.info}>
               <Text style={styles.info_title}>Job</Text>
               <Text style={styles.info_text}>Add Job Title</Text>
