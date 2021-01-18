@@ -11,12 +11,14 @@ const small_img = StyleSheet.create({
     img: {
         borderRadius: 15,
         height:69,
-        backgroundColor: 'black',
     }
 })
 
-const Small_image = ({}) => (
-        <Image style={small_img.img}> 
+const Small_image = ({img}) => (
+        <Image style={small_img.img}
+        source={{uri:img}}
+
+        > 
         <Remove_button/>
   
         </Image>

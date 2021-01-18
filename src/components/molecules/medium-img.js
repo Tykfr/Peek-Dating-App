@@ -11,13 +11,14 @@ const medium_img = StyleSheet.create({
         borderRadius: 18,
         width: "100%",
         height:85,
-        
-        backgroundColor: 'black',
-    }
+        }
 })
 
-const Medium_image = ({}) => (
-        <Image style={medium_img.img}> 
+const Medium_image = ({img}) => (
+        <Image style={medium_img.img}
+        source={{uri:img}}
+
+        > 
         <Remove_button/>
       
         </Image>

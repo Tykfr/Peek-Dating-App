@@ -10,13 +10,14 @@ const large_img = StyleSheet.create({
     img: {
         borderRadius: 23,
         height:"100%",
-        backgroundColor: 'black',
     }
 })
 
-const Large_image = ({}) => (
+const Large_image = ({img}) => (
     // Add if case here and remove or add button
-        <Image style={large_img.img}> 
+        <Image style={large_img.img}
+            source={{uri:img}}
+        > 
         <Remove_button/>
       
         </Image>

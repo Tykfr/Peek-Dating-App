@@ -12,6 +12,9 @@ import {
   import { Divider, Avatar } from "react-native-elements";
   import { TouchableOpacity } from "react-native-gesture-handler";
 
+const _SettingsHandler = (navigation) => {
+    navigation.navigate("SettingsNavigator");
+  };
 const Prompt = ({prompt,navigation}) => {
   
   return(
@@ -27,7 +30,7 @@ const Prompt = ({prompt,navigation}) => {
 }
 
 const ProfileView = (props) => {
-    const { prompts,isloading,loaded,navigation} = props 
+    const { name,age,bio,pictures,prompts,job,school,ethnicity,location,gender,isloading,loaded,navigation} = props 
     return (
         <SafeAreaView>
         { isloading && 
@@ -50,11 +53,14 @@ const ProfileView = (props) => {
             </View>
 
             <View style={styles.header}>
-              <Text>Jeff Dowyre, 26</Text>
+              <Text>{name}, {age}</Text>
+              <Text>{bio}</Text>
             </View>
             <Divider />
             <View style={styles.images}>
-              <Profile_images/>
+              <Profile_images 
+                imagesUrl={pictures}
+              />
             </View>
             <View style={styles.prompt}>
             <Text style={styles.prompt_title}>Prompts</Text>
@@ -71,27 +77,27 @@ const ProfileView = (props) => {
             <Divider/>
             <View style={styles.info}>
               <Text style={styles.info_title}>Job</Text>
-              <Text style={styles.info_text}>Add Job Title</Text>
+              <Text style={styles.info_text}>{job}</Text>
             </View>
             <Divider />
             <View style={styles.info}>
               <Text style={styles.info_title}>School</Text>
-              <Text style={styles.info_text}>Add School</Text>
+              <Text style={styles.info_text}>{school}</Text>
             </View>
             <Divider />
             <View style={styles.info}>
               <Text style={styles.info_title}>Location</Text>
-              <Text style={styles.info_text}>Location</Text>
+              <Text style={styles.info_text}>{location}</Text>
             </View>
             <Divider />
             <View style={styles.info}>
               <Text style={styles.info_title}>Gender</Text>
-              <Text style={styles.info_text}>Male</Text>
+              <Text style={styles.info_text}>{gender}</Text>
             </View>
             <Divider />
             <View style={styles.info}>
               <Text style={styles.info_title}>Ethnicity</Text>
-              <Text style={styles.info_text}>Black/African American</Text>
+              <Text style={styles.info_text}>{ethnicity}</Text>
             </View>
             <Divider />
             <View style={styles.info}>
@@ -102,6 +108,12 @@ const ProfileView = (props) => {
                 color="#D99202"
               />
             </View>
+          </View>
+          <View>
+            <Button
+              title={"Settings"}
+              onPress={() => _SettingsHandler(navigation)}
+            />
           </View>
         </ScrollView>
         }
