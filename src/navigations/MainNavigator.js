@@ -16,8 +16,9 @@ function MainNavigation() {
         name="Home"
         component={Homescreen}
         options={{
-          headerShown: false,
+         // headerShown: true,
         }}
+       
       />
       <Stack.Screen name="Profile" component={ProfileStackScreen} />
     </Stack.Navigator>

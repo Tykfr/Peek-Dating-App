@@ -1,36 +1,34 @@
 import React from "react";
 import "react-native-gesture-handler";
-import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-
-import { LoginPage } from "_scenes/login-Page";
-import { NumberEntryPage } from "_scenes/number-entry-page";
-import { VerificationCodePage } from "_scenes/verification-code-page";
-import { NameEntryPage } from "_scenes/name-entry-page";
-import { EmailEntryPage } from "_scenes/email-entry-page";
-import { BirthdayEntryPage } from "_scenes/birthday-entry-page";
-import { GenderIdentityPage } from "_scenes/gender-identity-page";
-import { DatingInterestPage } from "_scenes/dating-interest-page";
-import { SchoolEntryPage } from "_scenes/school-entry-page";
-import { PoliticalEntryPage } from "_scenes/political-entry-page";
-import { ReligionEntryPage } from "_scenes/religion-entry-page";
-import { EthnicityEntryPage } from "_scenes/ethnicity-entry-page";
-import { OccupationEntryPage } from "_scenes/occupation-entry-page";
-import { LocationEntryPage } from "_scenes/location-entry-page";
-import { BioEntryPage } from "_scenes/bio-entry-page";
-import { PhotoSelectionPage } from "_scenes/photo-selection-page";
-import { PromptEntryPage } from "_scenes/prompt-entry-page";
-import { PromptSelectionPage } from "_scenes/prompt-selection-page";
-import { PromptSubmissionPage } from "_scenes/prompt-submission-page";
+import { LoginPage } from "_scenes/sign-up";
+import { NumberEntryPage } from "_scenes/sign-up";
+import { VerificationCodePage } from "_scenes/sign-up";
+import { NameEntryPage } from "_scenes/sign-up";
+import { EmailEntryPage } from "_scenes/sign-up";
+import { BirthdayEntryPage } from "_scenes/sign-up";
+import { GenderIdentityPage } from "_scenes/sign-up";
+import { DatingInterestPage } from "_scenes/sign-up";
+import { SchoolEntryPage } from "_scenes/sign-up";
+import { PoliticalEntryPage } from "_scenes/sign-up";
+import { ReligionEntryPage } from "_scenes/sign-up";
+import { EthnicityEntryPage } from "_scenes/sign-up";
+import { OccupationEntryPage } from "_scenes/sign-up";
+import { LocationEntryPage } from "_scenes/sign-up";
+import { BioEntryPage } from "_scenes/sign-up";
+import { PhotoSelectionPage } from "_scenes/sign-up";
+import { PromptEntryPage } from "_scenes/sign-up";
+import { PromptSelectionPage } from "_scenes/sign-up";
+import { PromptSubmissionPage } from "_scenes/sign-up";
 import { MainNavigation } from "_navigations";
 
 const Stack = createStackNavigator();
 
 function SignUpNavigator() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="LoginPage" headerMode="none">
-        <Stack.Screen name="LoginPage" component={LoginPage} />
+
+      <Stack.Navigator initialRouteName="LoginPage" headerMode="none" screenOptions={{gestureEnabled:false}} >
+        <Stack.Screen name="LoginPage" component={LoginPage}  />
         <Stack.Screen name="NumberEntryPage" component={NumberEntryPage} />
         <Stack.Screen
           name="VerificationPage"
@@ -82,7 +80,6 @@ function SignUpNavigator() {
         />
         <Stack.Screen name="MainNavigation" component={MainNavigation} />
       </Stack.Navigator>
-    </NavigationContainer>
   );
 }
 
