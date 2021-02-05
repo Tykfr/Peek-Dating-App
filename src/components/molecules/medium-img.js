@@ -15,12 +15,13 @@ const medium_img = StyleSheet.create({
 })
 
 const Medium_image = ({img}) => (
+
         <Image style={medium_img.img}
         source={{uri:img}}
-
         > 
-        <Remove_button/>
-      
+        <Remove_button
+                name={"photo"}
+        />
         </Image>
 )
 
