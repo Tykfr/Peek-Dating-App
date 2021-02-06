@@ -32,7 +32,7 @@ const Image_box = ({img,index}) => (
             style={styles.large_img}
             source={{uri:img}}
         >   
-        <Remove_button id={index}/>
+         {typeof(img) !== "undefined"  ?  <Remove_button id={index}/> : <Add_photo_button index={index}/> }  
         </Image>
         }
         {/* Medium image */}
@@ -41,7 +41,7 @@ const Image_box = ({img,index}) => (
             style={styles.medium_img}
             source={{uri:img}}
         >   
-            <Remove_button id={index}/>
+         {typeof(img) !== "undefined"  ?  <Remove_button id={index}/> : <Add_photo_button index={index}/> }  
 
         </Image>
         }
