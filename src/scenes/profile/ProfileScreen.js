@@ -11,7 +11,7 @@ class Profile extends Component{
       datasource:[],
       userId:"",
       prompts: [],
-      pictures:[],
+      pictures:{},
       job:"Add Job Title",
       ethnicity:"Other",
       name:"",
@@ -130,7 +130,9 @@ class Profile extends Component{
     }
     return age;
   }
-  // Function to get Images from the Firebase
+
+  //  Function to get Images from the Firebase
+ 
   fetchImages = async () => {
     await this.getUserId()
     for(let x = 0; x < 6; x++){
@@ -138,7 +140,8 @@ class Profile extends Component{
       imageRef
       .getDownloadURL()
       .then((url) => {
-        var picture = this.state.pictures.concat([url])
+        var picture = this.state.pictures
+        picture[x] = url
         this.setState({
           pictures: picture
         });
