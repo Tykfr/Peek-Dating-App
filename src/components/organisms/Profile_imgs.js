@@ -11,7 +11,7 @@ const profile_img = StyleSheet.create({
 
 const Profile_images = ({imagesUrl}) => (
     <View style={profile_img.basic}>
-
+        
         <View style={{flexDirection:'row',flex:1, justifyContent:"space-between"}}>
 
             <View style={{flex:2}}>

@@ -25,3 +25,4 @@ export { default as PromptOptions } from "./prompt-option";
 export { default as PromptTitle } from "./prompt-title";
 export { default as SubTitle } from "./sub-title";
 export { default as SettingsButtonTitle } from "./settings-button-title";
+export {default as Add_photo_button} from "./add-photo-button";

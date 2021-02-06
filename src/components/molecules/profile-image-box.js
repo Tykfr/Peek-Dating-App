@@ -1,6 +1,6 @@
 import React from 'react';
 import { View,StyleSheet } from 'react-native';
-import {Remove_button} from "_atoms";
+import {Remove_button,Add_photo_button} from "_atoms";
 import {Image} from 'react-native-elements';
 
 
@@ -51,7 +51,8 @@ const Image_box = ({img,index}) => (
             style={styles.small_img}
             source={{uri:img}}
         >   
-            <Remove_button id={index}/>
+    
+         {typeof(img) !== "undefined"  ?  <Remove_button id={index}/> : <Add_photo_button index={index}/> }  
 
         </Image>
         }
