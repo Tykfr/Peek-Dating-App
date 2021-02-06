@@ -27,21 +27,21 @@ const _pickImage = async (index) => {
       });
       if (!result.cancelled) {
         let userID = await AsyncStorage.getItem("userID")
+        uploadImage(result.uri,userID,index)
 
-        uploadImage(result.uri,userID,index);
       }
     } catch (E) {
       console.log(E);
     }
   }
-const uploadImage = async ({imgurl, userID,index}) =>{
-
+const uploadImage = async (imgurl, userID,index) =>{
+      console.log("Uploading image " + index );
       let ref = firebase.storage().ref().child("user_images/" + "user_" +userID  + "/" + "img_"+ index);
       const response = await fetch(imgurl);
       const blob = await response.blob();
       ref.put(blob)
               .then(function(snapshot) {
-             console.log('Uploaded img ' + index);
+             console.log('Uploaded img ' + userID);
             })
             .catch((error) =>{
              console.error("Failure on image : " + x +" " + error);
