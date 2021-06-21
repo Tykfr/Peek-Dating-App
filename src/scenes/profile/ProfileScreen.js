@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import AsyncStorage from "@react-native-community/async-storage";
 import ProfileView from "./ProfileView";
 import * as firebase from "firebase";
+
+
 class Profile extends Component{
   constructor(props){
     super(props);
@@ -10,7 +12,7 @@ class Profile extends Component{
       loaded:false,
       datasource:[],
       userId:"",
-      prompts: [],
+      prompts: {},
       pictures:{},
       job:"Add Job Title",
       ethnicity:"Other",
@@ -60,19 +62,22 @@ class Profile extends Component{
       loaded:true,
     })
     if(data.Prompt_1.length > 0){
-      var prompt = this.state.prompts.concat([[data.Prompt_1,data.Response_1]])
+      var prompt = this.state.prompts
+      prompt[0] = [data.Prompt_1,data.Response_1]
       this.setState({
         prompts: prompt
       })
     }
     if(data.Prompt_2.length > 0){
-      var prompt = this.state.prompts.concat([[data.Prompt_2,data.Response_2]])
+      var prompt = this.state.prompts
+      prompt[1] = [data.Prompt_2,data.Response_2]
       this.setState({
         prompts: prompt
       })
     }
     if(data.Prompt_3.length > 0){
-      var prompt = this.state.prompts.concat([[data.Prompt_3,data.Response_3]])
+      var prompt = this.state.prompts
+      prompt[2] = [data.Prompt_3,data.Response_3]
       this.setState({
         prompts: prompt
       })

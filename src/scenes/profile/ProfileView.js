@@ -15,11 +15,11 @@ import {
 const _SettingsHandler = (navigation) => {
     navigation.navigate("SettingsNavigator");
   };
-const Prompt = ({prompt,navigation}) => {
+const Prompt = ({prompt,navigation,index}) => {
   
   return(
     <View>
-      <TouchableOpacity onPress={() => navigation.navigate("Prompt")}>
+      <TouchableOpacity onPress={() => navigation.navigate("Prompt", {index: index})}>
       <View style={styles.prompt_text}>
         <Text>{prompt[0]}</Text>
         <Text>{prompt[1]}</Text>
@@ -65,13 +65,14 @@ const ProfileView = (props) => {
             <View style={styles.prompt}>
             <Text style={styles.prompt_title}>Prompts</Text>
             
-            {prompts.map(prompt => (
+            {Object.keys(prompts).map(key => (
               <Prompt 
-                prompt={prompt}
+                prompt={prompts[key]}
                 navigation={navigation}
+                index={key}
               /> 
             ))}
-            {prompts.length < 3 && <Prompt prompt={["Add Prompt",""]} navigation={navigation}/>}
+            {prompts.length < 3 && <Prompt prompt={["Add Prompt",""]} navigation={navigation} index={prompts.length}/>}
             </View>
 
             <Divider/>
