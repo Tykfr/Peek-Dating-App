@@ -1,190 +1,189 @@
-import React from "react";
-import {
-  SafeAreaView,
-  View,
-  Text,
-  StyleSheet,
-  ScrollView,
-  Button,
-  StatusBar,
-} from "react-native";
-import { Profile_images } from "_organisms";
-import { Divider, Avatar } from "react-native-elements";
-import { TouchableOpacity } from "react-native-gesture-handler";
-import { AppLoading } from "expo";
+import React, { Component } from "react";
+import AsyncStorage from "@react-native-community/async-storage";
+import ProfileView from "./ProfileView";
+import * as firebase from "firebase";
 
-import { useFonts, Roboto_400Regular } from "@expo-google-fonts/roboto";
 
-const _SettingsHandler = (navigation) => {
-  navigation.navigate("SettingsNavigator");
-};
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: "column",
-    justifyContent: "space-between",
-  },
-  peek: {
-    alignItems: "center",
-    marginTop: 38,
-  },
-  story: {
-    marginTop: 19,
-    marginBottom: 19,
-    alignItems: "center",
-  },
-  header: {
-    marginBottom: 16,
-    marginLeft: 13,
-    marginRight: 13,
-  },
-  images: {
-    flex: 1,
-    marginTop: 16,
-    marginLeft: 33,
-    marginRight: 33,
-    marginBottom: 10,
-  },
-  prompt: {
-    marginLeft: 13,
-    marginRight: 13,
-    marginTop: 9,
-    marginBottom: 9,
-  },
-  prompt_title: {
-    fontFamily: "Roboto_400Regular",
-    fontSize: 18,
-    fontWeight: "bold",
-  },
-  prompt_text: {
-    width: 380,
-    height: 66,
-    borderRadius: 10,
-    borderColor: "#C4C4C4",
-    borderWidth: 1,
-    marginTop: 9,
-  },
-  info: {
-    marginLeft: 19,
-    marginBottom: 6,
-    marginTop: 6,
-    marginRight: 19,
-  },
-  info_title: {
-    fontFamily: "Roboto_400Regular",
-    fontWeight: "bold",
-    fontSize: 18,
-    color: "#C4C4C4",
-  },
-  info_text: {
-    marginLeft: 15,
-    fontFamily: "Roboto_400Regular",
-    fontWeight: "bold",
-    fontSize: 13,
-    color: "#E5E5E5",
-  },
-  info_button: {
-    marginLeft: 7,
-    borderRadius: 4,
-  },
-});
+class Profile extends Component{
+  constructor(props){
+    super(props);
+    this.state = {
+      isloading: true,
+      loaded:false,
+      datasource:[],
+      userId:"",
+      prompts: {},
+      pictures:{},
+      job:"Add Job Title",
+      ethnicity:"Other",
+      name:"",
+      school:"Add School",
+      location:"Add Location",
+      gender:"Other",
+      bio:"",
+      age:"18",
+    }
+  }
+  getUserId = async() => {
+    try {
+      const userID = await AsyncStorage.getItem("userID")
+      this.setState({
+        userId:userID
+      })
+      
+    } catch (error) { console.log("Error retrieving userId")}
 
-function ProfileScreen({ navigation }) {
-  let [fontsLoaded] = useFonts({
-    Roboto_400Regular,
-  });
-  if (!fontsLoaded) {
-    return <AppLoading />;
-  } else {
+  }
+
+  // Function to fetch profile data from database 
+  fetchProfileData = async () => {
+
+    await this.getUserId()
+
+    fetch ( "https://www-student.cse.buffalo.edu/peek_mobile_dating/retrievePrompts.php",{
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      userID: this.state.userId,
+
+    })
+    }
+  )
+  .then((response) => response.json())
+  .then((json) => {
+    // Update prompts here 
+    const data = JSON.parse(JSON.stringify(json));
+    console.log(data)
+    this.setState({
+      isloading:false,
+      loaded:true,
+    })
+    if(data.Prompt_1.length > 0){
+      var prompt = this.state.prompts
+      prompt[0] = [data.Prompt_1,data.Response_1]
+      this.setState({
+        prompts: prompt
+      })
+    }
+    if(data.Prompt_2.length > 0){
+      var prompt = this.state.prompts
+      prompt[1] = [data.Prompt_2,data.Response_2]
+      this.setState({
+        prompts: prompt
+      })
+    }
+    if(data.Prompt_3.length > 0){
+      var prompt = this.state.prompts
+      prompt[2] = [data.Prompt_3,data.Response_3]
+      this.setState({
+        prompts: prompt
+      })
+    }
+    console.log(this.state.prompts)
+
+  })
+  .catch((error) => console.log(error))
+
+  
+  fetch ("https://www-student.cse.buffalo.edu/peek_mobile_dating/retrieveProfile.php", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      userID: this.state.userId,
+    })
+    }
+  )
+  .then((response) => response.json())
+  .then((json) => {
+    const data = JSON.parse(JSON.stringify(json));
+
+    console.log(data)
+    this.updateProfile(data)
+
+  })
+  .catch((error) => console.log(error))
+  
+  }
+
+  updateProfile(data){
+
+    if(data.Bio.length > 0){ this.setState({bio:data.Bio})}
+    if(data.Gender.length > 0){ this.setState({gender:data.Gender})}
+    if(data.City_State.length > 0){ this.setState({location:data.City_State})}
+    if(data.Ethnicity.length > 0){  this.setState({ethnicity:data.Ethnicity})}
+    if(data.School.length > 0){  this.setState({school:data.School})}
+    if(data.Occupation.length > 0){  this.setState({job:data.Occupation})}
+    if(data.BirthYear.length > 0){ this.setState({age: this.calculateage(data.BirthYear,data.BirthMonth,data.BirthDate)})}
+  }
+  calculateage(birthyear,birthmonth,birthdate){
+    today = new Date();
+    year = today.getFullYear();
+    today_month = today.getMonth();
+    today_day = today.getDate();
+    age = year - birthyear;
+    if(parseInt(birthmonth) == parseInt(today_month)+1){
+      return age-1
+    }
+    if(parseInt(birthmonth) == parseInt(today_month)+1 && parseInt(today_day) < parseInt(birthdate)){
+      return age-1
+    }
+    return age;
+  }
+
+  //  Function to get Images from the Firebase
+ 
+  fetchImages = async () => {
+    await this.getUserId()
+    for(let x = 0; x < 6; x++){
+      let imageRef = firebase.storage().ref("user_images/" + "user_" + this.state.userId + "/img_" + x);
+      imageRef
+      .getDownloadURL()
+      .then((url) => {
+        var picture = this.state.pictures
+        picture[x] = url
+        this.setState({
+          pictures: picture
+        });
+      })
+      .catch((error) => console.log(error))
+    }
+  }
+
+
+  componentDidMount(){
+    this.fetchProfileData()
+    this.fetchImages()   
+
+  }
+
+  render(){
+    const {name,age,bio,pictures,prompts,job,school,ethnicity,location,gender,isloading,loaded} = this.state
+    const {navigation} = this.props
     return (
-      <SafeAreaView>
-        <StatusBar barStyle="dark-content"/>
-        <ScrollView>
-          <View style={styles.container}>
-            <View style={styles.peek}>
-              <Text>Peek Profile</Text>
-            </View>
-            <View style={styles.story}>
-              <Avatar
-                rounded
-                size="large"
-                overlayContainerStyle={{ backgroundColor: "black" }}
-              />
-            </View>
-
-            <View style={styles.header}>
-              <Text>Jeff Dowyre, 26</Text>
-              <Text>
-                Looking for some positive moments,adventurous and fun{" "}
-              </Text>
-            </View>
-            <Divider />
-            <View style={styles.images}>
-              <Profile_images />
-            </View>
-            <View style={styles.prompt}>
-              <Text style={styles.prompt_title}>Prompts</Text>
-              <TouchableOpacity onPress={() => navigation.navigate("Prompt")}>
-                <View style={styles.prompt_text}>
-                  <Text>My Week usually goes like this....</Text>
-                </View>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={() => navigation.navigate("Prompt")}>
-                <View style={styles.prompt_text}>
-                  <Text>An irrational fear I have is....</Text>
-                </View>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={() => navigation.navigate("Prompt")}>
-                <View style={styles.prompt_text}>
-                  <Text>I spend more time than I should doing this....</Text>
-                </View>
-              </TouchableOpacity>
-            </View>
-            <Divider />
-            <View style={styles.info}>
-              <Text style={styles.info_title}>Job</Text>
-              <Text style={styles.info_text}>Add Job Title</Text>
-            </View>
-            <Divider />
-            <View style={styles.info}>
-              <Text style={styles.info_title}>School</Text>
-              <Text style={styles.info_text}>Add School</Text>
-            </View>
-            <Divider />
-            <View style={styles.info}>
-              <Text style={styles.info_title}>Location</Text>
-              <Text style={styles.info_text}>Location</Text>
-            </View>
-            <Divider />
-            <View style={styles.info}>
-              <Text style={styles.info_title}>Gender</Text>
-              <Text style={styles.info_text}>Male</Text>
-            </View>
-            <Divider />
-            <View style={styles.info}>
-              <Text style={styles.info_title}>Ethnicity</Text>
-              <Text style={styles.info_text}>Black/African American</Text>
-            </View>
-            <Divider />
-            <View style={styles.info}>
-              <Text style={styles.info_title}>Linked Accounts</Text>
-              <Button
-                title="Connect Your Instagram"
-                style={styles.info_button}
-                color="#D99202"
-              />
-            </View>
-          </View>
-          <View>
-            <Button
-              title={"Settings"}
-              onPress={() => _SettingsHandler(navigation)}
-            />
-          </View>
-        </ScrollView>
-      </SafeAreaView>
-    );
+      <ProfileView
+        name={name}
+        bio={bio}
+        age={age} 
+        pictures={pictures}
+        prompts={prompts}
+        job={job}
+        ethnicity={ethnicity}
+        location={location}
+        gender={gender}
+        school={school}
+        isloading={isloading}
+        loaded={loaded}
+        navigation={navigation}
+      />
+    )
   }
 }
 
-export default ProfileScreen;
+
+export default Profile;

@@ -1,4 +1,4 @@
-export const ListOfPrompts = [
+export const listOfPrompts = [
   { prompt: "Something I find funny that most people don’t", key: "0" },
   { prompt: "Greatest accomplishment", key: "1" },
   { prompt: "If money didn’t exist, I would travel to", key: "2" },

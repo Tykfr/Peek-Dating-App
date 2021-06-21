@@ -2,6 +2,7 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Homescreen } from "_scenes/home";
 import { ProfileStackScreen } from "_navigations";
+import { NavigationContainer } from "@react-navigation/native";
 
 const Stack = createStackNavigator();
 

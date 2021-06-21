@@ -1,2 +1,2 @@
-import ListOfPrompts from "./list-of-prompts";
+import ListOfPrompts from "../assets/data/list-of-prompts";
 export { ListOfPrompts };
