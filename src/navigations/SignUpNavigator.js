@@ -22,11 +22,11 @@ import { PromptSelectionPage } from "_scenes/sign-up";
 import { PromptSubmissionPage } from "_scenes/sign-up";
 import { MainNavigation } from "_navigations";
 
+
 const Stack = createStackNavigator();
 
 function SignUpNavigator() {
   return (
-
       <Stack.Navigator initialRouteName="LoginPage" headerMode="none" screenOptions={{gestureEnabled:false}} >
         <Stack.Screen name="LoginPage" component={LoginPage}  />
         <Stack.Screen name="NumberEntryPage" component={NumberEntryPage} />

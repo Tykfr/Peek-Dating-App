@@ -48,9 +48,9 @@ function BirthdayEntryPage({ navigation, route }) {
  
 
   const _genderIdentityPage = () => {
-    userData.birthYear = parseInt(dob_split[2]);
-    userData.birthMonth = parseInt(dob_split[0]); //The plus one is necesary because the months are counting from 0.
-    userData.birthDay =parseInt(dob_split[1]);
+    userData.BirthYear = parseInt(dob_split[2]);
+    userData.BirthMonth = parseInt(dob_split[0]); //The plus one is necesary because the months are counting from 0.
+    userData.BirthDate =parseInt(dob_split[1]);
     navigation.navigate("GenderIdentityPage", {
       userData: userData,
     });

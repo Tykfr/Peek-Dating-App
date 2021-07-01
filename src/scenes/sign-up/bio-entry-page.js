@@ -16,7 +16,7 @@ function BioEntryPage({ navigation, route }) {
   const [bio, setBio] = React.useState("");
 
   const _selectPhotoHander = () => {
-    userData.bio = bio;
+    userData.Bio = bio;
 
     navigation.navigate("PhotoSelectionPage", {
       userData: userData,

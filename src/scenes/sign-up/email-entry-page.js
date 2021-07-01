@@ -34,7 +34,7 @@ function EmailEntryPage({ route, navigation }) {
   const [email, setEmail] = React.useState("");
 
   function recordUserEmail() {
-    userData.email = email;
+    userData.Email = email;
     navigation.navigate("BirthdayEntryPage", {
       userData: userData,
     });

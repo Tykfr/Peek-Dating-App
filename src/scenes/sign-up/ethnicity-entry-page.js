@@ -21,7 +21,7 @@ function EthnicityEntryPage({ navigation, route }) {
   })
 
   function _occupationHandler() {
-    userData.ethnicity = ethnicity;
+    userData.Ethnicity = ethnicity;
 
     navigation.navigate("OccupationEntryPage", {
       userData: userData,

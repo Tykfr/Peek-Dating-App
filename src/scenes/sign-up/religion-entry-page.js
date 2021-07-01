@@ -26,7 +26,7 @@ function ReligionEntryPage({ navigation, route }) {
     setJudiasm(selection === "Judiasm" ? true : false);
   }
   const _ethnicityEntryPage = () => {
-    userData.religion = religion;
+    userData.Religion = religion;
 
     navigation.navigate("EthnicityEntryPage", {
       userData: userData,

@@ -20,7 +20,7 @@ function OccupationEntryPage({ navigation, route }) {
   const [occupation, setOccupation] = React.useState("");
 
   const _locationHandler = () => {
-    userData.occupation = occupation;
+    userData.Occupation = occupation;
     navigation.navigate("LocationEntryPage", {
       userData: userData,
     });

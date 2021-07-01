@@ -16,7 +16,7 @@ function SchoolEntryPage({ navigation, route }) {
   const [school, setSchool] = React.useState("");
 
   const _polticalEntryPageHandler = () => {
-    userData.school = school;
+    userData.School = school;
 
     navigation.navigate("PoliticalEntryPage", {
       userData: userData,

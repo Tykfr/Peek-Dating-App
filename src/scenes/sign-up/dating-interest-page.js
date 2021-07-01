@@ -20,7 +20,7 @@ function DatingInterestPage({ navigation, route }) {
   const [both, setBoth] = React.useState(false);
 
   const _schoolEntryPageHandler = () => {
-    userData.interestSelection = interestSelection;
+    userData.DatingInterest = interestSelection;
 
     navigation.navigate("SchoolEntryPage", {
       userData: userData,

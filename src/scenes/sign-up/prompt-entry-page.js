@@ -14,7 +14,11 @@ import {
 
 function PromptEntryPage({ navigation, route }) {
   const { userData } = route.params;
-
+  const userID = firebase.auth().currentUser.uid;
+  console.log(userID)
+  // const firebase = require("firebase");
+  // Required for side-effects
+  require("firebase/firestore");
   const [firstPrompt, setFirstPrompt] = React.useState("");
   const [secondPrompt, setSecondPrompt] = React.useState("");
   const [thirdPrompt, setThirdPrompt] = React.useState("");
@@ -32,13 +36,12 @@ function PromptEntryPage({ navigation, route }) {
     false
   );
   async function completeAccount(userData, navigation) {
-    userData.firstResponse = firstResponse;
-    userData.secondResponse = secondResponse;
-    userData.thirdResponse = thirdResponse;
-    userData.firstPrompt = firstPrompt;
-    userData.secondPrompt = secondPrompt;
-    userData.thirdPrompt = thirdPrompt;
-    await submitData(userData, navigation);
+    userData.prompts = {firstPrompt : firstResponse,
+      secondPrompt: secondResponse,
+      thirdPrompt:thirdResponse
+    };
+
+    await submitData(userID,userData, navigation);
   }
 
   const _promptSelectionHandler = (key) => {
@@ -63,7 +66,6 @@ function PromptEntryPage({ navigation, route }) {
 
   useEffect(() => {
     StatusBar.setBarStyle("dark-content");
-
     let mounted = true;
     if(mounted){
     if (route.params) {
@@ -217,29 +219,14 @@ async function storeUserID(userID, navigation) {
   }
 }
 
-async function submitData(userData, navigation) {
-  await fetch(
-    "https://www-student.cse.buffalo.edu/peek_mobile_dating/newUser.php",
-    {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(userData),
-    }
-  )
-    .then((response) => response.json())
-    .then((responseJson) => {
-      const userID = JSON.stringify(responseJson); //The userID needs to be a string so that it can be stored in async storage
-      uploadImages(userData, userID);
-      storeUserID(userID, navigation);
+async function submitData(userID,userData, navigation) {
 
-      //naviagation that navigate will be called her to go to the main stack.
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+  await uploadImages(userData, userID);
+
+  let db = firebase.firestore();
+  let userRef = db.collection("users");
+  userRef.doc(userID).set(userData);
+  storeUserID(userID, navigation);
   }
 
   async function uploadImages(userData, userID){
@@ -258,6 +245,9 @@ async function submitData(userData, navigation) {
              console.error("Failure on image : " + x +" " + error);
             });
     }
+     delete userData["img_array"];
+
+
  
 
   }

@@ -72,7 +72,7 @@ function NumberEntryPage({ navigation }) {
   const _verificationHandler = (verificationId, phoneNumber) => {
     navigation.navigate("VerificationPage", {
       verificationId: verificationId,
-      phoneNumber: phoneNumber,
+      PhoneNumber: phoneNumber,
     });
   };
 

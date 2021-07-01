@@ -20,7 +20,7 @@ function NameEntryPage({ route, navigation }) {
   const [name, setName] = React.useState("");
 
   function recordUserName() {
-    userData.name = name;
+    userData.Name = name;
     navigation.navigate("EmailEntryPage", {
       userData: userData,
     });

@@ -25,9 +25,12 @@ import AsyncStorage from "@react-native-community/async-storage";
  */
 
 function VerificationCodePage({ route, navigation }) {
+  require("firebase/firestore");
+
   let { verificationId } = route.params;
-  let { phoneNumber } = route.params;
-  phoneNumber = JSON.parse(JSON.stringify(phoneNumber));
+  let { PhoneNumber } = route.params;
+  console.log(PhoneNumber)
+  PhoneNumber = JSON.parse(JSON.stringify(PhoneNumber));
   const [verificationCode, setVerificationCode] = React.useState("");
   verificationId = JSON.parse(JSON.stringify(verificationId));
 
@@ -44,6 +47,7 @@ function VerificationCodePage({ route, navigation }) {
   async function verifyCode() {
    
       const credential = firebase.auth.PhoneAuthProvider.credential( verificationId,verificationCode);
+
       firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
       .then( async function() {
     // Existing and future Auth states are now persisted in the current
@@ -52,8 +56,9 @@ function VerificationCodePage({ route, navigation }) {
     // ...
     // New sign-in will be persisted with session persistence.
         await firebase.auth().signInWithCredential(credential);
-              
-       await retrieveUserIDFromDB(phoneNumber, navigation);
+        let userID = await firebase.auth().currentUser.uid;
+        let db = await firebase.firestore();
+       await retrieveUserIDFromDB(db, userID, PhoneNumber, navigation);
     }).catch(function(error)  {
     // Handle Errors here.
       Alert.alert("Invalid verification code. Please try again.");
@@ -92,7 +97,7 @@ function VerificationCodePage({ route, navigation }) {
               }}
             >
               <View>
-                <InfoText description="Code sent to:" extraInfo={phoneNumber} />
+                <InfoText description="Code sent to:" extraInfo={PhoneNumber} />
               </View>
               <View style={styles.assist_Button}>
                 <AssistButton
@@ -161,24 +166,14 @@ const styles = StyleSheet.create({
   },
 });
 
-async function retrieveUserIDFromDB(phoneNumber, navigation) {
-  await fetch(
-    "https://www-student.cse.buffalo.edu/peek_mobile_dating/userIDLookUp.php",
-    {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        phoneNumber: phoneNumber,
-      }),
-    }
-  )
-    .then((response) => response.json())
-    .then((responseJson) => {
-      const userID = JSON.parse(JSON.stringify(responseJson)); //The userID needs to be a string so that it can be stored in async storage
-      if (userID !== "-1") {
+// This function checks to see if this userID is in the cloud firestore
+//  if it is, login...otherwise signup
+async function retrieveUserIDFromDB(db, userID, PhoneNumber, navigation) {
+
+  let userRef = db.collection("users").doc(userID);
+
+  userRef.get().then((doc) => {
+      if (doc.exists) {
         try {
           AsyncStorage.setItem("userID", JSON.stringify(userID));
           navigation.navigate("MainNavigation");
@@ -187,15 +182,12 @@ async function retrieveUserIDFromDB(phoneNumber, navigation) {
           console.log("Error: " + e);
         }
       } else {
-
-        navigation.navigate("NameEntryPage", {
-          userData: { phoneNumber: phoneNumber },
-        });
+          // doc.data() will be undefined in this case
+          navigation.navigate("NameEntryPage", {
+            userData: { PhoneNumber: PhoneNumber },
+          });
       }
-
-      //naviagation that navigate will be called her to go to the main stack.
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+  }).catch((error) => {
+      console.log("Error getting document:", error);
+  });
 }

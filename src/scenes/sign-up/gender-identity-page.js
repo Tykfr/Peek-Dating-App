@@ -30,7 +30,7 @@ function GenderIdentityPage({ route, navigation }) {
   }
 
   const _datingInterestPageHandler = () => {
-    userData.genderResult = genderResult;
+    userData.Gender = genderResult;
 
     navigation.navigate("DatingInterestPage", {
       userData: userData,

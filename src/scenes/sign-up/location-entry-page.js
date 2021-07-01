@@ -21,9 +21,9 @@ function LocationEntryPage({ navigation, route }) {
   const [errorMessage, setErrorMessage] = React.useState("");
 
   const _bioEntryPageHandler = () => {
-    userData.longitude = location.longitude;
-    userData.latitude = location.latitude;
-    userData.city_state = city_state;
+    userData.Longitude = location.longitude;
+    userData.Latitude = location.latitude;
+    userData.City_State = city_state;
     navigation.navigate("BioEntryPage", {
       userData: userData,
     });
