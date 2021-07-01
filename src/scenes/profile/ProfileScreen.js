@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import AsyncStorage from "@react-native-community/async-storage";
 import ProfileView from "./ProfileView";
 import * as firebase from "firebase";
+import "firebase/firestore";
 
 
 class Profile extends Component{
@@ -40,75 +41,26 @@ class Profile extends Component{
 
     await this.getUserId()
 
-    fetch ( "https://www-student.cse.buffalo.edu/peek_mobile_dating/retrievePrompts.php",{
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      userID: this.state.userId,
+    const db = firebase.firestore();
 
-    })
-    }
-  )
-  .then((response) => response.json())
-  .then((json) => {
-    // Update prompts here 
-    const data = JSON.parse(JSON.stringify(json));
-    console.log(data)
-    this.setState({
-      isloading:false,
-      loaded:true,
-    })
-    if(data.Prompt_1.length > 0){
-      var prompt = this.state.prompts
-      prompt[0] = [data.Prompt_1,data.Response_1]
-      this.setState({
-        prompts: prompt
-      })
-    }
-    if(data.Prompt_2.length > 0){
-      var prompt = this.state.prompts
-      prompt[1] = [data.Prompt_2,data.Response_2]
-      this.setState({
-        prompts: prompt
-      })
-    }
-    if(data.Prompt_3.length > 0){
-      var prompt = this.state.prompts
-      prompt[2] = [data.Prompt_3,data.Response_3]
-      this.setState({
-        prompts: prompt
-      })
-    }
-    console.log(this.state.prompts)
+    const userdata = db.collection("users").doc(this.state.userId);
 
-  })
-  .catch((error) => console.log(error))
+    userdata.get().then((doc) => {
+      if(doc.exists){
+        const data = JSON.parse(JSON.stringify(doc.data()));
 
-  
-  fetch ("https://www-student.cse.buffalo.edu/peek_mobile_dating/retrieveProfile.php", {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      userID: this.state.userId,
-    })
-    }
-  )
-  .then((response) => response.json())
-  .then((json) => {
-    const data = JSON.parse(JSON.stringify(json));
+        this.updateProfile(data)
+        // Update prompts here 
+        console.log(data)
+        this.setState({
+          isloading:false,
+          loaded:true,
+        })
+        this.setState({prompts: data.prompts});
+      
+      }else{ console.log("User Data does not exist")}
 
-    console.log(data)
-    this.updateProfile(data)
-
-  })
-  .catch((error) => console.log(error))
-  
+    }).catch((error) => console.log(error));
   }
 
   updateProfile(data){
