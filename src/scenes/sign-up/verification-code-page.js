@@ -29,7 +29,6 @@ function VerificationCodePage({ route, navigation }) {
 
   let { verificationId } = route.params;
   let { PhoneNumber } = route.params;
-  console.log(PhoneNumber)
   PhoneNumber = JSON.parse(JSON.stringify(PhoneNumber));
   const [verificationCode, setVerificationCode] = React.useState("");
   verificationId = JSON.parse(JSON.stringify(verificationId));

@@ -226,9 +226,23 @@ async function submitData(userID,userData, navigation) {
   let db = firebase.firestore();
   let userRef = db.collection("users");
   userRef.doc(userID).set(userData);
+  initalizeSettings(userID, userData);
   storeUserID(userID, navigation);
   }
 
+function initalizeSettings(userID, userData){
+
+  let settingsDB = firebase.firestore();
+  let settingsRef = settingsDB.collection("Settings");
+  settingsRef.doc(userID).set({
+    "Public":true,
+    "PhoneNumber": userData.PhoneNumber,
+    "Email": userData.Email,
+    "PushNotifications":true,
+
+  });
+
+}
   async function uploadImages(userData, userID){
   
 
