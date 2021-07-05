@@ -1,7 +1,10 @@
 import React, {useState, Component} from "react";
-import ProfileView from "./PromptView";
+import PromptView from "./PromptView";
 import * as firebase from "firebase";
 import "firebase/firestore";
+import { View } from "react-native";
+import { TouchableOpacity } from "react-native";
+import { Prompt_box } from "_molecules";
 
 class PromptScreen extends Component {
 
@@ -33,7 +36,6 @@ class PromptScreen extends Component {
   updatePrompt = async (prompt,response,navigation) => {
     const userID = firebase.auth().currentUser;
     const db = firebase.firestore();
-
     const userdata = db.collection("users").doc(userID.uid);
     const updatedprompt = "prompts." + prompt;
     userdata.update({
@@ -62,6 +64,7 @@ class PromptScreen extends Component {
         response={response}
         updatePrompt={this.updatePrompt}
         updateModal={this.updateModal}
+        updateResponse={this.updateResponse}
         renderItem={this.renderItem}
       />
     )

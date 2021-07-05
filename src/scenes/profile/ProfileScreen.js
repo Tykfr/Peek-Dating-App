@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import AsyncStorage from "@react-native-community/async-storage";
 import ProfileView from "./ProfileView";
 import * as firebase from "firebase";
 import "firebase/firestore";
@@ -27,9 +26,11 @@ class Profile extends Component{
   }
   getUserId = async() => {
     try {
-      const userID = await AsyncStorage.getItem("userID")
+      const userID = firebase.auth().currentUser;
+      const db = firebase.firestore();
+  
       this.setState({
-        userId:userID
+        userId: userID.uid
       })
       
     } catch (error) { console.log("Error retrieving userId")}
@@ -65,6 +66,7 @@ class Profile extends Component{
 
   updateProfile(data){
 
+    if(data.Name) { this.setState({name:data.Name})}
     if(data.Bio.length > 0){ this.setState({bio:data.Bio})}
     if(data.Gender.length > 0){ this.setState({gender:data.Gender})}
     if(data.City_State.length > 0){ this.setState({location:data.City_State})}
