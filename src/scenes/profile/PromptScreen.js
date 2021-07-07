@@ -14,6 +14,7 @@ class PromptScreen extends Component {
       isModalVisible: false,
       prompt: "",
       response: "",
+      old_prompt:props.route.params.prompt,
     }
   }
   setPrompt = (prompt) => {
@@ -37,10 +38,16 @@ class PromptScreen extends Component {
     const userID = firebase.auth().currentUser;
     const db = firebase.firestore();
     const userdata = db.collection("users").doc(userID.uid);
-    const updatedprompt = "prompts." + prompt;
-    userdata.update({
-      updatedprompt :response
-    }).then(() => { navigation.navigate("Profile"); })
+    const updatedprompt ={};
+    if(this.state.old_prompt!="Add Prompt"){
+      console.log(this.state.old_prompt);
+      userdata.update({
+        [`prompts.${this.state.old_prompt}`]: firebase.firestore.FieldValue.delete()});
+    }
+    updatedprompt[`prompts.${prompt}`] = response
+    userdata.update(updatedprompt)
+    .then(() => { navigation.navigate("Profile");
+   })
   
   }
 

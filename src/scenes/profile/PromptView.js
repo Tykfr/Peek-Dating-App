@@ -21,10 +21,10 @@ const PromptView = ({navigation,isModalVisible,response,prompt,updateModal,updat
                     <Text>{prompt}</Text>
                     <View>
                         <TextInput
-                            style={styles.textInput}
-                            onChangeText={input => updateResponse(input)}
-                            placeholder="Type Response Here!"
-                            defaultValue={response}
+                        style={styles.textInput}
+                        onChangeText={input => updateResponse(input)}
+                        placeholder="Type Response Here!"
+                        defaultValue={response}
                         />
                         <View>
                             <TouchableOpacity onPress={() => updatePrompt(prompt,response,navigation)}>
