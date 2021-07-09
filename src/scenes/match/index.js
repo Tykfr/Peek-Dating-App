@@ -1,1 +1,1 @@
-export { default as MatchingScreen } from "./MatchingScreen";
+export { default as Matching } from "./MatchingScreen";

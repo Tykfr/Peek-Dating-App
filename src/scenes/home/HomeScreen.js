@@ -61,7 +61,7 @@ function HomeScreen({ navigation }) {
 
           <View style={styles.chatButton_MatchButton_Container}>
             <Chat_button />
-            <Match_button />
+            <Match_button navigation={navigation} />
           </View>
         </View>
       </Camera>
