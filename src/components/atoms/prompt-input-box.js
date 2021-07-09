@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, View, SafeAreaView, Text, TextInput } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import PropTypes from "prop-types";
-import { AppLoading } from "expo";
+import AppLoading from 'expo-app-loading';
 import { useFonts, ReemKufi_400Regular } from "@expo-google-fonts/reem-kufi";
 
 function PromptInputBox({ _onPress, _response, _prompt }) {

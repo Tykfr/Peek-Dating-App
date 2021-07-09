@@ -15,7 +15,7 @@ import AssistButton from "_atoms/assist-button";
 import ContinueButton from "_atoms/continueButton";
 import * as firebase from "firebase";
 import InputResponse from "_atoms/input-response";
-import AsyncStorage from "@react-native-community/async-storage";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 /**
  * @author - William Phillips
  * @param {*} route - route is a prop that allows me to recieve data passed from a previous page

@@ -2,8 +2,7 @@ import React ,{useEffect} from 'react';
 import {SafeAreaView, View, Text, StyleSheet, Image} from 'react-native';
 import { LinearGradient } from "expo-linear-gradient";
 import * as firebase from "firebase";
-import AsyncStorage from "@react-native-community/async-storage";
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function SplashScreen ({navigation}){
 

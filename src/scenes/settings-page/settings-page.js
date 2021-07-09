@@ -13,7 +13,7 @@ import {
 import { SubTitle, SettingsButtonTitle, InfoText } from "_atoms";
 import { AppLoading } from "expo";
 import { useFonts, ReemKufi_400Regular } from "@expo-google-fonts/reem-kufi";
-import AsyncStorage from "@react-native-community/async-storage";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as firebase from "firebase";
 
 // import { StatusBar } from "expo-status-bar";

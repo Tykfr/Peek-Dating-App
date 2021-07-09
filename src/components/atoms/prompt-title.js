@@ -1,6 +1,6 @@
 import React from "react";
 import { Text, StyleSheet } from "react-native";
-import { AppLoading } from "expo";
+import AppLoading from 'expo-app-loading';
 import { useFonts, ReemKufi_400Regular } from "@expo-google-fonts/reem-kufi";
 
 function PromptTitle({ description }) {

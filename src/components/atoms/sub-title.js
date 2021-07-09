@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, Text } from "react-native";
 import PropTypes from "prop-types";
 
-import { AppLoading } from "expo";
+import AppLoading from 'expo-app-loading';
 import { useFonts, ReemKufi_400Regular } from "@expo-google-fonts/reem-kufi";
 
 function SubTitle({ description }) {

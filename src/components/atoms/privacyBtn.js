@@ -1,6 +1,6 @@
 import React from "react";
 import { Text, TouchableOpacity, StyleSheet } from "react-native";
-import { AppLoading } from "expo";
+import AppLoading from 'expo-app-loading';
 
 import {
   useFonts,

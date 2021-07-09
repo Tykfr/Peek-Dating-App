@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import { Text, StyleSheet, TouchableOpacity, View } from "react-native";
-import { AppLoading } from "expo";
+import AppLoading from 'expo-app-loading';
 import {
   useFonts,
   MuktaVaani_600SemiBold,
