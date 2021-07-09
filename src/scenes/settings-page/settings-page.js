@@ -11,14 +11,16 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { SubTitle, SettingsButtonTitle, InfoText } from "_atoms";
-import { AppLoading } from "expo";
+import AppLoading from 'expo-app-loading';
 import { useFonts, ReemKufi_400Regular } from "@expo-google-fonts/reem-kufi";
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as firebase from "firebase";
+import {updateProfileStatus, retrieveSettings, updateNotificationStatus,updateEmail, logout} from "./settings-functions"
 
 // import { StatusBar } from "expo-status-bar";
 
 function SettingsPage() {
+  require("firebase/firestore");
+  let settingsDB = firebase.firestore();
   const profileDescription =
     "When private, your profile will be hidden from new people, but you will still be able to talk with your current matches.";
   const [publicStatus, setPublicStatus] = React.useState();
@@ -33,6 +35,7 @@ function SettingsPage() {
 
   useEffect(() => {
     retrieveSettings(
+      settingsDB,
       setPublicStatus,
       setEmail,
       setPhoneNumber,
@@ -72,7 +75,7 @@ function SettingsPage() {
               <SettingsButtonTitle description={"Public"} />
               <Switch
                 onValueChange={() => {
-                  updateProfileStatus(userID, !publicStatus, setPublicStatus);
+                  updateProfileStatus(settingsDB,userID, !publicStatus, setPublicStatus);
                 }}
                 value={publicStatus}
               />
@@ -106,7 +109,7 @@ function SettingsPage() {
                     setEmail(email);
                     // console.log(email);
                   }}
-                  onEndEditing={() => updateEmail(userID, email)}
+                  onEndEditing={() => updateEmail(settingsDB, userID, email)}
                   // onEndEditing = {() => }
                 />
               </View>
@@ -120,7 +123,7 @@ function SettingsPage() {
               <SettingsButtonTitle description={"Push Notifications"} />
               <Switch
                 onValueChange={() =>
-                  updateNotificationStatus(
+                  updateNotificationStatus(settingsDB,
                     userID,
                     !notificationStatus,
                     setNotificationStatus
@@ -226,118 +229,4 @@ const styles = StyleSheet.create({
     fontFamily: "ReemKufi_400Regular",
   },
 });
-
-async function updateProfileStatus(userID, publicStatus, setPublicStatus) {
-  setPublicStatus(publicStatus);
-
-  fetch(
-    "https://www-student.cse.buffalo.edu/peek_mobile_dating/updateProfileStatus.php",
-    {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        userID: userID,
-        status: Number(publicStatus),
-      }),
-    }
-  ).catch((error) => {
-    console.error(error);
-  });
-}
-
-async function retrieveSettings(
-  setPublicStatus,
-  setEmail,
-  setPhoneNumber,
-  setNotificationStatus,
-  setUserID
-) {
-  let userID = await AsyncStorage.getItem("userID");
-  setUserID(userID);
-  fetch(
-    "https://www-student.cse.buffalo.edu/peek_mobile_dating/retrieveSettings.php",
-    {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        userID: userID,
-      }),
-    }
-  )
-    .then((response) => response.json())
-    .then((responseJson) => {
-      const userSettings = JSON.parse(JSON.stringify(responseJson)); //The userID needs to be a string so that it can be stored in async storage
-      setPublicStatus(!!userSettings.Visibility);
-      setEmail(userSettings.Email);
-      setPhoneNumber(userSettings.PhoneNumber);
-      setNotificationStatus(!!userSettings.PushNotificationStatus);
-      //naviagation that navigate will be called her to go to the main stack.
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-}
-
-async function updateNotificationStatus(
-  userID,
-  notificationStatus,
-  setNotificationStatus
-) {
-  setNotificationStatus(notificationStatus);
-  fetch(
-    "https://www-student.cse.buffalo.edu/peek_mobile_dating/updateNotificationStatus.php",
-    {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        userID: userID,
-        status: Number(notificationStatus),
-      }),
-    }
-  ).catch((error) => {
-    console.error(error);
-  });
-}
-
-async function updateEmail(userID, email) {
-  console.log(userID);
-  console.log(email);
-  fetch(
-    "https://www-student.cse.buffalo.edu/peek_mobile_dating/updateEmail.php",
-    {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        userID: userID,
-        email: email,
-      }),
-    }
-  )
-    .then((response) => response.json())
-    .then((responseJson) => {
-      const result = JSON.parse(JSON.stringify(responseJson)); //The userID needs to be a string so that it can be stored in async storage
-      console.log(result);
-      //naviagation that navigate will be called her to go to the main stack.
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-}
-
-async function logout(userID){
-  await AsyncStorage.removeItem("userID");
-  firebase.auth().signOut()
-}
 

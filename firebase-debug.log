@@ -1,0 +1,141 @@
+[debug] [2021-07-07T03:40:44.557Z] ----------------------------------------------------------------------
+[debug] [2021-07-07T03:40:44.558Z] Command:       /usr/local/bin/node /usr/local/bin/firebase emulators:start
+[debug] [2021-07-07T03:40:44.558Z] CLI Version:   9.14.0
+[debug] [2021-07-07T03:40:44.558Z] Platform:      darwin
+[debug] [2021-07-07T03:40:44.558Z] Node Version:  v14.16.0
+[debug] [2021-07-07T03:40:44.564Z] Time:          Tue Jul 06 2021 23:40:44 GMT-0400 (Eastern Daylight Time)
+[debug] [2021-07-07T03:40:44.564Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2021-07-07T03:40:44.573Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2021-07-07T03:40:44.573Z] > authorizing via signed-in user (willphillips422@gmail.com)
+[info] i  emulators: Starting emulators: auth, functions, firestore, database, hosting, pubsub, storage {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: auth, functions, firestore, database, hosting, pubsub, storage"}}
+[debug] [2021-07-07T03:40:44.590Z] [hub] writing locator at /var/folders/gk/xqsbx8xx523c5flslcbzgy780000gn/T/hub-peek-365d4.json
+[warn] ⚠  hosting: The hosting emulator is configured but there is no hosting configuration. Have you run firebase init hosting? {"metadata":{"emulator":{"name":"hosting"},"message":"The hosting emulator is configured but there is no hosting configuration. Have you run \u001b[1mfirebase init hosting\u001b[22m?"}}
+[warn] ⚠  functions: The following emulators are not running, calls to these services from the Functions emulator will affect production: hosting {"metadata":{"emulator":{"name":"functions"},"message":"The following emulators are not running, calls to these services from the Functions emulator will affect production: \u001b[1mhosting\u001b[22m"}}
+[info] ✔  functions: Using node@14 from host. {"metadata":{"emulator":{"name":"functions"},"message":"Using node@14 from host."}}
+[debug] [2021-07-07T03:40:44.616Z] defaultcredentials: writing to file /Users/wphillips/.config/firebase/willphillips422_gmail_com_application_default_credentials.json
+[debug] [2021-07-07T03:40:44.618Z] Setting GAC to /Users/wphillips/.config/firebase/willphillips422_gmail_com_application_default_credentials.json {"metadata":{"emulator":{"name":"functions"},"message":"Setting GAC to /Users/wphillips/.config/firebase/willphillips422_gmail_com_application_default_credentials.json"}}
+[debug] [2021-07-07T03:40:44.621Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/peek-365d4/adminSdkConfig [none]
+[debug] [2021-07-07T03:40:44.945Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/peek-365d4/adminSdkConfig 200
+[debug] [2021-07-07T03:40:44.945Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/peek-365d4/adminSdkConfig {"projectId":"peek-365d4","databaseURL":"https://peek-365d4.firebaseio.com","storageBucket":"peek-365d4.appspot.com","locationId":"us-central"}
+[debug] [2021-07-07T03:40:44.987Z] Ignoring unsupported arg: projectId {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: projectId"}}
+[debug] [2021-07-07T03:40:44.988Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2021-07-07T03:40:44.988Z] Starting Firestore Emulator with command {"binary":"java","args":["-Dgoogle.cloud_firestore.debug_log_level=FINE","-Duser.language=en","-jar","/Users/wphillips/.cache/firebase/emulators/cloud-firestore-emulator-v1.13.0.jar","--host","localhost","--port",8080,"--rules","/Users/wphillips/Documents/MobileApp Project/Peek-Dating-App/firestore.rules","--functions_emulator","localhost:5001"],"optionalArgs":["port","webchannel_port","host","rules","functions_emulator","seed_from_export"],"joinArgs":false} {"metadata":{"emulator":{"name":"firestore"},"message":"Starting Firestore Emulator with command {\"binary\":\"java\",\"args\":[\"-Dgoogle.cloud_firestore.debug_log_level=FINE\",\"-Duser.language=en\",\"-jar\",\"/Users/wphillips/.cache/firebase/emulators/cloud-firestore-emulator-v1.13.0.jar\",\"--host\",\"localhost\",\"--port\",8080,\"--rules\",\"/Users/wphillips/Documents/MobileApp Project/Peek-Dating-App/firestore.rules\",\"--functions_emulator\",\"localhost:5001\"],\"optionalArgs\":[\"port\",\"webchannel_port\",\"host\",\"rules\",\"functions_emulator\",\"seed_from_export\"],\"joinArgs\":false}"}}
+[info] i  firestore: Firestore Emulator logging to firestore-debug.log {"metadata":{"emulator":{"name":"firestore"},"message":"Firestore Emulator logging to \u001b[1mfirestore-debug.log\u001b[22m"}}
+[debug] [2021-07-07T03:40:46.353Z] Jul 06, 2021 11:40:46 PM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketServer start
+INFO: Started WebSocket server on ws://localhost:53052
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jul 06, 2021 11:40:46 PM com.google.cloud.datastore.emulator.firestore.websocket.WebSocketServer start\nINFO: Started WebSocket server on ws://localhost:53052\n"}}
+[debug] [2021-07-07T03:40:46.420Z] API endpoint: http:// {"metadata":{"emulator":{"name":"firestore"},"message":"API endpoint: http://"}}
+[debug] [2021-07-07T03:40:46.420Z] localhost:8080
+If you are using a library that supports the FIRESTORE_EMULATOR_HOST environment variable, run:
+
+   export FIRESTORE_EMULATOR_HOST=localhost:8080
+
+Dev App Server is now running.
+
+ {"metadata":{"emulator":{"name":"firestore"},"message":"localhost:8080\nIf you are using a library that supports the FIRESTORE_EMULATOR_HOST environment variable, run:\n\n   export FIRESTORE_EMULATOR_HOST=localhost:8080\n\nDev App Server is now running.\n\n"}}
+[debug] [2021-07-07T03:40:46.549Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/peek-365d4 [none]
+[debug] [2021-07-07T03:40:46.764Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/peek-365d4 200
+[debug] [2021-07-07T03:40:46.765Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/peek-365d4 {"projectId":"peek-365d4","projectNumber":"933581565982","displayName":"Peek ","name":"projects/peek-365d4","resources":{"hostingSite":"peek-365d4","realtimeDatabaseInstance":"peek-365d4","storageBucket":"peek-365d4.appspot.com","locationId":"us-central"},"state":"ACTIVE"}
+[debug] [2021-07-07T03:40:46.765Z] database rules config:  []
+[warn] ⚠  database: Did not find a Realtime Database rules file specified in a firebase.json config file. The emulator will default to allowing all reads and writes. Learn more about this option: https://firebase.google.com/docs/emulator-suite/install_and_configure#security_rules_configuration. {"metadata":{"emulator":{"name":"database"},"message":"Did not find a Realtime Database rules file specified in a firebase.json config file. The emulator will default to allowing all reads and writes. Learn more about this option: https://firebase.google.com/docs/emulator-suite/install_and_configure#security_rules_configuration."}}
+[debug] [2021-07-07T03:40:46.768Z] Ignoring unsupported arg: projectId {"metadata":{"emulator":{"name":"database"},"message":"Ignoring unsupported arg: projectId"}}
+[debug] [2021-07-07T03:40:46.769Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"database"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2021-07-07T03:40:46.769Z] Ignoring unsupported arg: rules {"metadata":{"emulator":{"name":"database"},"message":"Ignoring unsupported arg: rules"}}
+[debug] [2021-07-07T03:40:46.769Z] Starting Database Emulator with command {"binary":"java","args":["-Duser.language=en","-jar","/Users/wphillips/.cache/firebase/emulators/firebase-database-emulator-v4.7.2.jar","--host","localhost","--port",9000,"--functions_emulator_host","localhost","--functions_emulator_port",5001],"optionalArgs":["port","host","functions_emulator_port","functions_emulator_host"],"joinArgs":false} {"metadata":{"emulator":{"name":"database"},"message":"Starting Database Emulator with command {\"binary\":\"java\",\"args\":[\"-Duser.language=en\",\"-jar\",\"/Users/wphillips/.cache/firebase/emulators/firebase-database-emulator-v4.7.2.jar\",\"--host\",\"localhost\",\"--port\",9000,\"--functions_emulator_host\",\"localhost\",\"--functions_emulator_port\",5001],\"optionalArgs\":[\"port\",\"host\",\"functions_emulator_port\",\"functions_emulator_host\"],\"joinArgs\":false}"}}
+[info] i  database: Database Emulator logging to database-debug.log {"metadata":{"emulator":{"name":"database"},"message":"Database Emulator logging to \u001b[1mdatabase-debug.log\u001b[22m"}}
+[debug] [2021-07-07T03:40:48.615Z] 23:40:48.614 [NamespaceSystem-akka.actor.default-dispatcher-4] INFO akka.event.slf4j.Slf4jLogger - Slf4jLogger started
+ {"metadata":{"emulator":{"name":"database"},"message":"23:40:48.614 [NamespaceSystem-akka.actor.default-dispatcher-4] INFO akka.event.slf4j.Slf4jLogger - Slf4jLogger started\n"}}
+[debug] [2021-07-07T03:40:48.782Z] 23:40:48.782 [main] INFO com.firebase.server.forge.App$ - Listening at localhost:9000
+ {"metadata":{"emulator":{"name":"database"},"message":"23:40:48.782 [main] INFO com.firebase.server.forge.App$ - Listening at localhost:9000\n"}}
+[debug] [2021-07-07T03:40:50.939Z] Ignoring unsupported arg: projectId {"metadata":{"emulator":{"name":"pubsub"},"message":"Ignoring unsupported arg: projectId"}}
+[debug] [2021-07-07T03:40:50.940Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"pubsub"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2021-07-07T03:40:50.940Z] Starting Pub/Sub Emulator with command {"binary":"/Users/wphillips/.cache/firebase/emulators/pubsub-emulator-0.1.0/pubsub-emulator/bin/cloud-pubsub-emulator","args":["--host=localhost","--port=8085"],"optionalArgs":["port","host"],"joinArgs":true} {"metadata":{"emulator":{"name":"pubsub"},"message":"Starting Pub/Sub Emulator with command {\"binary\":\"/Users/wphillips/.cache/firebase/emulators/pubsub-emulator-0.1.0/pubsub-emulator/bin/cloud-pubsub-emulator\",\"args\":[\"--host=localhost\",\"--port=8085\"],\"optionalArgs\":[\"port\",\"host\"],\"joinArgs\":true}"}}
+[info] i  pubsub: Pub/Sub Emulator logging to pubsub-debug.log {"metadata":{"emulator":{"name":"pubsub"},"message":"Pub/Sub Emulator logging to \u001b[1mpubsub-debug.log\u001b[22m"}}
+[debug] [2021-07-07T03:40:51.291Z] This is the Google Pub/Sub fake.
+Implementation may be incomplete or differ from the real system.
+ {"metadata":{"emulator":{"name":"pubsub"},"message":"This is the Google Pub/Sub fake.\nImplementation may be incomplete or differ from the real system.\n"}}
+[debug] [2021-07-07T03:40:51.314Z] Jul 06, 2021 11:40:51 PM com.google.cloud.pubsub.testing.v1.Main main
+INFO: IAM integration is disabled. IAM policy methods and ACL checks are not supported
+ {"metadata":{"emulator":{"name":"pubsub"},"message":"Jul 06, 2021 11:40:51 PM com.google.cloud.pubsub.testing.v1.Main main\nINFO: IAM integration is disabled. IAM policy methods and ACL checks are not supported\n"}}
+[debug] [2021-07-07T03:40:51.810Z] Jul 06, 2021 11:40:51 PM io.gapi.emulators.netty.NettyUtil applyJava7LongHostnameWorkaround
+INFO: Unable to apply Java 7 long hostname workaround.
+ {"metadata":{"emulator":{"name":"pubsub"},"message":"Jul 06, 2021 11:40:51 PM io.gapi.emulators.netty.NettyUtil applyJava7LongHostnameWorkaround\nINFO: Unable to apply Java 7 long hostname workaround.\n"}}
+[debug] [2021-07-07T03:40:51.878Z] Jul 06, 2021 11:40:51 PM com.google.cloud.pubsub.testing.v1.Main main
+INFO: Server started, listening on 8085
+ {"metadata":{"emulator":{"name":"pubsub"},"message":"Jul 06, 2021 11:40:51 PM com.google.cloud.pubsub.testing.v1.Main main\nINFO: Server started, listening on 8085\n"}}
+[debug] [2021-07-07T03:40:52.002Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"storage"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2021-07-07T03:40:52.127Z] Jul 06, 2021 11:40:52 PM io.gapi.emulators.grpc.GrpcServer$3 operationComplete
+INFO: Adding handler(s) to newly registered Channel.
+ {"metadata":{"emulator":{"name":"pubsub"},"message":"Jul 06, 2021 11:40:52 PM io.gapi.emulators.grpc.GrpcServer$3 operationComplete\nINFO: Adding handler(s) to newly registered Channel.\n"}}
+[debug] [2021-07-07T03:40:52.283Z] Temp file directory for storage emulator: /var/folders/gk/xqsbx8xx523c5flslcbzgy780000gn/T/firebase/storage/blobs {"metadata":{"emulator":{"name":"storage"},"message":"Temp file directory for storage emulator: /var/folders/gk/xqsbx8xx523c5flslcbzgy780000gn/T/firebase/storage/blobs"}}
+[warn] ⚠  hosting: The hosting emulator is configured but there is no hosting configuration. Have you run firebase init hosting? {"metadata":{"emulator":{"name":"hosting"},"message":"The hosting emulator is configured but there is no hosting configuration. Have you run \u001b[1mfirebase init hosting\u001b[22m?"}}
+[info] i  ui: downloading ui-v1.5.0.zip... {"metadata":{"emulator":{"name":"ui"},"message":"downloading ui-v1.5.0.zip..."}}
+[debug] [2021-07-07T03:40:53.328Z] >>> [apiv2][query] GET https://storage.googleapis.com/firebase-preview-drop/emulator/ui-v1.5.0.zip 
+[debug] [2021-07-07T03:40:53.622Z] <<< [apiv2][status] GET https://storage.googleapis.com/firebase-preview-drop/emulator/ui-v1.5.0.zip 200
+[debug] [2021-07-07T03:40:53.623Z] <<< [apiv2][body] GET https://storage.googleapis.com/firebase-preview-drop/emulator/ui-v1.5.0.zip [stream]
+[debug] [2021-07-07T03:40:54.858Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2021-07-07T03:40:54.860Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2021-07-07T03:40:54.860Z] Starting Emulator UI with command {"binary":"node","args":["/Users/wphillips/.cache/firebase/emulators/ui-v1.5.0/server.bundle.js"],"optionalArgs":[],"joinArgs":false} {"metadata":{"emulator":{"name":"ui"},"message":"Starting Emulator UI with command {\"binary\":\"node\",\"args\":[\"/Users/wphillips/.cache/firebase/emulators/ui-v1.5.0/server.bundle.js\"],\"optionalArgs\":[],\"joinArgs\":false}"}}
+[info] i  ui: Emulator UI logging to ui-debug.log {"metadata":{"emulator":{"name":"ui"},"message":"Emulator UI logging to \u001b[1mui-debug.log\u001b[22m"}}
+[debug] [2021-07-07T03:40:54.970Z] Web / API server started at http://localhost:4000
+ {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at http://localhost:4000\n"}}
+[info] i  functions: Watching "/Users/wphillips/Documents/MobileApp Project/Peek-Dating-App/functions" for Cloud Functions... {"metadata":{"emulator":{"name":"functions"},"message":"Watching \"/Users/wphillips/Documents/MobileApp Project/Peek-Dating-App/functions\" for Cloud Functions..."}}
+[debug] [2021-07-07T03:40:55.205Z] [worker-pool] addWorker(~diagnostic~) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] addWorker(~diagnostic~)"}}
+[debug] [2021-07-07T03:40:55.206Z] [worker-pool] Adding worker with key ~diagnostic~, total=1 {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] Adding worker with key ~diagnostic~, total=1"}}
+[debug] [2021-07-07T03:40:55.206Z] [worker-pool] submitWork(triggerId=) {"metadata":{"emulator":{"name":"functions"},"message":"[worker-pool] submitWork(triggerId=)"}}
+[debug] [2021-07-07T03:40:55.206Z] [worker-~diagnostic~-7e636558-8e73-4922-aa97-4018d652631d]: Assigning socketPath: /var/folders/gk/xqsbx8xx523c5flslcbzgy780000gn/T/fire_emu_3394.sock {"metadata":{"emulator":{"name":"functions"},"message":"[worker-~diagnostic~-7e636558-8e73-4922-aa97-4018d652631d]: Assigning socketPath: /var/folders/gk/xqsbx8xx523c5flslcbzgy780000gn/T/fire_emu_3394.sock"}}
+[debug] [2021-07-07T03:40:55.207Z] [worker-~diagnostic~-7e636558-8e73-4922-aa97-4018d652631d]: BUSY {"metadata":{"emulator":{"name":"functions"},"message":"[worker-~diagnostic~-7e636558-8e73-4922-aa97-4018d652631d]: BUSY"}}
+[debug] [2021-07-07T03:40:55.336Z] [runtime-status] [3394] Functions runtime initialized. {"cwd":"/Users/wphillips/Documents/MobileApp Project/Peek-Dating-App/functions","node_version":"14.16.0"} {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [3394] Functions runtime initialized. {\"cwd\":\"/Users/wphillips/Documents/MobileApp Project/Peek-Dating-App/functions\",\"node_version\":\"14.16.0\"}"}}
+[debug] [2021-07-07T03:40:55.337Z] [runtime-status] [3394] Disabled runtime features: undefined {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [3394] Disabled runtime features: undefined"}}
+[debug] [2021-07-07T03:40:55.339Z] [runtime-status] [3394] Resolved module firebase-admin {"declared":true,"installed":true,"version":"9.10.0","resolution":"/Users/wphillips/Documents/MobileApp Project/Peek-Dating-App/functions/node_modules/firebase-admin/lib/index.js"} {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [3394] Resolved module firebase-admin {\"declared\":true,\"installed\":true,\"version\":\"9.10.0\",\"resolution\":\"/Users/wphillips/Documents/MobileApp Project/Peek-Dating-App/functions/node_modules/firebase-admin/lib/index.js\"}"}}
+[debug] [2021-07-07T03:40:55.341Z] [runtime-status] [3394] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.14.1","resolution":"/Users/wphillips/Documents/MobileApp Project/Peek-Dating-App/functions/node_modules/firebase-functions/lib/index.js"} {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [3394] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"3.14.1\",\"resolution\":\"/Users/wphillips/Documents/MobileApp Project/Peek-Dating-App/functions/node_modules/firebase-functions/lib/index.js\"}"}}
+[debug] [2021-07-07T03:40:55.342Z] [runtime-status] [3394] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.14.1","resolution":"/Users/wphillips/Documents/MobileApp Project/Peek-Dating-App/functions/node_modules/firebase-functions/lib/index.js"} {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [3394] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"3.14.1\",\"resolution\":\"/Users/wphillips/Documents/MobileApp Project/Peek-Dating-App/functions/node_modules/firebase-functions/lib/index.js\"}"}}
+[debug] [2021-07-07T03:40:55.343Z] [runtime-status] [3394] Set PUBSUB_EMULATOR_HOST to localhost:8085 {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [3394] Set PUBSUB_EMULATOR_HOST to localhost:8085"}}
+[debug] [2021-07-07T03:40:55.344Z] [runtime-status] [3394] Outgoing network have been stubbed. [{"name":"http","status":"mocked"},{"name":"http","status":"mocked"},{"name":"https","status":"mocked"},{"name":"https","status":"mocked"},{"name":"net","status":"mocked"}] {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [3394] Outgoing network have been stubbed. [{\"name\":\"http\",\"status\":\"mocked\"},{\"name\":\"http\",\"status\":\"mocked\"},{\"name\":\"https\",\"status\":\"mocked\"},{\"name\":\"https\",\"status\":\"mocked\"},{\"name\":\"net\",\"status\":\"mocked\"}]"}}
+[debug] [2021-07-07T03:40:55.344Z] [runtime-status] [3394] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.14.1","resolution":"/Users/wphillips/Documents/MobileApp Project/Peek-Dating-App/functions/node_modules/firebase-functions/lib/index.js"} {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [3394] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"3.14.1\",\"resolution\":\"/Users/wphillips/Documents/MobileApp Project/Peek-Dating-App/functions/node_modules/firebase-functions/lib/index.js\"}"}}
+[debug] [2021-07-07T03:40:55.379Z] [runtime-status] [3394] Checked functions.config() {"config":{}} {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [3394] Checked functions.config() {\"config\":{}}"}}
+[debug] [2021-07-07T03:40:55.379Z] [runtime-status] [3394] firebase-functions has been stubbed. {"functionsResolution":{"declared":true,"installed":true,"version":"3.14.1","resolution":"/Users/wphillips/Documents/MobileApp Project/Peek-Dating-App/functions/node_modules/firebase-functions/lib/index.js"}} {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [3394] firebase-functions has been stubbed. {\"functionsResolution\":{\"declared\":true,\"installed\":true,\"version\":\"3.14.1\",\"resolution\":\"/Users/wphillips/Documents/MobileApp Project/Peek-Dating-App/functions/node_modules/firebase-functions/lib/index.js\"}}"}}
+[debug] [2021-07-07T03:40:55.379Z] [runtime-status] [3394] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.14.1","resolution":"/Users/wphillips/Documents/MobileApp Project/Peek-Dating-App/functions/node_modules/firebase-functions/lib/index.js"} {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [3394] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"3.14.1\",\"resolution\":\"/Users/wphillips/Documents/MobileApp Project/Peek-Dating-App/functions/node_modules/firebase-functions/lib/index.js\"}"}}
+[debug] [2021-07-07T03:40:55.380Z] [runtime-status] [3394] Resolved module firebase-admin {"declared":true,"installed":true,"version":"9.10.0","resolution":"/Users/wphillips/Documents/MobileApp Project/Peek-Dating-App/functions/node_modules/firebase-admin/lib/index.js"} {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [3394] Resolved module firebase-admin {\"declared\":true,\"installed\":true,\"version\":\"9.10.0\",\"resolution\":\"/Users/wphillips/Documents/MobileApp Project/Peek-Dating-App/functions/node_modules/firebase-admin/lib/index.js\"}"}}
+[debug] [2021-07-07T03:40:55.380Z] [runtime-status] [3394] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.14.1","resolution":"/Users/wphillips/Documents/MobileApp Project/Peek-Dating-App/functions/node_modules/firebase-functions/lib/index.js"} {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [3394] Resolved module firebase-functions {\"declared\":true,\"installed\":true,\"version\":\"3.14.1\",\"resolution\":\"/Users/wphillips/Documents/MobileApp Project/Peek-Dating-App/functions/node_modules/firebase-functions/lib/index.js\"}"}}
+[debug] [2021-07-07T03:40:55.380Z] [runtime-status] [3394] firebase-admin has been stubbed. {"adminResolution":{"declared":true,"installed":true,"version":"9.10.0","resolution":"/Users/wphillips/Documents/MobileApp Project/Peek-Dating-App/functions/node_modules/firebase-admin/lib/index.js"}} {"metadata":{"emulator":{"name":"functions"},"message":"[runtime-status] [3394] firebase-admin has been stubbed. {\"adminResolution\":{\"declared\":true,\"installed\":true,\"version\":\"9.10.0\",\"resolution\":\"/Users/wphillips/Documents/MobileApp Project/Peek-Dating-App/functions/node_modules/firebase-admin/lib/index.js\"}}"}}
+[info] 
+┌─────────────────────────────────────────────────────────────┐
+│ ✔  All emulators ready! It is now safe to connect your app. │
+│ i  View Emulator UI at http://localhost:4000                │
+└─────────────────────────────────────────────────────────────┘
+
+┌────────────────┬──────────────────────────────────┬─────────────────────────────────┐
+│ Emulator       │ Host:Port                        │ View in Emulator UI             │
+├────────────────┼──────────────────────────────────┼─────────────────────────────────┤
+│ Authentication │ localhost:19002                  │ http://localhost:4000/auth      │
+├────────────────┼──────────────────────────────────┼─────────────────────────────────┤
+│ Functions      │ localhost:5001                   │ http://localhost:4000/functions │
+├────────────────┼──────────────────────────────────┼─────────────────────────────────┤
+│ Firestore      │ localhost:8080                   │ http://localhost:4000/firestore │
+├────────────────┼──────────────────────────────────┼─────────────────────────────────┤
+│ Database       │ localhost:9000                   │ http://localhost:4000/database  │
+├────────────────┼──────────────────────────────────┼─────────────────────────────────┤
+│ Hosting        │ Failed to initialize (see above) │                                 │
+├────────────────┼──────────────────────────────────┼─────────────────────────────────┤
+│ Pub/Sub        │ localhost:8085                   │ n/a                             │
+├────────────────┼──────────────────────────────────┼─────────────────────────────────┤
+│ Storage        │ localhost:9199                   │ http://localhost:4000/storage   │
+└────────────────┴──────────────────────────────────┴─────────────────────────────────┘
+  Emulator Hub running at localhost:4400
+  Other reserved ports: 4500
+
+Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
+ 
+[debug] [2021-07-07T03:40:55.386Z] [worker-~diagnostic~-7e636558-8e73-4922-aa97-4018d652631d]: IDLE {"metadata":{"emulator":{"name":"functions"},"message":"[worker-~diagnostic~-7e636558-8e73-4922-aa97-4018d652631d]: IDLE"}}
+[debug] [2021-07-07T03:43:56.228Z] >>> [apiv2][query] POST http://localhost:5001/functions/projects/peek-365d4/trigger_multicast [none]
+[debug] [2021-07-07T03:43:56.230Z] >>> [apiv2][body] POST http://localhost:5001/functions/projects/peek-365d4/trigger_multicast {"eventType":"providers/firebase.auth/eventTypes/user.create","data":{"uid":"jWSmehoicsFeNL84JknwA3pXU5D0","emailVerified":false,"displayName":"William Phillips","photoURL":"","phoneNumber":"+19144138193","metadata":{"creationTime":"1625629436226","lastSignInTime":"1625629436225"},"customClaims":{},"providerData":[{"providerId":"phone","phoneNumber":"+19144138193","rawId":"+19144138193"}]}}
+[debug] [2021-07-07T03:43:56.247Z] <<< [apiv2][status] POST http://localhost:5001/functions/projects/peek-365d4/trigger_multicast 200
+[debug] [2021-07-07T03:43:56.247Z] <<< [apiv2][body] POST http://localhost:5001/functions/projects/peek-365d4/trigger_multicast {"status":"multicast_acknowledged"}
+[debug] [2021-07-07T03:46:36.289Z] Jul 06, 2021 11:46:36 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jul 06, 2021 11:46:36 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected non-HTTP/2 connection.\n"}}
+[debug] [2021-07-07T03:46:36.465Z] Jul 06, 2021 11:46:36 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected HTTP/2 connection.
+ {"metadata":{"emulator":{"name":"firestore"},"message":"Jul 06, 2021 11:46:36 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead\nINFO: Detected HTTP/2 connection.\n"}}
