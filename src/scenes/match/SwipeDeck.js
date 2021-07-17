@@ -32,6 +32,7 @@ function SwipeDeck() {
     const img_6 = imagePath + "img_6.jpg";
     const screenWidth = Dimensions.get("screen").width ;
     const screenHeight = Dimensions.get("screen").height;
+    const VISIBLE_ITEMS = 3;
     const DATA = [
         {
         id: "1",
@@ -61,6 +62,12 @@ function SwipeDeck() {
         outputRange:[.8, 1, 1.3]
 
     })
+
+    const opacity = scrollXAnimated.interpolate({
+      inputRange,
+      outputRange:[1-1/VISIBLE_ITEMS, 1, 0]
+
+  })
     // console.log(translateX)
     // console.log(scale)
     return (
@@ -75,13 +82,15 @@ function SwipeDeck() {
           position:"absolute",
           width: screenWidth * .70, 
           height: screenHeight * .50,
+          opacity,
+          // borderRadius:33
           // transform:[
           //   {translateX}, 
           //   {scale}
           // ]
         }}
       >
-        <Image style={{ width: "100%" ,  height:  "100%",   }} source={item.uri} />
+        <Image style={{ width: "100%" ,  height:  "100%", borderRadius:33  }} source={item.uri} />
       </Animated.View>
         </Animated.View>
     );
