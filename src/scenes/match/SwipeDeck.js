@@ -10,10 +10,31 @@ import {
   Dimensions,
   Animated
 } from "react-native";
-// import Animated from "react-native-reanimated";
-
+import { Directions, FlingGestureHandler, State } from "react-native-gesture-handler";
 function SwipeDeck() {
 
+  const imagePath = "../../assets/images/stock_photos/";
+  const img_1 = imagePath + "img_1.jpg";
+  const img_2 = imagePath + "img_2.jpg";
+  const img_4 = imagePath + "img_4.jpg";
+  const img_5 = imagePath + "img_5.jpg";
+  const img_6 = imagePath + "img_6.jpg";
+  const DATA = [
+    {
+    // id: "1",
+    uri: require(img_1),
+    },
+    {
+    // id: "2",
+    uri: require(img_2),
+    },
+    {
+    // id: "4",
+    uri: require(img_4),
+    },
+];
+
+const [data,setData] = React.useState(DATA);
     const scrollXIndex = React.useRef(new Animated.Value(0)).current;
 
     const scrollXAnimated = React.useRef(new Animated.Value(0)).current;
@@ -24,35 +45,29 @@ function SwipeDeck() {
         }).start();
     })
 
-    const imagePath = "../../assets/images/stock_photos/";
-    const img_1 = imagePath + "img_1.jpg";
-    const img_2 = imagePath + "img_2.jpg";
-    const img_4 = imagePath + "img_4.jpg";
-    const img_5 = imagePath + "img_5.jpg";
-    const img_6 = imagePath + "img_6.jpg";
+    React.useEffect(()=>{
+      if(index === data.length - VISIBLE_ITEMS){
+        const newDATA = [...data, ...data];
+        setData(newDATA);
+      }
+    })
+
+
     const screenWidth = Dimensions.get("screen").width ;
     const screenHeight = Dimensions.get("screen").height;
     const VISIBLE_ITEMS = 3;
-    const DATA = [
-        {
-        id: "1",
-        uri: require(img_1),
-        },
-        {
-        id: "2",
-        uri: require(img_2),
-        },
-        {
-        id: "4",
-        uri: require(img_4),
-        },
-    ];
+    const [index, setIndex] = React.useState(0);
+    const setActiveIndex = React.useCallback((activeIndex) =>{
+      setIndex(activeIndex);
+      scrollXIndex.setValue(activeIndex);
+    });
+
 
    const Item = ({ item, index }) => {
       const inputRange = [index - 1, index, index +1];
       const translateX =  scrollXAnimated.interpolate({
           inputRange,
-          outputRange:[50, 0,-100]
+          outputRange:[50, 0,-50]
 
       })
         // console.log(translateX)
@@ -72,10 +87,8 @@ function SwipeDeck() {
     // console.log(scale)
     return (
       // This secondary Animated view is for positioning the stack to the middle of the screen
-    <Animated.View style={{ backgroundColozr:"red", width:"100%", height:"100%", alignItems:"center", justifyContent:"center",transform:[
-      {translateX}, 
-      {scale}
-    ], position:"absolute", marginLeft:screenWidth/2}}>
+      //To make vertical change MarginLeft to MarginTop: screenHeight /2 and set horizontal to false
+    <Animated.View style={{ backgroundColozr:"red", width:"100%", height:"100%", alignItems:"center", justifyContent:"center", position:"absolute", marginLeft:screenWidth/2}}> 
       <Animated.View
         style={{
           flex: 1,
@@ -84,10 +97,10 @@ function SwipeDeck() {
           height: screenHeight * .50,
           opacity,
           // borderRadius:33
-          // transform:[
-          //   {translateX}, 
-          //   {scale}
-          // ]
+          transform:[
+            {translateX}, 
+            {scale}
+          ]
         }}
       >
         <Image style={{ width: "100%" ,  height:  "100%", borderRadius:33  }} source={item.uri} />
@@ -97,6 +110,34 @@ function SwipeDeck() {
   };
 
   return (
+    <FlingGestureHandler
+    key="left"
+    direction={Directions.LEFT}
+    onHandlerStateChange={ev => {
+      if(ev.nativeEvent.state === State.END){
+        // setActiveIndex()
+        if(index === data.length -1){
+          return;
+        }
+        setActiveIndex( index+1)        
+      }
+    }}>
+      <FlingGestureHandler
+      FlingGestureHandler
+      key="right"
+      direction={Directions.RIGHT}
+      onHandlerStateChange={ev => {
+        if(ev.nativeEvent.state === State.END){
+          // setActiveIndex()
+          if(index === 0){
+            return;
+          }
+          setActiveIndex( index-1)        
+        }
+      }}
+      >
+
+   
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle={"dark-content"} />
 
@@ -109,7 +150,7 @@ function SwipeDeck() {
         scrollEnabled={false} //this is because were going to do an animated scroll
         removeClippedSubviews={false} //this is because we want to make items visible on android
         CellRendererComponent = {({item, index, children, style, ...props}) =>{ //this purpose of this compoment is that its the wrapper of the renderedItem. This allows the first item to have the largest index and transition in descreasing order
-            const newStyle = [style, {zIndex: DATA.length - index}];
+            const newStyle = [style, {zIndex: data.length - index}];
             return (
                 <View style = {newStyle} index={index} {...props}> 
                 {children}
@@ -120,13 +161,15 @@ function SwipeDeck() {
         style={{backgroundColor:"blue",  width:screenWidth, height:screenHeight}}
         contentContainerStyle={{ flex:1,  }}
         pagingEnabled={true}
-        data={DATA}
+        data={data}
         renderItem={Item}
-        keyExtractor={item=>item.id}
+        keyExtractor={(_, index) => String(index)}
         
         />
 
     </SafeAreaView>
+    </FlingGestureHandler>
+    </FlingGestureHandler>
   );
 }
 
@@ -227,79 +270,79 @@ const styles = StyleSheet.create({
 //   TouchableWithoutFeedback,
 // } from "react-native";
 
-function SwipeDeckOld() {
-  const imagePath = "../../assets/images/stock_photos/";
-  const img_1 = imagePath + "img_1.jpg";
-  const img_2 = imagePath + "img_2.jpg";
-  const img_4 = imagePath + "img_4.jpg";
-  const img_5 = imagePath + "img_5.jpg";
-  const img_6 = imagePath + "img_6.jpg";
-    const screenWidth = Dimensions.get("screen").width ;
-  const screenHeight = Dimensions.get("screen").height;
-  const SPACING = 10
-  const DATA = [
-    {
-      id: "1",
-      uri: require(img_1),
-    },
-    {
-      id: "2",
-      uri: require(img_2),
-    },
-    {
-      id: "4",
-      uri: require(img_4),
-    },
-  ];
+// function SwipeDeckOld() {
+//   const imagePath = "../../assets/images/stock_photos/";
+//   const img_1 = imagePath + "img_1.jpg";
+//   const img_2 = imagePath + "img_2.jpg";
+//   const img_4 = imagePath + "img_4.jpg";
+//   const img_5 = imagePath + "img_5.jpg";
+//   const img_6 = imagePath + "img_6.jpg";
+//     const screenWidth = Dimensions.get("screen").width ;
+//   const screenHeight = Dimensions.get("screen").height;
+//   const SPACING = 10
+//   const DATA = [
+//     {
+//       id: "1",
+//       uri: require(img_1),
+//     },
+//     {
+//       id: "2",
+//       uri: require(img_2),
+//     },
+//     {
+//       id: "4",
+//       uri: require(img_4),
+//     },
+//   ];
 
-  const Item = ({ item }) => {
-    return (
-      <View
-        style={{
-          flex: 1,
-        //   position:"absolute",
-          width: screenWidth, 
-          height: screenHeight,
-          backgroundColor:"purple",
-        //   justifyContent:"space-between" 
+//   const Item = ({ item }) => {
+//     return (
+//       <View
+//         style={{
+//           flex: 1,
+//         //   position:"absolute",
+//           width: screenWidth, 
+//           height: screenHeight,
+//           backgroundColor:"purple",
+//         //   justifyContent:"space-between" 
           
-        }}
-      >
-        <Image style={{  width: "100%" , 
-          height:  "100%"  }} source={item.uri} />
-      </View>
-    );
-  };
+//         }}
+//       >
+//         <Image style={{  width: "100%" , 
+//           height:  "100%"  }} source={item.uri} />
+//       </View>
+//     );
+//   };
 
-  return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar barStyle={"dark-content"} />
+//   return (
+//     <SafeAreaView style={styles.container}>
+//       <StatusBar barStyle={"dark-content"} />
 
-      {/* <Card /> */}
+//       {/* <Card /> */}
 
 
-      <FlatList
-        // horizontal={true}
-        // inverted={true}
-        // scrollEnabled={false} //this is because were going to do an animated scroll
-        // removeClippedSubviews={false} //this is because we want to make items visible on android
-        // CellRendererComponent = {({item, index, children, style, ...props}) =>{ //this purpose of this compoment is that its the wrapper of the renderedItem. This allows the first item to have the largest index and transition in descreasing order
-        //     const newStyle = [style, {zIndex: DATA.length - index}];
-        //     return (
-        //         <View style = {newStyle} index={index} {...props}> 
-        //         {children}
-        //         </View>
-        //     )
+//       <FlatList
+//         // horizontal={true}
+//         // inverted={true}
+//         // scrollEnabled={false} //this is because were going to do an animated scroll
+//         // removeClippedSubviews={false} //this is because we want to make items visible on android
+//         // CellRendererComponent = {({item, index, children, style, ...props}) =>{ //this purpose of this compoment is that its the wrapper of the renderedItem. This allows the first item to have the largest index and transition in descreasing order
+//         //     const newStyle = [style, {zIndex: DATA.length - index}];
+//         //     return (
+//         //         <View style = {newStyle} index={index} {...props}> 
+//         //         {children}
+//         //         </View>
+//         //     )
 
-        // }}
-        style={{backgroundColor:"blue", width:screenWidth, height:screenHeight}}
-        // contentContainerStyle={{flex:1,  }}
-        pagingEnabled={true}
-        data={DATA}
-        renderItem={Item}
-        keyExtractor={item=>item.id}
+//         // }}
+//         style={{backgroundColor:"blue", width:screenWidth, height:screenHeight}}
+//         // contentContainerStyle={{flex:1,  }}
+//         pagingEnabled={true}
+//         data={data}
+//         renderItem={Item}
+//         keyExtractor={item=>item.id}
         
-        />
-    </SafeAreaView>
-  );
-}
+//         />
+//     </SafeAreaView>
+//   );
+// }
