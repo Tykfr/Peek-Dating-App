@@ -30,7 +30,7 @@ function LocationEntryPage({ navigation, route }) {
   };
 
   async function getLocation() {
-    const { status } = await Location.requestPermissionsAsync();
+    const { status } = await Location.requestForegroundPermissionsAsync();
     if (status !== "granted") {
       setErrorMessage("PERMISSION NOT GRANTED!");
     }
