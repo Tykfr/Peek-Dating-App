@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { StyleSheet, View, SafeAreaView, Text, ScrollView, StatusBar } from "react-native";
+import { StyleSheet, View, SafeAreaView, ScrollView, StatusBar } from "react-native";
 import * as firebase from "firebase";
 
 import {

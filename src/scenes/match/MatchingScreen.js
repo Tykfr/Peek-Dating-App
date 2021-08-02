@@ -8,6 +8,10 @@ class Matching extends Component{
         super(props);
     }
 
+    findPartners(){
+        
+    }
+
     render(){
         
         return(

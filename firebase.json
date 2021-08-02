@@ -14,7 +14,7 @@
   },
   "emulators": {
     "auth": {
-      "port": 19002
+      "port": 8081
     },
     "functions": {
       "port": 5001
