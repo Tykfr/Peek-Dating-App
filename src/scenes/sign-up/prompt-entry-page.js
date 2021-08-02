@@ -36,10 +36,17 @@ function PromptEntryPage({ navigation, route }) {
     false
   );
   async function completeAccount(userData, navigation) {
-    userData.prompts = {firstPrompt : firstResponse,
-      secondPrompt: secondResponse,
-      thirdPrompt:thirdResponse
-    };
+
+    if(firstPrompt !== ""){
+      userData.prompts = {[`${firstPrompt}`] : firstResponse}
+    }
+    if(secondPrompt!==""){
+      userData.prompts = {[`${secondPrompt}`]: secondResponse}
+    }
+
+    if(thirdPrompt!==""){
+      userData.prompts = {[`${thirdPrompt}`]:thirdResponse}
+    }
 
     await submitData(userID,userData, navigation);
   }

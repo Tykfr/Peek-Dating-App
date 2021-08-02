@@ -2,7 +2,7 @@ import React, {useEffect} from "react";
 import { StyleSheet, StatusBar, View, SafeAreaView, Image } from "react-native";
 import { ContinueButton, OnboardingTitle } from "_atoms";
 import { CheckBox } from "react-native-elements";
-import { AppLoading } from "expo";
+import AppLoading from 'expo-app-loading';
 import { useFonts, Roboto_500Medium } from "@expo-google-fonts/roboto";
 
 function GenderIdentityPage({ route, navigation }) {

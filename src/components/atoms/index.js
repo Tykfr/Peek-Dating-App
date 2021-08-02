@@ -26,3 +26,7 @@ export { default as PromptTitle } from "./prompt-title";
 export { default as SubTitle } from "./sub-title";
 export { default as SettingsButtonTitle } from "./settings-button-title";
 export {default as Add_photo_button} from "./add-photo-button";
+export {default as Name_Age} from "./name_age";
+export {default as Like_Icon} from "./like_icon";
+export {default as No_Like_Icon} from "./no_like_icon";
+export {default as Story_Button} from "./story_button";

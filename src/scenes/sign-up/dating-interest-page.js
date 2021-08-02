@@ -8,7 +8,7 @@ import {
   Image,
 } from "react-native";
 import { CheckBox } from "react-native-elements";
-import { AppLoading } from "expo";
+import AppLoading from 'expo-app-loading';
 import { useFonts, Roboto_500Medium } from "@expo-google-fonts/roboto";
 import { ContinueButton, OnboardingTitle } from "_atoms";
 

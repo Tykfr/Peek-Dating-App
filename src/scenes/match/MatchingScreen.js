@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import MatchingView from "./MatchingView";
+import SwipeDeck from "_components/organisms/SwipeDeck";
 
 
 class Matching extends Component{
@@ -15,8 +16,8 @@ class Matching extends Component{
     render(){
         
         return(
-            <MatchingView
-            />
+            // <SwipeDeck/>
+            <MatchingView/>
         )
     }
 }
