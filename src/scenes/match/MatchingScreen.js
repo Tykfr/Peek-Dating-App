@@ -72,16 +72,45 @@ class Matching extends Component{
                 .getDownloadURL()
                 .then((url) => {
                     var user = this.state.imageDataset
-                    user[UserId].push({uri:require(url)})
+                    user[UserId].push({uri:url})
                     this.setState({
                         imageDataset:user
                     })
-                })
+                })      
                 .catch((error) => console.log(error))
             })
         }).catch((error) => (console.log("Error retrieving user Images: ", error)));
 
     }
+
+    addLike = async(user,like) => {
+        const db = firebase.firestore();
+        var matches = db.collection("Matching").doc(this.state.userID);
+
+        matches.update({
+            Seen: firestore.FieldValue.arrayUnion(user)
+        })
+        .then(() => {console.log("Seen successfully updated!")})
+        .catch((error) => {console.log("Error updating Seen: ",error)})
+
+        if(like){
+            matches.update({
+                Likes: firestore.FieldValue.arrayUnion(user)
+             })
+             .then(() => {console.log("Likes successfully updated!")})
+             .catch((error) => {console.log("Error updating Likes: ",error)})
+        }
+        else{
+            matches.update({
+                Dislikes: firestore.FieldValue.arrayUnion(user)
+             })
+             .then(() => {console.log("Dislikes successfully updated!")})
+             .catch((error) => {console.log("Error updating Dislikes: ",error)})
+
+        }
+      
+
+    }   
 
     componentDidMount(){
         this.findPartners()
