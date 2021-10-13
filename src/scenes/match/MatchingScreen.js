@@ -12,7 +12,7 @@ class Matching extends Component{
     render(){
         
         return(
-            // <SwipeDeck/>
+            
             <MatchingView/>
         )
     }

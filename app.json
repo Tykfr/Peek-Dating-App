@@ -1,19 +1,21 @@
 {
   "expo": {
-    "name": "test1",
-    "slug": "test1",
+    "name": "Peek",
+    "slug": "peek",
     "version": "1.0.0",
     "orientation": "portrait",
-
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "description": "peek version 1"
   }
 }

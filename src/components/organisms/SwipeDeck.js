@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./SwipeDeckStyles"
+import styles from "./SwipeDeckStyles";
 import {
   Text,
   StyleSheet,
@@ -15,20 +15,75 @@ import {
   Directions,
   FlingGestureHandler,
   State,
+  TouchableOpacity,
 } from "react-native-gesture-handler";
-function SwipeDeck({content}) {
+function SwipeDeck({ content }) {
+
+  let degreeOfMotion = 0;
+  const [flag,setFlag] = React.useState(true);
+  let animatedValue = new Animated.Value(0);
+
+  let frontInterporlate = animatedValue.interpolate({
+    inputRange: [0, 180],
+    outputRange: ["0deg", "180deg"],
+  });
+
+  let backInterpolate = animatedValue.interpolate({
+    inputRange: [0, 180],
+    outputRange: ["180deg", "360deg"],
+  });
 
 
+
+  const frontAnimatedStyle = {
+    transform: [{ rotateY: frontInterporlate }],
+  };
+
+  const backAnimatedStyle = {
+    transform: [{ rotateY: backInterpolate }],
+  };
+
+  function flipCard() {
+    if (degreeOfMotion >= 90) {
+      
+      Animated.spring(animatedValue, {
+        toValue: 0,
+        friction: 8,
+        tension: 10,
+        useNativeDriver: true,
+      }).start();
+      setFlag(true)
+    } else {
+      Animated.spring(animatedValue, {
+        toValue: 180,
+        friction: 8,
+        tension: 10,
+        useNativeDriver: true,
+      }).start();
+      setFlag(false)
+    }
+   
+
+    // }
+  }
   const [data, setData] = React.useState(content);
   const scrollXIndex = React.useRef(new Animated.Value(0)).current;
-
   const scrollXAnimated = React.useRef(new Animated.Value(0)).current;
+
+
   React.useEffect(() => {
+
     Animated.spring(scrollXAnimated, {
       toValue: scrollXIndex,
       useNativeDriver: true,
     }).start();
+
+    animatedValue.addListener(({ value }) => {
+      degreeOfMotion = value;
   });
+
+
+});
 
   // Uncomment this if you want to scroll through an endless loop of a users profile
   // React.useEffect(() => {
@@ -47,6 +102,8 @@ function SwipeDeck({content}) {
     scrollXIndex.setValue(activeIndex);
   });
 
+ 
+
   const Item = ({ item, index }) => {
     const inputRange = [index - 1, index, index + 1];
     const translateY = scrollXAnimated.interpolate({
@@ -64,6 +121,9 @@ function SwipeDeck({content}) {
       outputRange: [1 - 1 / VISIBLE_ITEMS, 1, 0],
     });
 
+   
+  
+
     return (
       // This secondary Animated view is for positioning the stack to the middle of the screen
       //To make vertical change MarginLeft to MarginTop: screenHeight /2 and set horizontal to false
@@ -75,7 +135,7 @@ function SwipeDeck({content}) {
           justifyContent: "center",
           position: "absolute",
           marginTop: screenHeight / 3.2,
-          backgroundColor:"blue"
+          backgroundColor: "blue",
         }}
       >
         <Animated.View
@@ -88,19 +148,30 @@ function SwipeDeck({content}) {
             transform: [{ translateY }, { scale }],
           }}
         >
-          {item.isImage === true && (
-            <Image
-              style={styles.imageStyle}
-              source={item.uri}
-            />
-          )}
+          
+         { degreeOfMotion < 90 &&
+           <Animated.View style={[styles.flipCard, frontAnimatedStyle ]}> 
+            {flag === true  && (
+            <Image style={styles.imageStyle} source={item.uri} />
+            )}
+            
+          </Animated.View>
+  
+           } 
+          
 
-          {item.isImage === false && (
-            <Card details = {item}/>
-          )}
+        
+          <Animated.View style={[styles.flipCard, backAnimatedStyle]}>
+            {flag === false && (
+            <Card details={item} />
+              )}
+          </Animated.View>
+           
+  
         </Animated.View>
       </Animated.View>
     );
+            
   };
 
   return (
@@ -134,9 +205,9 @@ function SwipeDeck({content}) {
           {/* <Card/> */}
 
           <FlatList
-            // horizontal={true}
-
-            // inverted={true}
+            //  getItemLayout={(data, index) =>(
+            //    {length:ITEM_HEIGHT, offset:ITEM_HEIGHT*index, index}
+            //  )}
             scrollEnabled={false} //this is because were going to do an animated scroll
             removeClippedSubviews={false} //this is because we want to make items visible on android
             CellRendererComponent={({
@@ -161,6 +232,9 @@ function SwipeDeck({content}) {
             renderItem={Item}
             keyExtractor={(_, index) => String(index)}
           />
+          <TouchableOpacity onPress={() => flipCard()}>
+            <Text>Flip button</Text>
+          </TouchableOpacity>
         </SafeAreaView>
       </FlingGestureHandler>
     </FlingGestureHandler>
@@ -186,12 +260,8 @@ function Card({ details }) {
       </View>
 
       <View style={{ width: "100%", alignItems: "center" }}>
-        <Image
-          style={styles.logoStyle}
-          source={logoPath}
-        />
+        <Image style={styles.logoStyle} source={logoPath} />
       </View>
     </View>
   );
 }
-

@@ -12,6 +12,7 @@ const styles = StyleSheet.create({
       height: Dimensions.get("window").height * 0.5,
       backgroundColor: "#E7E0D5",
       borderRadius: 33,
+      backfaceVisibility:"hidden"
     },
   
     promptText: {
@@ -50,6 +51,9 @@ const styles = StyleSheet.create({
       width: "100%", 
       height: "100%", 
       borderRadius: 33
+    },
+    flipCard:{
+      backfaceVisibility:"hidden"
     }
   });
   

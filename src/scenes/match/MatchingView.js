@@ -22,34 +22,42 @@ const MatchingView = ({}) => {
     {
       isImage: true,
       uri: require(img_1),
-    },
-    {
-      isImage: true,
-      uri: require(img_2),
-    },
-    {
-      isImage: true,
-      uri: require(img_4),
-    },
-    {
-      isImage: false,
       prompt: "If money didn't exist, I would travel to: ",
       response: "Dubai! Dubai has the craziest worlds largest water slide!",
+      
     },
+    // {
+    //   isImage: false,
+    //   prompt: "If money didn't exist, I would travel to: ",
+    //   response: "Dubai! Dubai has the craziest worlds largest water slide!",
+    // },
 
-    {
-      isImage: false,
-      prompt: "Biggest turn offs ",
-      response: "Smelly feet...go somewhere and clean yourself",
-    },
-    {
-      isImage: true,
-      uri: require(img_5),
-    },
-    {
-      isImage: true,
-      uri: require(img_6),
-    },
+    // {
+    //   isImage: true,
+    //   uri: require(img_2),
+    // },
+
+    // {
+    //   isImage: false,
+    //   prompt: "Biggest turn offs ",
+    //   response: "Smelly feet...go somewhere and clean yourself",
+    // },
+
+    // {
+    //   isImage: true,
+    //   uri: require(img_4),
+    // },
+  
+
+   
+    // {
+    //   isImage: true,
+    //   uri: require(img_5),
+    // },
+    // {
+    //   isImage: true,
+    //   uri: require(img_6),
+    // },
   ];
     const [name, setName] = React.useState("Tasha Beacon");
     const [age, setAge] = React.useState(22);
