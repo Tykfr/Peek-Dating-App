@@ -43,6 +43,11 @@ const styles = StyleSheet.create({
       height: 75, 
       marginBottom: 15 
     },
+    heartStyle:{
+      width: 30,
+      height: 30, 
+      marginBottom: 15 
+    },
     flatListStyle:{
       width: Dimensions.get("screen").width,
       height: Dimensions.get("screen").height,
@@ -53,7 +58,8 @@ const styles = StyleSheet.create({
       borderRadius: 33
     },
     flipCard:{
-      backfaceVisibility:"hidden"
+      backfaceVisibility:"hidden",
+      // position:"absolute"
     }
   });
   

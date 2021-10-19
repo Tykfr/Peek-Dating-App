@@ -31,16 +31,20 @@ function SwipeDeck({ content }) {
   let backInterpolate = animatedValue.interpolate({
     inputRange: [0, 180],
     outputRange: ["180deg", "360deg"],
+    // outputRange: ["0deg", "180deg"],
+
   });
 
 
 
   const frontAnimatedStyle = {
     transform: [{ rotateY: frontInterporlate }],
+    position:"absolute"
   };
 
   const backAnimatedStyle = {
     transform: [{ rotateY: backInterpolate }],
+   
   };
 
   function flipCard() {
@@ -52,7 +56,7 @@ function SwipeDeck({ content }) {
         tension: 10,
         useNativeDriver: true,
       }).start();
-      setFlag(true)
+      // setFlag(true)
     } else {
       Animated.spring(animatedValue, {
         toValue: 180,
@@ -60,7 +64,7 @@ function SwipeDeck({ content }) {
         tension: 10,
         useNativeDriver: true,
       }).start();
-      setFlag(false)
+      // setFlag(false)
     }
    
 
@@ -80,6 +84,7 @@ function SwipeDeck({ content }) {
 
     animatedValue.addListener(({ value }) => {
       degreeOfMotion = value;
+      
   });
 
 
@@ -149,24 +154,18 @@ function SwipeDeck({ content }) {
           }}
         >
           
-         { degreeOfMotion < 90 &&
-           <Animated.View style={[styles.flipCard, frontAnimatedStyle ]}> 
-            {flag === true  && (
-            <Image style={styles.imageStyle} source={item.uri} />
-            )}
-            
-          </Animated.View>
   
-           } 
           
-
-        
-          <Animated.View style={[styles.flipCard, backAnimatedStyle]}>
-            {flag === false && (
+          
+          <Animated.View style={[styles.flipCard, frontAnimatedStyle]}>
             <Card details={item} />
-              )}
           </Animated.View>
-           
+          
+           <Animated.View style={[styles.flipCard, backAnimatedStyle ]}> 
+            <Image style={styles.imageStyle} source={item.uri} />
+          </Animated.View>
+      
+  
   
         </Animated.View>
       </Animated.View>
@@ -232,11 +231,14 @@ function SwipeDeck({ content }) {
             renderItem={Item}
             keyExtractor={(_, index) => String(index)}
           />
-          <TouchableOpacity onPress={() => flipCard()}>
+
+<TouchableOpacity onPress={() => flipCard()}>
             <Text>Flip button</Text>
           </TouchableOpacity>
+          
         </SafeAreaView>
       </FlingGestureHandler>
+      
     </FlingGestureHandler>
   );
 }
@@ -245,6 +247,7 @@ export default SwipeDeck;
 
 function Card({ details }) {
   const logoPath = require("_assets/images/Peek_Logo.png");
+  const heartIcon = require("_assets/images/Brown_Heart.png");
 
   return (
     <View style={styles.cardContainer}>
@@ -262,6 +265,7 @@ function Card({ details }) {
       <View style={{ width: "100%", alignItems: "center" }}>
         <Image style={styles.logoStyle} source={logoPath} />
       </View>
+      
     </View>
   );
 }
