@@ -232,7 +232,7 @@ function SwipeDeck({ content }) {
             keyExtractor={(_, index) => String(index)}
           />
 
-<TouchableOpacity onPress={() => flipCard()}>
+          <TouchableOpacity onPress={() => flipCard()}>
             <Text>Flip button</Text>
           </TouchableOpacity>
           

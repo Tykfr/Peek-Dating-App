@@ -47,25 +47,6 @@ const MatchingView = ({}) => {
       response: "Oxtail, goes crazy with Mac and Cheese and Rice and Peas",
     },
 
-    // {
-    //   isImage: false,
-    //   prompt: "Biggest turn offs ",
-    //   response: "Smelly feet...go somewhere and clean yourself",
-    // },
-
-    // {
-    //   isImage: true,
-    //   uri: require(img_4),
-    // },
-
-    // {
-    //   isImage: true,
-    //   uri: require(img_5),
-    // },
-    // {
-    //   isImage: true,
-    //   uri: require(img_6),
-    // },
   ];
   const [name, setName] = React.useState("Tasha Beacon");
   const [age, setAge] = React.useState(22);
