@@ -14,6 +14,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-around",
         width: "100%",
+        // backgroundColor:"white"
       },
     
       card_container: {

@@ -52,29 +52,37 @@ const MatchingView = ({}) => {
   const [age, setAge] = React.useState(22);
   return (
     <SafeAreaView style={styles.container}>
+
+      
       <View
         style={{
-          marginTop: 20,
+          // marginTop: 20,
           width: "100%",
+          height:"100%",
           alignItems: "center",
           justifyContent: "space-between",
+          // backgroundColor:"red"
         }}
       >
-        {/* This is the card  holder */}
+
+         <View style={{ width: "100%", height: "100%",  }}>
+            <SwipeDeck content={DATA} />
+          </View>
+                  {/* This is the card  holder
         <View style={styles.card_container}>
           <View style={styles.name_age_container}>
             <Name_Age _name={name} _age={age} />
           </View>
-          <View style={{ width: "100%", height: "100%" }}>
+          <View style={{ width: "100%", height: "100%",  }}>
             <SwipeDeck content={DATA} />
           </View>
-        </View>
+        </View> */}
 
-        <View style={styles.action_btn_continer}>
+        {/* <View style={styles.action_btn_continer}>
           <No_Like_Icon />
           <Story_Button />
           <Like_Icon />
-        </View>
+        </View> */}
       </View>
     </SafeAreaView>
   );
