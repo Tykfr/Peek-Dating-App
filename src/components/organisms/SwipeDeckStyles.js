@@ -4,8 +4,6 @@ const styles = StyleSheet.create({
       flex: 1,
       justifyContent: "center",
       alignItems: "center",
-      // backgroundColor:"blue",
-      // height:"100%"
     },
   
     cardContainer: {
@@ -13,8 +11,6 @@ const styles = StyleSheet.create({
       width: Dimensions.get("window").width * 0.7,
       height: Dimensions.get("window").height * 0.5,
       backgroundColor: "#E7E0D5",
-      // backgroundColor: "#E7E0D5",
-
       borderRadius: 33,
       backfaceVisibility:"hidden"
     },
@@ -54,9 +50,7 @@ const styles = StyleSheet.create({
     },
     flatListStyle:{
       width: Dimensions.get("screen").width,
-      height: Dimensions.get("screen").height,
-      // backgroundColor:"orange"
-      
+      height: Dimensions.get("screen").height,      
     },
     imageStyle:{
       width: Dimensions.get("window").width * 0.7,
@@ -65,13 +59,11 @@ const styles = StyleSheet.create({
     },
     flipCard:{
       backfaceVisibility:"hidden",
-      // position:"absolute"
     },
     action_btn_continer: {
       flexDirection: "row",
       justifyContent: "space-around",
       width: "100%",
-      // backgroundColor:"white"
     },
 
     card_container: {
@@ -85,9 +77,17 @@ const styles = StyleSheet.create({
 
     },
     name_age_container: {
-      // marginTop: 30,
+      marginTop: 30,
       marginLeft: 15,
     },
+    outerAnimatedView:{
+      width: "100%",
+      height: "100%",
+      alignItems: "center",
+      justifyContent: "center",
+      position: "absolute",
+      marginTop: Dimensions.get("window").height / 3.2,
+    }
   });
   
   export default styles;
