@@ -1,12 +1,7 @@
 import styles from "./MatchingStyles";
 import React from "react";
 import { Text, View, Image, SafeAreaView } from "react-native";
-import {
-  Name_Age,
-  No_Like_Icon,
-  Like_Icon,
-  Story_Button,
-} from "../../components/atoms";
+
 import SwipeDeck from "_components/organisms/SwipeDeck";
 
 const MatchingView = ({}) => {
@@ -46,36 +41,12 @@ const MatchingView = ({}) => {
       prompt: "My favorite meal is: ",
       response: "Oxtail, goes crazy with Mac and Cheese and Rice and Peas",
     },
-
   ];
   const [name, setName] = React.useState("Tasha Beacon");
   const [age, setAge] = React.useState(22);
   return (
     <SafeAreaView style={styles.container}>
-      <View
-        style={{
-          marginTop: 20,
-          width: "100%",
-          alignItems: "center",
-          justifyContent: "space-between",
-        }}
-      >
-        {/* This is the card  holder */}
-        <View style={styles.card_container}>
-          <View style={styles.name_age_container}>
-            <Name_Age _name={name} _age={age} />
-          </View>
-          <View style={{ width: "100%", height: "100%" }}>
-            <SwipeDeck content={DATA} />
-          </View>
-        </View>
-
-        <View style={styles.action_btn_continer}>
-          <No_Like_Icon />
-          <Story_Button />
-          <Like_Icon />
-        </View>
-      </View>
+      <SwipeDeck content={DATA} name = {name} age = {age} />
     </SafeAreaView>
   );
 };
