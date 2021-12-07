@@ -187,7 +187,7 @@ function SwipeDeck({ content, name, age }) {
                 );
               }}
               style={styles.flatListStyle}
-              contentContainerStyle={{ flex: 1 }}
+              contentContainerStyle={{ flex: 1,  }}
               pagingEnabled={true}
               data={data}
               renderItem={Item}
