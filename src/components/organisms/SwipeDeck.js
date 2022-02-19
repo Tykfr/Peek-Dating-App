@@ -19,18 +19,18 @@ import {
 
 import { Card } from "_organisms";
 
-function SwipeDeck({ content, name, age }) {
+function SwipeDeck({ content, name, age, currPos, setNextPos }) {
   let degreeOfMotion = 0;
   let animatedValue = new Animated.Value(0);
   const logoPath = require("_assets/images/Peek_Logo.png");
-  const [data, setData] = React.useState(content);
+  const [data, setData] = React.useState();
   const scrollXIndex = React.useRef(new Animated.Value(0)).current;
   const scrollXAnimated = React.useRef(new Animated.Value(0)).current;
   const screenWidth = Dimensions.get("screen").width;
   const screenHeight = Dimensions.get("screen").height;
   const VISIBLE_ITEMS = 3;
   const [index, setIndex] = React.useState(0);
-
+  
   const setActiveIndex = React.useCallback((activeIndex) => {
     setIndex(activeIndex);
     scrollXIndex.setValue(activeIndex);
@@ -47,6 +47,8 @@ function SwipeDeck({ content, name, age }) {
   });
 
   React.useEffect(() => {
+    setData(content)
+   
     Animated.spring(scrollXAnimated, {
       toValue: scrollXIndex,
       useNativeDriver: true,
@@ -127,7 +129,7 @@ function SwipeDeck({ content, name, age }) {
           </Animated.View>
 
           <Animated.View style={[styles.flipCard, backAnimatedStyle]}>
-            <Image style={styles.imageStyle} source={item.uri} />
+            <Image style={styles.imageStyle} source={{uri: item.uri}} />
           </Animated.View>
         </Animated.View>
       </Animated.View>
@@ -140,7 +142,7 @@ function SwipeDeck({ content, name, age }) {
       direction={Directions.UP}
       onHandlerStateChange={(ev) => {
         if (ev.nativeEvent.state === State.END) {
-          if (index === data.length - 1) {
+          if (index === content.length - 1) {
             return;
           }
           setActiveIndex(index + 1);
@@ -179,7 +181,7 @@ function SwipeDeck({ content, name, age }) {
                 ...props
               }) => {
                 //this purpose of this compoment is that its the wrapper of the renderedItem. This allows the first item to have the largest index and transition in descreasing order
-                const newStyle = [style, { zIndex: data.length - index }];
+                const newStyle = [style, { zIndex: content.length - index }];
                 return (
                   <View style={newStyle} index={index} {...props}>
                     {children}
@@ -189,14 +191,14 @@ function SwipeDeck({ content, name, age }) {
               style={styles.flatListStyle}
               contentContainerStyle={{ flex: 1,  }}
               pagingEnabled={true}
-              data={data}
+              data={content}
               renderItem={Item}
               keyExtractor={(_, index) => String(index)}
             />
           </View>
 
           <View style={styles.action_btn_continer}>
-            <No_Like_Icon />
+            <No_Like_Icon currentPos={currPos} nextPos={setNextPos}/>
 
             <TouchableOpacity onPress={() => flipCard() }>
               <Image style={styles.logoStyle} source={logoPath} />

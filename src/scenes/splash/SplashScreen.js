@@ -27,8 +27,8 @@ function SplashScreen ({navigation}){
               });
         }, 1000);
     }
-    //move this code to a splash page
-  useEffect(()=>{
+
+    useEffect(()=>{
         test();
   })
     return(

@@ -4,6 +4,8 @@ import styles from "./SwipeDeckStyles";
 
 
 function Card({ details }) {
+
+  // console.log("\n\n\n\n\n\n\n\n\n"+details)
     return (
       <View style={styles.cardContainer}>
         <View>

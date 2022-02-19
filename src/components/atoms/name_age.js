@@ -23,7 +23,7 @@ Name_Age.propTypes = {
 const styles = StyleSheet.create({
     
     text_style:{
-        fontFamily:"Nunito_700Bold",
+        // fontFamily:"Nunito_700Bold",
         fontSize:23, 
     }
 })
