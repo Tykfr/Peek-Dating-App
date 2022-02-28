@@ -6,6 +6,7 @@ import * as firebase from "firebase";
 import { Button, SafeAreaView, Text, TouchableOpacity } from "react-native";
 import AppLoading from "expo-app-loading";
 import { func } from "prop-types";
+import AgeCalculator from "_utils/AgeCalculator"
 
 function Matching() {
   const [userID, setUserID] = React.useState("");
@@ -16,6 +17,7 @@ function Matching() {
   const [imageDataset, setImageDataset] = React.useState({});
   const [promptDataset, setPromptDataset] = React.useState({});
   const [bioDataset, setbioDataset] = React.useState({});
+  const [nameAndAgeDatatset, setNameAndAgeDataset] = React.useState({});
   const [userIDDataset, setUserIDDataset] = React.useState(new Set([]));
   const [partnerDataSet, setPartnerDataset] = React.useState({});
   const [isFetching, setFetching] = React.useState(true);
@@ -50,13 +52,17 @@ function Matching() {
     var userIDs = userIDDataset;
     var bios = bioDataset;
     var user = promptDataset;
-    var currentBio = data.data().Bio;
-    bios[data.id] = currentBio;
+    var nameAndAge = nameAndAgeDatatset;
+    var name = data.data().Name;
+    var age = AgeCalculator("" + data.data().BirthMonth + "/" + data.data().BirthDate + "/" + data.data().BirthYear);
+    bios[data.id] = data.data().Bio;
     user[data.id] = data.data().prompts;
     userIDs.add(data.id);
+    nameAndAge[data.id]  = {name: name, age: age}
     setUserIDDataset(userIDs);
     setPromptDataset(user);
     setbioDataset(bios);
+    setNameAndAgeDataset(nameAndAge);
   }
 
   async function formatCard(){
@@ -65,9 +71,11 @@ function Matching() {
       let entryArr = [{}, {}, {}, {}];
       entryArr[0]["prompt"] = "Bio: ";
       entryArr[0]["response"] = bioDataset[partnerID];
+      entryArr[0]["name"] = nameAndAgeDatatset[partnerID]["name"]
+      entryArr[0]["age"] = nameAndAgeDatatset[partnerID]["age"]
 
       let index = 1;
-      for (let prompts of Object.keys(promptDataset[partnerID])) {
+      for (let prompts of Object.keys(promptDataset[partnerID])) { 
         entryArr[index]["prompt"] = prompts;
         entryArr[index]["response"] = promptDataset[partnerID][prompts];
         index++;
@@ -147,16 +155,20 @@ function Matching() {
         });
     }
   }
-
-  //Consider executing apploading to wait if data isn't pulled
-
+  
   React.useEffect(() => {
     findPartners();
   }, [isFetching]);
 
-  if (isFetching) {
-    return <AppLoading />;
+  if ( Object.keys(partnerDataSet).length === 0) {
+    return (
+      <SafeAreaView style={{flex:1, justifyContent:"center", alignItems:"center"}}>
+        <Text>Loading Screen :)</Text>
+      </SafeAreaView>
+    )
+    // <AppLoading />);
   } else {
+    {console.log(partnerDataSet)}
     return <MatchingView DATA={partnerDataSet} />;
   }
 }

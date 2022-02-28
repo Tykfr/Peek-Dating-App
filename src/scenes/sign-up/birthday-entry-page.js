@@ -9,7 +9,6 @@ import {
   KeyboardAvoidingView,
   Platform
 } from "react-native";
-import DateTimePicker from "@react-native-community/datetimepicker";
 import { OnboardingTitle, ContinueButton, InputResponse } from "_atoms";
 /**
  * NTS: Get current date and subtract it from the date the user input to determine their age...restrict access of ages
@@ -20,9 +19,7 @@ let flag = false;
 let dob_split = [];
 function calculateAge(dob) {
   const current = new Date();
-  
    dob_split = dob.split("/");
-
   //The plus one is necesary because the months are counting from 0.
    let potentialAge = current.getUTCFullYear() - parseInt(dob_split[2]);
    if (current.getUTCMonth() + 1 < parseInt(dob_split[0])) {
@@ -35,7 +32,6 @@ function calculateAge(dob) {
      return potentialAge;
     }
   }
-
   return potentialAge;
 }
 

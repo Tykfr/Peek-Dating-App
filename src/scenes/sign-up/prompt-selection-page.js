@@ -14,7 +14,6 @@ function PromptSelectionPage({ navigation, route }) {
 
   useEffect(() => {
     StatusBar.setBarStyle("dark-content");
-   
   })
   return (
     <SafeAreaView style={styles.container}>
