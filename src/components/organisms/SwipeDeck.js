@@ -19,7 +19,7 @@ import {
 
 import { Card } from "_organisms";
 
-function SwipeDeck({ content, name, age, currPos, setNextPos }) {
+function SwipeDeck({ content, name, age, currPos, setNextPos, likesFunc, dislikesFunc, currUserID }) {
   let degreeOfMotion = 0;
   let animatedValue = new Animated.Value(0);
   const logoPath = require("_assets/images/Peek_Logo.png");
@@ -198,13 +198,11 @@ function SwipeDeck({ content, name, age, currPos, setNextPos }) {
           </View>
 
           <View style={styles.action_btn_continer}>
-            <No_Like_Icon currentPos={currPos} nextPos={setNextPos}/>
-
+            <No_Like_Icon nextPos={()=> {setNextPos(currPos-1)}} dislikesFunc={()=> dislikesFunc(currUserID)}/>
             <TouchableOpacity onPress={() => flipCard() }>
               <Image style={styles.logoStyle} source={logoPath} />
             </TouchableOpacity>
-
-            <Like_Icon />
+            <Like_Icon nextPos={() =>{setNextPos(currPos-1)}} likesFunc={()=> likesFunc(currUserID)}/>
           </View>
         </SafeAreaView>
       </FlingGestureHandler>

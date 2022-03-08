@@ -267,8 +267,4 @@ function initalizeSettings(userID, userData){
             });
     }
      delete userData["img_array"];
-
-
- 
-
   }

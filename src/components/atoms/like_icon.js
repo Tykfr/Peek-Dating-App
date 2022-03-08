@@ -4,12 +4,15 @@ import {Icon} from 'react-native-elements';
 import { TouchableOpacity, View} from "react-native";
 
 
-function Like_Icon(){
+function Like_Icon({ nextPos, likesFunc}){
 
   return(
    
         <View style ={{justifyContent:"center"}}>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={() =>{
+           nextPos(); 
+           likesFunc();
+        }}>
         <Icon color = "#4682DD" type="material-community" name= "thumb-up" size = {30}  />
         </TouchableOpacity>
         </View>
