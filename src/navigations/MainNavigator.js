@@ -1,8 +1,9 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Homescreen } from "_scenes/home";
-import { ProfileStackScreen } from "_navigations";
+import { ProfileStackScreen, ChatNavigator } from "_navigations";
 import { Matching } from "_scenes/match";
+
 const Stack = createStackNavigator();
 
 // Contains the navigations from the homepage to the related pages
@@ -19,6 +20,7 @@ function MainNavigation() {
       />
       <Stack.Screen name="Profile" component={ProfileStackScreen} />
       <Stack.Screen name="Matching" component={Matching}/>
+      <Stack.Screen name="Chat" component={ChatNavigator}/>
     </Stack.Navigator>
   );
 }

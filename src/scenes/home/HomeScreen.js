@@ -65,7 +65,7 @@ function HomeScreen({ navigation }) {
           </View>
 
           <View style={styles.chatButton_MatchButton_Container}>
-            <Chat_button />
+            <Chat_button navigation={navigation} />
             <Match_button navigation={navigation} />
           </View>
         </View>
