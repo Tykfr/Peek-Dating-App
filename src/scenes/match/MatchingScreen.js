@@ -1,15 +1,14 @@
 import React, { Component, useCallback } from "react";
 import MatchingView from "./MatchingView";
-import SwipeDeck from "_components/organisms/SwipeDeck";
 import firebase from "firebase";
 import "firebase/firestore";
 import { Button, SafeAreaView, Text, TouchableOpacity } from "react-native";
-import AppLoading from "expo-app-loading";
-import { func } from "prop-types";
 import AgeCalculator from "_utils/AgeCalculator";
 
+
 function Matching() {
-  const [userID, setUserID] = React.useState("");
+  // const [userID, setUserID] = React.useState("");
+  const userID = firebase.auth().currentUser.uid;
   const [preference, setPreference] = React.useState("");
   const [radius, setRadius] = React.useState("");
   const [location, setLocation] = React.useState("");
@@ -21,32 +20,31 @@ function Matching() {
   const [userIDDataset, setUserIDDataset] = React.useState(new Set([]));
   const [partnerDataSet, setPartnerDataset] = React.useState({});
   const [isFetching, setFetching] = React.useState(true);
+  let seenList = [];
   require("firebase/firestore");
 
-  async function getUserID() {
-    try {
-      const userID = firebase.auth().currentUser;
-      const db = firebase.firestore();
-
-      setUserID(userID.uid);
-    } catch (error) {
-      console.log("Error retrieving userId");
-    }
-  }
-
+//Find partners should find partners that youve seen but havenet liked and never seen before
   const findPartners = async function () {
-    await getUserID();
+    // await getUserID();
     const db = firebase.firestore();
-    db.collection("users")
+    //When retrieving the seen list, last it in the function for comparision
+    // await fetchSeenList(db); 
+    // console.log(seenList) /* Value isn't present until screen rerenders. The screen will rerender when a value in useEffect updates
+    await db.collection("users")
+      .limit(2) // limits number of profiles pulled down to 10
+      .where("userID", "not-in", ["2pKBqJCSfITHrP9Ta85ZkJnAK7o2","MbR3mbfjmmRCBcIJjVbHkAnIjUa2","UFrDyzfANgVPMFvlnMBkE545mEQ2"])
       .get()
-      .then(async (data) => {
-        data.forEach(async (doc) => {
-          await fetchCardData(doc);
+      .then(async  (data) => {
+      data.forEach( async (doc) => {
+            if(doc.id !== userID) {
+              console.log(userID)
+              await fetchCardData(doc);
+            }
         });
         await formatCard();
       })
       .catch((error) => console.log("Error getting Users: ", error));
-  };
+ };
 
   async function fetchCardData(data) {
     await setPhotosURI(data.id);
@@ -56,7 +54,6 @@ function Matching() {
     var nameAndAge = nameAndAgeDatatset;
     var name = data.data().Name;
     var age = AgeCalculator(
-      "" +
         data.data().BirthMonth +
         "/" +
         data.data().BirthDate +
@@ -195,6 +192,39 @@ function Matching() {
       console.log("Error getting document: " + error);
     });
   }
+  /**
+   *  Fetches user seen list to compare next set of users to pull down from db to potenial matches
+   *  Seen list is pulled down once but updated locally and globally in the database to reduce db pulling overuse
+   * */  
+const fetchSeenList  = async function (db) {
+    if(seenList.length === 0){
+      let ref = db.collection("Matching").doc(userID);
+      ref
+      .get()
+      .then((doc) => {
+        if (doc.exists) {
+          seenList = doc.data().Seen; //Gets users seen list
+         // setSeenList[doc.data().Seen];
+        } else {
+          console.log("Users Seen list has not been set yet");
+        }
+      })
+    }
+
+
+    // await db.collection("Matching").doc(userID)
+    // .get()
+    // .then(async  (data) => {
+    // data.forEach(async (doc) => {
+    //       if(doc.id !== userID){
+    //         console.log(doc.id + " => " + doc.data())
+    //           // await fetchCardData(doc);
+    //       }
+    //   });
+      // await formatCard();
+    // })
+
+  }
 
   React.useEffect(() => {
     findPartners();
@@ -211,6 +241,7 @@ function Matching() {
   } else {
     return <MatchingView DATA={partnerDataSet} likesFunc={likeProfile} dislikesFunc={dislikeProfile}/>;
   }
+
 }
 
 export default Matching;

@@ -1,14 +1,17 @@
 import React from "react";
 import { Icon } from "react-native-elements";
 import { TouchableOpacity, StyleSheet, View } from "react-native";
+import {Queue} from "_dataStructures";
 
-function No_Like_Icon({ currentPos, nextPos, dislikesFunc }) {
+function No_Like_Icon({ setNextUserID, userProfileTable, setNextProfile, dislikesFunc, queue }) {
   return (
     <View style={{ justifyContent: "center" }}>
       <TouchableOpacity
         style={styles.button}
         onPress={() => {
-          nextPos(currentPos - 1);
+          queue.dequeue();
+          setNextUserID(queue.peek());
+          setNextProfile(userProfileTable[queue.peek()]);
           dislikesFunc();
         }}
       >
