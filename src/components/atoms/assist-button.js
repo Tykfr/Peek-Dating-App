@@ -1,7 +1,7 @@
 import React from "react";
 import { Text, StyleSheet, TouchableOpacity } from "react-native";
 import AppLoading from 'expo-app-loading';
-import PropTypes from "prop-types";
+import PropTypes from "prop-types"
 
 import { useFonts, Roboto_400Regular } from "@expo-google-fonts/roboto";
 

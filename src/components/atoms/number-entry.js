@@ -11,7 +11,7 @@ import {
   FlatList,
   TouchableOpacity,
 } from "react-native";
-import PropTypes from "prop-types";
+import PropTypes from "prop-types"
 // native base imports
 import { Item, Icon } from "native-base";
 import data from "../../../Countries";
