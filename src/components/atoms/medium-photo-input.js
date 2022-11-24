@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
-import PropTypes from "prop-types";
+import PropTypes from "prop-types"
 
 function MediumPhotoInput({ _image, _getPermissionAsync }) {
   const temp = "_assets/images/defaultPortait.jpg";

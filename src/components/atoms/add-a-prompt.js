@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, TouchableOpacity, View, Text } from "react-native";
-import PropTypes from "prop-types";
+import PropTypes from "prop-types"
 
 function AddAPrompt({ _onPress }) {
   return (
