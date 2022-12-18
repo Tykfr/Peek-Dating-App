@@ -15,8 +15,7 @@ const ChatView = (props) => {
     const {messages} = props
     return (
         <SafeAreaView>
-            <GiftedChat messages={messages}
-                user={user}/>
+            <Text>Hello</Text>
         </SafeAreaView>
     )
 }

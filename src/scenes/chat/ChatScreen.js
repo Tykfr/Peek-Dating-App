@@ -3,11 +3,13 @@ import ChatView from "./ChatView";
 import * as firebase from "firebase";
 import "firebase/firestore";
 
-
 class Chat extends Component{
     constructor(props){
         super(props);
-
+        this.docs = firebase.firestore().collection("chats").doc(firebase.auth().currentUser).collection("messages");
+        this.state = {
+          messages: [],
+        }
 
     }
     getUserId = async() => {
@@ -21,18 +23,30 @@ class Chat extends Component{
           
         } catch (error) { console.log("Error retrieving userId")}
     
-      }
-    fetchMessages = async () =>{
-        await this.getUserId();
-
-        const db = firebase.firestore();
-        const userchats = db.collection("users").doc(this.state.userId);
-
     }
-
+    getMessagesData = (querySnapshot) =>{
+        const messages = [];
+        querySnapshot.forEach((res) => {
+          const data = res.data();
+          messages.push({
+            data
+          });
+          console.log(data)
+        });
+        this.setState({
+          messages
+        })
+      }
+    componentDidMount(){
+      this.fetchMessages()  
+    
+      }
     render(){
+      const {messages} = this.state
         return(
-            <ChatView/>
+            <ChatView
+            messages={messages}
+            />
         )
     }
 }
