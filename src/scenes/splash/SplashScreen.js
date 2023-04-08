@@ -1,14 +1,17 @@
 import React ,{useEffect} from 'react';
 import {SafeAreaView, View, Text, StyleSheet, Image} from 'react-native';
 import { LinearGradient } from "expo-linear-gradient";
-import * as firebase from "firebase";
+// import * as firebase from "firebase";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function SplashScreen ({navigation}){
 
     function test (){
+        const auth = getAuth();
         setTimeout(()=>{
-            firebase.auth().onAuthStateChanged(async function(user) {
+            onAuthStateChanged(auth, async function(user) {
                 const userID = await AsyncStorage.getItem("userID");
                 if (user && userID !== null) {
                     navigation.reset({

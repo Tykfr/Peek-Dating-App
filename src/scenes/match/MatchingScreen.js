@@ -1,8 +1,9 @@
 import React, { Component, useCallback } from "react";
 import MatchingView from "./MatchingView";
 import SwipeDeck from "_components/organisms/SwipeDeck";
-import "firebase/firestore";
-import * as firebase from "firebase";
+import { getAuth } from "firebase/auth";
+import { collection, query, where, getFirestore, getDocs } from "firebase/firestore";
+
 import { Button, SafeAreaView, Text, TouchableOpacity } from "react-native";
 import AppLoading from "expo-app-loading";
 import { func } from "prop-types";
@@ -24,8 +25,8 @@ function Matching() {
 
   async function getUserID() {
     try {
-      const userID = firebase.auth().currentUser;
-      const db = firebase.firestore();
+      const auth = getAuth(); 
+      const userID = auth.currentUser;
 
       setUserID(userID.uid);
     } catch (error) {
@@ -35,16 +36,34 @@ function Matching() {
 
   const findPartners = async function () {
     await getUserID();
-    const db = firebase.firestore();
-    db.collection("users")
-      .get()
-      .then(async (data) => {
-        data.forEach(async (doc) => {
-          await fetchCardData(doc);
-        });
-        await formatCard();
-      })
-      .catch((error) => console.log("Error getting Users: ", error));
+    const db = getFirestore();
+    /**
+     * May need to pass firestore configuration into 
+     * the getFireStore function
+     * Configuration can found in the number entry page
+     * need to put it in its own file and export it if anything
+     */
+
+    const userQuery = query(collection(db, "users"));
+
+    const userSnapshot = await getDocs(userQuery);
+    /**
+     * Need to test how to fetch all user data with 
+     * new updates to firebase
+     */
+    userSnapshot.forEach(async (doc) => {
+      await fetchCardData(doc);
+    });
+
+    // db.collection("users")
+    //   .get()
+    //   .then(async (data) => {
+    //     data.forEach(async (doc) => {
+    //       await fetchCardData(doc);
+    //     });
+    //     await formatCard();
+    //   })
+    //   .catch((error) => console.log("Error getting Users: ", error));
   };
 
   async function fetchCardData(data) {

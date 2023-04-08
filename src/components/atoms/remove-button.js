@@ -4,7 +4,7 @@ import {Icon} from 'react-native-elements';
 import { TouchableOpacity } from 'react-native';
 import Modal from 'react-native-modal';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import * as firebase from "firebase";
+import { getStorage, ref } from "firebase/storage";
 
 
 const Remove_button = ({id}) => {
@@ -12,7 +12,8 @@ const Remove_button = ({id}) => {
 
     const remove_image = async (id) => {
         let userID = await AsyncStorage.getItem("userID")
-        let imageRef = firebase.storage().ref("user_images/" + "user_" + userID + "/img_" + id);
+        const storage = getStorage();
+        let imageRef = ref(storage, "user_images/" + "user_" + userID + "/img_" + id);
         imageRef
         .delete()
         .then(() => {
